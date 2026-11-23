@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
+import Footer from './components/layout/Footer.jsx'
 import MobileBar from './components/layout/MobileBar.jsx'
 import Navbar from './components/layout/Navbar.jsx'
 import Home from './pages/Home.jsx'
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
+      <Footer />
       <MobileBar />
     </>
   )

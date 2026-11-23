@@ -98,6 +98,10 @@
 
 /* Mobile menu: grows as a circle from the Menu button's corner, links slide in one after another. */
 @media (prefers-reduced-motion: no-preference) {
+  .twinkle {
+    animation: twinkle 3.2s ease-in-out infinite;
+  }
+
   .mobile-menu[open] {
     animation: menu-in 0.5s var(--ease-snap);
   }
@@ -119,6 +123,11 @@
 @keyframes menu-out {
   from { clip-path: circle(150% at calc(100% - 3rem) 2rem); }
   to { clip-path: circle(0% at calc(100% - 3rem) 2rem); }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.35; transform: scale(0.8) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.1) rotate(20deg); }
 }
 
 @keyframes menu-link {

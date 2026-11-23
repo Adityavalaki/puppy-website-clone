@@ -6,8 +6,9 @@ Read first: CLAUDE.md, docs/DECISIONS.md, docs/blutec-assignment-plan.md
 ## 2026-11-23 (2) — model: Claude Opus 5.5
 - Done: Navbar (fixed header, hides on scroll down, milk bar + scalloped edge once scrolled or off Home, active paw), mobile menu (native <dialog>, circle reveal, Escape/Close/link all close it), MobileBar (WhatsApp + Call, <768px only), scroll-to-top on route change, skip link. docs/blutec-assignment-plan.md gitignored (private contact details).
 - In progress: nothing.
-- Broken or risky: Nav links to pages not built yet show the 404 page. Bottom bar covers the last ~70px of a page on phones until the Footer adds bottom padding. WhatsApp number is the reference site's placeholder.
-- Next: Footer, then Home sections top to bottom (Hero first).
+  Footer (night sky: wavy hill, 9 twinkling stars, CSS crescent moon; Explore + Say hello columns; basket pup; phone bottom padding clears the WhatsApp bar). Pushed setup + navbar to GitHub (main @ d6d019d).
+- Broken or risky: Nav links to pages not built yet show the 404 page. WhatsApp number is the reference site's placeholder; email is a reserved .example address. Vercel project not created: the Vercel connector returned 403, Aditya to import the repo at vercel.com/new.
+- Next: Home sections top to bottom (Hero first).
 - Do not touch: reference/, docs/blutec-assignment-plan.md, docs/ai-prompts.md.
 
 ## 2026-11-23 — model: Claude Opus 5.5

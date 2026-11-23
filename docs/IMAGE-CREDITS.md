@@ -23,3 +23,18 @@ Downloaded as 480x600 face-centred crops from the Unsplash CDN.
 | toy-poodle-2.jpg | https://unsplash.com/photos/VW2HGWgtIfw | @theflouffy |
 
 Cartoon dog, logo, paw and stars in public/images/icons/ and src/components/ui/ were drawn for this project.
+
+## Families (public/images/gallery/)
+
+Photos of people with puppies, 480x552 face-centred crops, same Unsplash License.
+
+| File | Unsplash photo | Photographer |
+|---|---|---|
+| family-1.jpg | https://unsplash.com/photos/CXQgs12wFHc | @hudsonhintze |
+| family-2.jpg | https://unsplash.com/photos/K8JxScoZb4A | @yogendras31 |
+| family-3.jpg | https://unsplash.com/photos/Sm9gzKx8a3U | @anthonytran |
+| family-4.jpg | https://unsplash.com/photos/vN24f5_zpiA | @pipe_fx |
+| family-5.jpg | https://unsplash.com/photos/768Csu4GdAA | @maryyalong |
+| family-6.jpg | https://unsplash.com/photos/nhMcdRpT2fc | @ragoni |
+| family-7.jpg | https://unsplash.com/photos/TvVEp46BDus | @anna_khromova |
+| family-8.jpg | https://unsplash.com/photos/cCVs8eo7vH4 | @tamasp |

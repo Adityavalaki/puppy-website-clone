@@ -3,6 +3,13 @@ Lane: A (graded demo, no real users or data) — agreed with Aditya 2026-11-23. 
 Read first: CLAUDE.md, docs/DECISIONS.md, docs/blutec-assignment-plan.md
 
 <!-- Newest entry on top. Five lines, every session. -->
+## 2026-11-23 (6) — model: Claude Opus 5.5
+- Done: Home page complete, morning to night: Journey (sticky phone chat revealing per step, pushed 09bc4ca), Trust (passport book, 4 ink stamps, sunset skyline), Happy homes (testimonial bubble, polaroid wall 6/8 photos, reusable Lightbox: native dialog, arrows, Esc), Questions (3 FAQs, twinkling stars, floating ?), closing CTA (house with door opening on scroll, WhatsApp + contact). 8 Unsplash family photos in public/images/gallery (credited). Meet doors now show open in browsers without scroll-linked CSS.
+- In progress: nothing.
+- Broken or risky: Testimonial and family captions are placeholder text written for the demo. The reference's chat video message was skipped (no free video asset). All other pages (/puppies, detail, gone-home, happy-families, how-it-works, faq, contact) still show the 404 page.
+- Next: Puppies page (filters by origin/breed/sex via URL query, round photo cards), then puppy detail page.
+- Do not touch: reference/, docs/blutec-assignment-plan.md, docs/ai-prompts.md.
+
 ## 2026-11-23 (5) — model: Claude Opus 5.5
 - Done: Home "Two paths to your new puppy": wooden signpost (two arrow signs, post, pup at its foot), Dubai side (skyline SVG, shop window with striped awning + photo, CTA to /puppies?origin=local), imported side (dotted Korea to Dubai route, plane with a puppy in the porthole that bobs; CTA to /puppies?origin=imported). Geometry matches the reference at 1440px; phones stack Dubai side, pup, imported side.
 - In progress: nothing.

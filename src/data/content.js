@@ -96,6 +96,57 @@ export const journey = {
   compose: 'Message us on WhatsApp',
 }
 
+// Stamps in the "puppy passport". shape picks the stamp outline; ink and tilt make each one look hand-stamped.
+export const trust = {
+  kicker: 'puppy passport',
+  title: 'Why families choose TeddyPups',
+  stamps: [
+    { title: 'Vet checked & well', text: 'Each puppy is vaccinated, dewormed and leaves with a signed health certificate.', shape: 'round', icon: 'heart', ink: '#a24a1a', tilt: '-8deg' },
+    { title: 'Safe flights from Korea', text: 'Careful breeders, calm travel and premium care at every step of the way.', shape: 'ticket', icon: 'plane', ink: '#1f6b45', tilt: '5deg' },
+    { title: 'Help, day and night', text: 'Always here for you, from picking your puppy to life after delivery.', shape: 'oval', icon: 'chat', ink: '#5a3a28', tilt: '-4deg' },
+    { title: 'Loved around the world', text: 'Our puppies have settled into happy homes in many countries.', shape: 'scallop', icon: 'globe', ink: '#c2622b', tilt: '7deg' },
+  ],
+}
+
+// Placeholder testimonial and captions written for this demo (the reference site's real ones are not reused).
+export const families = {
+  title: 'Happy homes & happy pups',
+  lede: 'Nothing makes us prouder than seeing our puppies settle into loving homes. These sweet moments come from families who welcomed a TeddyPups puppy into their lives and their hearts.',
+  quote: 'TeddyPups made the whole thing easy. They answered every question during the import and kept us updated every day. Our Maltipoo arrived happy, healthy and full of energy, and knowing help was there day and night meant we never worried once.',
+  quoteBy: 'Aisha K., Dubai, UAE',
+  cta: 'See every happy family',
+  photos: [
+    { src: '/images/gallery/family-1.jpg', caption: 'First cuddle at home 🧸' },
+    { src: '/images/gallery/family-2.jpg', caption: 'Bella and her new best friend' },
+    { src: '/images/gallery/family-3.jpg', caption: 'Off on our first walk ☀️' },
+    { src: '/images/gallery/family-4.jpg', caption: 'Our little teddy ❤️' },
+    { src: '/images/gallery/family-5.jpg', caption: 'Snuggle time 🥰' },
+    { src: '/images/gallery/family-6.jpg', caption: 'Welcome home, Coco' },
+    { src: '/images/gallery/family-7.jpg', caption: 'Best day ever 🐾' },
+    { src: '/images/gallery/family-8.jpg', caption: 'Family of three now' },
+  ],
+}
+
+export const faqs = [
+  { q: 'Are your puppies vaccinated and vet checked?', a: 'Yes. Every puppy comes with a health certificate from a licensed vet, plus up-to-date vaccines and deworming, before going home.' },
+  { q: 'Can I meet a puppy before choosing?', a: 'Of course. Visit our Downtown Dubai showroom and spend time with the local puppies before you make up your mind.' },
+  { q: 'Can my puppy come home the same day?', a: 'Yes. Local puppies are ready right away, so you can take yours home on the day you visit.' },
+]
+
+export const questions = {
+  title: 'Your questions, answered',
+  cta: 'See all questions',
+}
+
+export const homeCta = {
+  title: 'Ready for your new best friend?',
+  lede: 'Welcome a healthy, happy teacup or designer puppy with friendly guidance from start to finish. We help you find the right match and deliver safely anywhere in the UAE.',
+  whatsappCta: 'Chat on WhatsApp',
+  contactCta: 'Visit & contact',
+  mat: 'welcome home',
+  image: '/images/puppies/maltipoo.jpg',
+}
+
 export const footer = {
   title: 'Welcome home.',
   blurb: 'TeddyPups is a Dubai home for miniature puppies, with caring guidance, full health checks and safe delivery to families everywhere.',

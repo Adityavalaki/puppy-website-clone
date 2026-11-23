@@ -31,7 +31,23 @@ export const puppies = [
   { slug: 'cocoa-cavapoo', name: 'Cocoa', breed: 'Cavapoo', sex: 'boy', age: '3 months', origin: 'local', image: '/images/puppies/cavapoo.jpg' },
   { slug: 'pepper-toy-poodle', name: 'Pepper', breed: 'Toy Poodle', sex: 'boy', age: '2 months', origin: 'local', image: '/images/puppies/toy-poodle.jpg' },
   { slug: 'mochi-shih-tzu', name: 'Mochi', breed: 'Shih Tzu', sex: 'girl', age: '2 months', origin: 'local', image: '/images/puppies/shih-tzu.jpg' },
+  { slug: 'honey-maltipoo', name: 'Honey', breed: 'Maltipoo', sex: 'girl', age: '3 months', origin: 'local', image: '/images/puppies/maltipoo-2.jpg' },
+  { slug: 'pearl-maltipoo', name: 'Pearl', breed: 'Korean Teacup Maltipoo', sex: 'girl', age: '2.5 months', origin: 'imported', image: '/images/puppies/maltipoo-3.jpg' },
+  { slug: 'peanut-pomeranian', name: 'Peanut', breed: 'Pomeranian', sex: 'boy', age: '2 months', origin: 'local', image: '/images/puppies/pomeranian-2.jpg' },
+  { slug: 'fudge-pomeranian', name: 'Fudge', breed: 'Korean Teacup Pomeranian', sex: 'girl', age: '2 months', origin: 'imported', image: '/images/puppies/pomeranian-3.jpg' },
+  { slug: 'shadow-pomeranian', name: 'Shadow', breed: 'Korean Teacup Pomeranian', sex: 'boy', age: '2 months', origin: 'imported', image: '/images/puppies/pomeranian-4.jpg' },
+  { slug: 'caramel-cavapoo', name: 'Caramel', breed: 'Cavapoo', sex: 'girl', age: '3 months', origin: 'local', image: '/images/puppies/cavapoo-2.jpg' },
+  { slug: 'oreo-shih-tzu', name: 'Oreo', breed: 'Shih Tzu', sex: 'girl', age: '2 months', origin: 'local', image: '/images/puppies/shih-tzu-2.jpg' },
+  { slug: 'bruno-shih-tzu', name: 'Bruno', breed: 'Shih Tzu', sex: 'boy', age: '2 months', origin: 'local', image: '/images/puppies/shih-tzu-3.jpg' },
+  { slug: 'toffee-toy-poodle', name: 'Toffee', breed: 'Toy Poodle', sex: 'girl', age: '2 months', origin: 'local', image: '/images/puppies/toy-poodle-2.jpg' },
 ]
+
+export const meet = {
+  title: 'Meet our pups',
+  lede: 'Real puppies and real photos, each one ready to meet their family.',
+  cta: 'Browse all puppies',
+  allLabel: 'See them all',
+}
 
 export const hero = {
   title: ['Teacup puppies,', 'loved in Dubai'],

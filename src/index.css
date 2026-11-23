@@ -19,6 +19,8 @@
 
   --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Fraunces", ui-serif, Georgia, serif;
+  /* Fraunces' "soft" and "wonky" axes give the rounded, playful headings of the reference site. */
+  --font-display--font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 144;
   --font-hand: "Shantell Sans", ui-rounded, "Comic Sans MS", cursive;
 
   --ease-pounce: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -224,6 +226,270 @@
     text-overflow: ellipsis;
     font-size: 0.82rem;
   }
+}
+
+/* ---------- Home "Meet our pups" ----------
+   Each puppy stands behind an arched door. On wide screens the section pins and the row slides sideways
+   (MeetThePups.jsx sets the translate and data-open); everywhere else it is a grid of doors. */
+.meet-stage {
+  position: relative;
+  padding-block: clamp(4rem, 9vh, 7rem) clamp(3rem, 7vh, 5rem);
+}
+
+.meet-hall {
+  --floor-h: clamp(5rem, 13vh, 8rem);
+  position: relative;
+  margin-top: clamp(2rem, 5vh, 3.5rem);
+}
+
+.meet-track {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(10.5rem, 42vw), 1fr));
+  gap: 2.75rem 1.25rem;
+  max-width: 110rem;
+  margin-inline: auto;
+}
+
+@media (min-width: 640px) {
+  .meet-track { gap: 3.5rem 2rem; }
+}
+
+.meet-floor { display: none; }
+
+.meet-pup {
+  position: absolute;
+  top: clamp(-9.5rem, -20vw, -6rem);
+  right: clamp(1rem, 4vw, 3.5rem);
+  width: clamp(8rem, 26vw, 11rem);
+}
+
+.meet[data-pinned] .meet-stage {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: calc(4.75rem + clamp(1rem, 3vh, 2.5rem)) 0 0;
+  overflow: hidden;
+}
+
+.meet[data-pinned] .meet-hall { flex: 1; }
+
+.meet[data-pinned] .meet-track {
+  position: absolute;
+  bottom: var(--floor-h);
+  left: 0;
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(4.5rem, 6vw, 7rem);
+  width: max-content;
+  max-width: none;
+  padding-inline: 38vw 12vw;
+}
+
+.meet[data-pinned] .meet-floor {
+  position: absolute;
+  inset: auto 0 0;
+  display: block;
+  height: var(--floor-h);
+  border-top: 2.4px solid var(--color-cocoa);
+  box-shadow: 0 -12px 0 -6px #f5d9a8;
+  background:
+    linear-gradient(rgba(42, 23, 14, 0.16), transparent 22%),
+    repeating-linear-gradient(90deg, transparent 0 174px, rgba(42, 23, 14, 0.12) 174px 176px),
+    linear-gradient(#e8b06a, #dc9a52);
+}
+
+.meet[data-pinned] .meet-pup {
+  top: auto;
+  right: auto;
+  bottom: calc(var(--floor-h) * 0.42);
+  left: 14vw;
+  width: clamp(11rem, min(14vw, 24vh), 14rem);
+}
+
+.door { position: relative; }
+
+.meet[data-pinned] .door { width: clamp(8rem, min(15vw, 24vh), 16rem); }
+
+.door-link { display: block; border-radius: 1rem; }
+
+.door-plate {
+  display: block;
+  margin-bottom: 0.8rem;
+  text-align: center;
+}
+
+.door-name {
+  display: block;
+  font-size: clamp(1.45rem, 2vw, 2rem);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  transition: color 0.25s;
+}
+
+.door-meta {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--color-cocoa-soft);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.door-frame {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5.2;
+  border: 2.4px solid var(--color-cocoa);
+  border-bottom: 0;
+  border-radius: 999px 999px 0 0;
+  background: #3b2215;
+}
+
+/* Little shelf under each door in the grid layout. */
+.door-frame::after {
+  content: "";
+  position: absolute;
+  bottom: -0.6rem;
+  left: -0.55rem;
+  right: -0.55rem;
+  height: 0.6rem;
+  border-radius: 0.35rem;
+  background: #dc9a52;
+}
+
+.meet[data-pinned] .door-frame::after { display: none; }
+
+.door-room {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.door-room img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: scale 0.6s var(--ease-silk);
+}
+
+/* The door leaf swings open on its left hinge. overflow: clip (not hidden) so the scroll-linked
+   animation below still tracks the page scroll. */
+.door-way {
+  --door-open: 78deg;
+  position: absolute;
+  inset: -3px -3px 0;
+  overflow: clip;
+  border-radius: 999px 999px 0 0;
+  perspective: 700px;
+  perspective-origin: 0 center;
+}
+
+.door-leaf {
+  position: absolute;
+  inset: 0;
+  transform-origin: 0 center;
+  border: 2.4px solid var(--color-cocoa);
+  border-bottom: 0;
+  border-radius: 999px 999px 0 0;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 calc(25% - 1.5px), rgba(42, 23, 14, 0.18) calc(25% - 1.5px) 25%),
+    var(--door);
+  transition: transform 1.05s cubic-bezier(0.3, 1.32, 0.48, 1) 50ms;
+}
+
+.door-leaf::before {
+  content: "";
+  position: absolute;
+  inset: 12% 14% 9%;
+  border: 2.5px solid rgba(255, 253, 248, 0.28);
+  border-radius: 999px 999px 8px 8px;
+}
+
+.door-peephole {
+  position: absolute;
+  top: 19%;
+  left: 50%;
+  width: 22%;
+  translate: -50%;
+  color: rgba(255, 253, 248, 0.45);
+}
+
+.door-knob {
+  position: absolute;
+  top: 56%;
+  right: 11%;
+  width: 0.85rem;
+  aspect-ratio: 1;
+  border: 2.4px solid var(--color-cocoa);
+  border-radius: 50%;
+  background: var(--color-honey);
+}
+
+.door[data-open] .door-leaf,
+.door-link:is(:hover, :focus-visible) .door-leaf {
+  transform: rotateY(var(--door-open));
+}
+
+.door[data-open] .door-room img { scale: 1.04; }
+
+.door-link:is(:hover, :focus-visible) .door-name { color: var(--color-toffee-deep); }
+
+.door-tag {
+  position: absolute;
+  top: 16%;
+  right: -0.7rem;
+  z-index: 2;
+  rotate: 7deg;
+  padding: 0.05rem 0.65rem 0.15rem;
+  border: 1.6px solid var(--color-cocoa);
+  border-radius: 999px;
+  background: var(--color-milk);
+  box-shadow: 2px 3px 0 rgba(42, 23, 14, 0.2);
+  font-size: 0.9rem;
+}
+
+.door--all {
+  display: flex;
+  align-self: stretch;
+  align-items: flex-end;
+}
+
+.door-frame--all {
+  display: grid;
+  place-items: center;
+  border-style: dashed;
+  background: none;
+}
+
+.door-all {
+  padding: 1rem;
+  font-size: clamp(1.6rem, 2.4vw, 2.4rem);
+  line-height: 1;
+  text-align: center;
+  text-decoration: underline 0.08em var(--color-toffee);
+  text-underline-offset: 0.18em;
+}
+
+/* Grid layout: each door opens by itself as it scrolls into view (browsers with scroll-linked animations). */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .meet:not([data-pinned]) .door-leaf {
+      animation: door-open linear both;
+      animation-timeline: view();
+      animation-range: entry 55% cover 48%;
+    }
+  }
+}
+
+@keyframes door-open {
+  to { transform: rotateY(var(--door-open)); }
+}
+
+/* Reduced motion: no swinging, every door simply stands open. */
+@media (prefers-reduced-motion: reduce) {
+  .door-leaf { transform: rotateY(var(--door-open)); }
 }
 
 /* Mobile menu: grows as a circle from the Menu button's corner, links slide in one after another. */

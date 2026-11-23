@@ -492,8 +492,187 @@
   .door-leaf { transform: rotateY(var(--door-open)); }
 }
 
+/* ---------- Home "Two paths" ----------
+   A wooden signpost: one arrow sign per path, a scene under each, a pup at the foot of the post.
+   Phones stack the two paths with the pup between them; from 1024px they sit either side of the post. */
+.ways {
+  position: relative;
+  display: grid;
+  gap: 2.5rem;
+  margin-top: clamp(2.5rem, 6vh, 4.5rem);
+}
+
+.ways-post { display: none; }
+
+.way {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.way--left { order: 1; }
+.way--right { order: 3; }
+
+.ways-pup {
+  order: 2;
+  justify-self: center;
+  width: clamp(9rem, 40vw, 12rem);
+}
+
+/* Arrow sign: a wooden plank plus a square turned 45deg behind one end, which draws the point. */
+.way-sign {
+  --wood: linear-gradient(#e4a85b, #d38f45);
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  height: 4.2rem;
+  padding: 0 1.4rem;
+  border: 3px solid var(--color-cocoa);
+  background: repeating-linear-gradient(0deg, transparent 0 9px, rgba(42, 23, 14, 0.09) 9px 10px), var(--wood);
+  box-shadow: 0 7px 0 -3px rgba(42, 23, 14, 0.25);
+  font-size: clamp(1.5rem, 2.4vw, 2.35rem);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  white-space: nowrap;
+}
+
+.way-sign::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  z-index: -1;
+  width: 2.95rem;
+  height: 2.95rem;
+  border: 3px solid var(--color-cocoa);
+  background: repeating-linear-gradient(-45deg, transparent 0 9px, rgba(42, 23, 14, 0.09) 9px 10px), var(--wood);
+  translate: 0 -50%;
+  rotate: 45deg;
+}
+
+.way-sign--left {
+  margin-left: 1.5rem;
+  padding-left: 0.6rem;
+  border-left: 0;
+  rotate: -2deg;
+}
+
+.way-sign--left::after {
+  left: -1.47rem;
+  border-top: 0;
+  border-right: 0;
+}
+
+.way-sign--right {
+  padding-right: 0.6rem;
+  border-right: 0;
+  rotate: 1.5deg;
+}
+
+.way-sign--right::after {
+  right: -1.47rem;
+  border-bottom: 0;
+  border-left: 0;
+}
+
+.way-scene {
+  position: relative;
+  width: 100%;
+  height: clamp(13rem, 22vw, 19rem);
+  margin-top: 1.75rem;
+}
+
+/* Shop window with a striped awning, standing in front of the skyline. */
+.way-window {
+  position: absolute;
+  bottom: 0;
+  left: 32%;
+  width: clamp(8.5rem, 13vw, 12rem);
+  translate: -50%;
+  text-align: center;
+}
+
+.way-window::before {
+  content: "";
+  position: relative;
+  z-index: 1;
+  display: block;
+  height: 1.6rem;
+  margin: 0 -0.8rem -0.2rem;
+  border: 3px solid var(--color-cocoa);
+  border-radius: 0.5rem 0.5rem 0.3rem 0.3rem;
+  background: repeating-linear-gradient(90deg, var(--color-toffee) 0 1.05rem, var(--color-milk) 1.05rem 2.1rem);
+}
+
+.way-window-glass {
+  display: block;
+  aspect-ratio: 4 / 4.6;
+  padding: 5px;
+  border: 3px solid var(--color-cocoa);
+  border-top: 0;
+  border-radius: 0 0 0.6rem 0.6rem;
+  background: var(--color-milk);
+}
+
+@media (max-width: 639px) {
+  .way-flight { width: 86%; }
+}
+
+@media (min-width: 1024px) {
+  .ways {
+    grid-template-columns: 1fr 1fr;
+    column-gap: clamp(9rem, 16vw, 15rem);
+    padding-bottom: 8.5rem;
+  }
+
+  .way--left,
+  .way--right { order: 0; }
+
+  .way--left {
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  /* Pull each sign across half the gap so its flat end meets the post. */
+  .way-sign--left {
+    margin-left: 0;
+    margin-right: calc(0.4rem - 0.5 * clamp(9rem, 16vw, 15rem));
+  }
+
+  .way-sign--right { margin-left: calc(0.4rem - 0.5 * clamp(9rem, 16vw, 15rem)); }
+
+  .ways-post {
+    position: absolute;
+    top: -2.2rem;
+    bottom: 2.6rem;
+    left: 50%;
+    display: block;
+    width: 1.5rem;
+    translate: -50%;
+    border: 3px solid var(--color-cocoa);
+    border-radius: 0.6rem 0.6rem 0.2rem 0.2rem;
+    background:
+      repeating-linear-gradient(90deg, transparent 0 5px, rgba(42, 23, 14, 0.12) 5px 6px),
+      linear-gradient(90deg, #d38f45, #b8742f);
+  }
+
+  .ways-pup {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: clamp(11rem, 13vw, 13.5rem);
+    translate: -46%;
+  }
+}
+
 /* Mobile menu: grows as a circle from the Menu button's corner, links slide in one after another. */
 @media (prefers-reduced-motion: no-preference) {
+  .plane {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: plane-bob 3.2s ease-in-out infinite;
+  }
+
   .twinkle {
     animation: twinkle 3.2s ease-in-out infinite;
   }
@@ -525,6 +704,10 @@
 @keyframes menu-out {
   from { clip-path: circle(150% at calc(100% - 3rem) 2rem); }
   to { clip-path: circle(0% at calc(100% - 3rem) 2rem); }
+}
+
+@keyframes plane-bob {
+  50% { translate: 0 -6px; rotate: -3deg; }
 }
 
 @keyframes peek-up {

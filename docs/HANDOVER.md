@@ -3,6 +3,13 @@ Lane: A (graded demo, no real users or data) — agreed with Aditya 2026-11-23. 
 Read first: CLAUDE.md, docs/DECISIONS.md, docs/blutec-assignment-plan.md
 
 <!-- Newest entry on top. Five lines, every session. -->
+## 2026-11-23 (5) — model: Claude Opus 5.5
+- Done: Home "Two paths to your new puppy": wooden signpost (two arrow signs, post, pup at its foot), Dubai side (skyline SVG, shop window with striped awning + photo, CTA to /puppies?origin=local), imported side (dotted Korea to Dubai route, plane with a puppy in the porthole that bobs; CTA to /puppies?origin=imported). Geometry matches the reference at 1440px; phones stack Dubai side, pup, imported side.
+- In progress: nothing.
+- Broken or risky: Plane stays mid-route with a gentle bob; the reference moves it along the route as you scroll (skipped per D-001). CTAs land on /puppies, which is the 404 page until the Puppies page exists.
+- Next: Home "Your puppy journey" (3 steps + WhatsApp-style phone chat mockup).
+- Do not touch: reference/, docs/blutec-assignment-plan.md, docs/ai-prompts.md.
+
 ## 2026-11-23 (4) — model: Claude Opus 5.5
 - Done: Home "Meet our pups": 15 puppy doors (9 more Unsplash photos, credited). >=1024px with motion allowed: section pins (sticky stage), scroll slides the row sideways (wrapper = 100vh + 0.8 x slide distance, as the reference), doors open once they pass the standing pup, floor planks move with the row. Otherwise: 2+ column grid, doors open on scroll via CSS view() timeline (Chrome/Edge), all open under reduced motion. Fraunces SOFT/WONK axes now loaded so headings match the reference.
 - In progress: nothing.

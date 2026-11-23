@@ -57,6 +57,24 @@ export const hero = {
   lineupLabel: 'A few of the puppies in our showroom',
 }
 
+export const paths = {
+  title: 'Two paths to your new puppy',
+  local: {
+    sign: 'Here in Dubai',
+    caption: 'At our showroom',
+    image: '/images/puppies/pomeranian-3.jpg',
+    text: 'Cuddle them first, then decide. Our Dubai puppies are ready to visit in the showroom and can go home the same day.',
+    cta: 'See Dubai puppies',
+  },
+  imported: {
+    sign: 'Flown in for you',
+    image: '/images/puppies/maltipoo-3.jpg',
+    text: 'Rare Korean teacup breeds, brought to your door. Pick from trusted breeders abroad and we take care of the whole journey.',
+    cta: 'See imported puppies',
+  },
+  planeLabel: 'A plane flying a puppy from Korea to Dubai',
+}
+
 export const footer = {
   title: 'Welcome home.',
   blurb: 'TeddyPups is a Dubai home for miniature puppies, with caring guidance, full health checks and safe delivery to families everywhere.',

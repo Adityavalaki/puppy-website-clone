@@ -1,7 +1,7 @@
 // All site text and lists live here so components only handle layout.
 
 // shortcut: placeholder number (same as the reference site's), swap for a real one before any real use.
-const whatsappMessage = "Hi TeddyPups! I'd love to know more about your puppies."
+export const whatsappMessage = "Hi TeddyPups! I'd love to know more about your puppies."
 
 export const site = {
   name: 'TeddyPups',
@@ -73,6 +73,27 @@ export const paths = {
     cta: 'See imported puppies',
   },
   planeLabel: 'A plane flying a puppy from Korea to Dubai',
+}
+
+export const journey = {
+  title: 'Your road to a puppy',
+  lede: 'A friendly, step-by-step service that keeps bringing your puppy home simple, safe and fun.',
+  steps: [
+    { title: 'Pick your breed', text: 'Tell us the breed you love or what you need in a dog. We will suggest puppies that suit your home and routine.' },
+    { title: 'See photos & details', text: 'We send real photos, health records and every detail you need, straight to your WhatsApp.' },
+    { title: 'Safe, happy delivery', text: 'Once you say yes, we arrange everything and bring your puppy to you calmly and safely.' },
+  ],
+  cta: 'How it works',
+  phoneLabel: 'A WhatsApp chat with TeddyPups',
+  breeds: [
+    { label: 'Maltipoo', slug: 'maltipoo' },
+    { label: 'Pomeranian', slug: 'pomeranian' },
+    { label: 'Poodle', slug: 'poodle' },
+    { label: 'Cavapoo', slug: 'cavapoo' },
+    { label: 'Shih Tzu', slug: 'shih-tzu' },
+  ],
+  snaps: ['/images/puppies/maltipoo.jpg', '/images/puppies/cavapoo.jpg', '/images/puppies/toy-poodle.jpg', '/images/puppies/maltipoo-2.jpg'],
+  compose: 'Message us on WhatsApp',
 }
 
 export const footer = {

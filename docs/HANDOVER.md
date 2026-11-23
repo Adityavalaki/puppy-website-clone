@@ -3,6 +3,13 @@ Lane: A (graded demo, no real users or data) — agreed with Aditya 2026-11-23. 
 Read first: CLAUDE.md, docs/DECISIONS.md, docs/blutec-assignment-plan.md
 
 <!-- Newest entry on top. Five lines, every session. -->
+## 2026-11-23 (3) — model: Claude Opus 5.5
+- Done: Vercel live at https://puppy-website-clone-f8vo.vercel.app (Aditya imported it; sub-page refresh, fonts, images verified). Home Hero: tagline + squiggle, 2-line H1, lede, primary + WhatsApp buttons, 6 arched puppy photos on CSS seat variables (positions measured from the reference at 1440px; phone/tablet overrides), peeking pup SVG, scalloped quilt cushion, rotating name tag (also follows hover/focus), peek-up entrance. 6 Unsplash photos in public/images/puppies (credits in docs/IMAGE-CREDITS.md); first 6 puppies in content.js.
+- In progress: nothing.
+- Broken or risky: Hero photos link to /puppies/:slug, which shows the 404 page until the detail page exists. The reference's "duck and pop" photo swap was skipped (decorative, D-001).
+- Next: Home "Meet the pups" (pinned horizontal door row, needs 15 puppies + 9 more photos).
+- Do not touch: reference/, docs/blutec-assignment-plan.md, docs/ai-prompts.md.
+
 ## 2026-11-23 (2) — model: Claude Opus 5.5
 - Done: Navbar (fixed header, hides on scroll down, milk bar + scalloped edge once scrolled or off Home, active paw), mobile menu (native <dialog>, circle reveal, Escape/Close/link all close it), MobileBar (WhatsApp + Call, <768px only), scroll-to-top on route change, skip link. docs/blutec-assignment-plan.md gitignored (private contact details).
 - In progress: nothing.

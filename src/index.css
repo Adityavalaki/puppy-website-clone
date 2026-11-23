@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+/* Design tokens measured from the reference site's CSS (see docs/DECISIONS.md).
+   Each one becomes a Tailwind utility, e.g. bg-toffee-deep, text-cocoa, font-display. */
+@theme {
+  --color-toffee: #c2622b;
+  --color-toffee-deep: #a24a1a;
+  --color-toffee-ink: #8e3f15;
+  --color-honey: #f2be6b;
+  --color-honey-soft: #fbe3b4;
+  --color-cocoa: #2a170e;
+  --color-cocoa-soft: #5a3a28;
+  --color-milk: #fffdf8;
+  --color-sky: #bfddf5;
+  --color-sky-deep: #2f6e9e;
+  --color-blush: #f9cdbf;
+  --color-whatsapp: #1f7a4d;
+  --color-night: #24130b;
+
+  --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-hand: "Shantell Sans", ui-rounded, "Comic Sans MS", cursive;
+
+  --ease-pounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-silk: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-snap: cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+/* Side padding that grows with the screen: 16px on phones up to 56px on wide screens. */
+@utility gutter {
+  padding-inline: clamp(1rem, 4vw, 3.5rem);
+}
+
+@layer base {
+  body {
+    background-color: var(--color-milk);
+    color: var(--color-cocoa);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+
+  ::selection {
+    background-color: var(--color-honey);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-toffee-deep);
+    outline-offset: 3px;
+  }
+
+  /* Stop the page behind the mobile menu from scrolling while it is open. */
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+}
+
+/* Pill buttons with a hard "sticker" shadow. Utilities (e.g. min-h-11) can still override them. */
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 3.25rem;
+    padding: 0.85rem 1.6rem;
+    border-radius: 999px;
+    font-size: 1.0625rem;
+    font-weight: 650;
+    line-height: 1.1;
+    transition: transform 0.35s var(--ease-pounce), background-color 0.25s ease, box-shadow 0.35s var(--ease-silk);
+  }
+
+  .btn:active {
+    transform: scale(0.96);
+  }
+
+  .btn-whatsapp {
+    background: var(--color-whatsapp);
+    color: #fff;
+    box-shadow: 0 0.5rem 0 -0.15rem var(--color-cocoa);
+  }
+
+  .btn-whatsapp:hover {
+    transform: translateY(-2px) rotate(1deg);
+  }
+
+  .btn-ghost {
+    border: 2px solid var(--color-cocoa);
+    color: var(--color-cocoa);
+  }
+
+  .btn-ghost:hover {
+    background: var(--color-cocoa);
+    color: var(--color-milk);
+  }
+}
+
+/* Mobile menu: grows as a circle from the Menu button's corner, links slide in one after another. */
+@media (prefers-reduced-motion: no-preference) {
+  .mobile-menu[open] {
+    animation: menu-in 0.5s var(--ease-snap);
+  }
+
+  .mobile-menu[data-closing] {
+    animation: menu-out 0.42s var(--ease-snap) forwards;
+  }
+
+  .mobile-menu[open] .menu-link {
+    animation: menu-link 0.55s var(--ease-pounce) both;
+  }
+}
+
+@keyframes menu-in {
+  from { clip-path: circle(0% at calc(100% - 3rem) 2rem); }
+  to { clip-path: circle(150% at calc(100% - 3rem) 2rem); }
+}
+
+@keyframes menu-out {
+  from { clip-path: circle(150% at calc(100% - 3rem) 2rem); }
+  to { clip-path: circle(0% at calc(100% - 3rem) 2rem); }
+}
+
+@keyframes menu-link {
+  from { opacity: 0; transform: translateY(1.2rem) rotate(-2deg); }
+}

@@ -68,7 +68,7 @@ export default function Hero() {
         </ul>
 
         {/* Hover: head tilts, eyes close, tongue out, "hm?" pops up (all CSS, .hero-peek in index.css). */}
-        <div aria-hidden="true" className="hero-teddy hero-peek">
+        <div aria-hidden="true" data-pup-stop data-pup-peek className="hero-teddy hero-peek">
           <span className="pup-bubble font-hand">{hero.peek}</span>
           <PupPeek />
         </div>

@@ -57,6 +57,7 @@ export const hero = {
   whatsappCta: 'Ask us on WhatsApp',
   lineupLabel: 'A few of the puppies in our showroom',
   peek: 'hm?', // the hero pup's speech bubble on hover
+  follow: 'coming?', // the walking dog asks this when you stop scrolling partway
 }
 
 export const paths = {

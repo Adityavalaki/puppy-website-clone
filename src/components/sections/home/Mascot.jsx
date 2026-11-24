@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import Paw from '../../ui/Paw.jsx'
+import { hero } from '../../../data/content.js'
 import Pup from '../../ui/Pup.jsx'
 
 // Home page only: one dog that walks with you from section to section as you scroll, leaving paw prints.
@@ -33,34 +34,42 @@ export default function Mascot() {
     let pos = null // where the dog is drawn now {x, y, w}
     let travelled = 0 // total distance walked in px; drives the leg swing
     let lastPrint = null
-    let lastStep = 0 // time of the last real step: the "walking" mood lingers briefly so slow scrolls don't flicker it
+    let lastStep = performance.now() // time of the last real step: the "walking" mood lingers briefly so slow scrolls don't flicker it
+    let askTimer = 0
     let nextId = 0
+
+    // A stop as a box for the whole dog. `key` is the edge the screen line must cross to leave the stop.
+    // The hero pup (data-pup-peek) shows only head + paws, cropped from the same 240x200 drawing (PupPeek's
+    // viewBox is 120 6 108 136), so the whole dog goes where its head lines up with the peeking one: it seems
+    // to stand up in place. Its key is its bottom, so the dog stands there a moment before walking off.
+    const toStop = (el) => {
+      const box = el.getBoundingClientRect()
+      const face = el.dataset.pupFace
+      if (!el.dataset.pupPeek) return { x: box.left, y: box.top, w: box.width, key: box.top, face }
+      const scale = box.width / 108
+      return { x: box.left - 120 * scale, y: box.top - 6 * scale, w: 240 * scale, key: box.bottom, face }
+    }
 
     // Where the dog should be for the current scroll position.
     const findTarget = () => {
       const vh = window.innerHeight
       const line = vh * 0.55 // the dog walks to whichever stops sit around this line across the screen
-      const els = [...document.querySelectorAll('main [data-pup-stop]')].filter((el) => el.getBoundingClientRect().width > 0) // offsetWidth doesn't exist on SVG stops
-      const stops = els.map((el) => el.getBoundingClientRect())
+      const stops = [...document.querySelectorAll('main [data-pup-stop]')]
+        .filter((el) => el.getBoundingClientRect().width > 0) // offsetWidth doesn't exist on SVG stops
+        .map(toStop)
       if (stops.length === 0) return null
-      const below = stops.findIndex((box) => box.top > line)
-      if (below === 0) {
-        // Above the first stop (hero): wait on it, and stay hidden until it scrolls into view.
-        const first = stops[0]
-        return { x: first.left, y: first.top, w: first.width, visible: first.top < vh, face: els[0].dataset.pupFace }
-      }
-      if (below === -1) {
-        // Past the last stop: stay on it and scroll away with it.
-        const last = stops[stops.length - 1]
-        return { x: last.left, y: last.top, w: last.width, visible: true, face: els[els.length - 1].dataset.pupFace }
-      }
+      const below = stops.findIndex((stop) => stop.key > line)
+      // On the first stop (the hero pup): hidden at the very top, standing up in its place once you scroll.
+      if (below === 0) return { ...stops[0], visible: window.scrollY > 4 }
+      // Past the last stop: stay on it and scroll away with it.
+      if (below === -1) return { ...stops[stops.length - 1], visible: true }
       // Between two stops: blend their positions by how far the line has moved from one to the other.
       const a = stops[below - 1]
       const b = stops[below]
-      const t = smooth(clamp((line - a.top) / (b.top - a.top), 0, 1))
-      const w = lerp(a.width, b.width, t)
-      const y = clamp(lerp(a.top, b.top, t), vh * 0.1, vh * 0.86 - w * (200 / 240)) // keep it in view
-      return { x: lerp(a.left, b.left, t), y, w, visible: true, face: els[t < 0.5 ? below - 1 : below].dataset.pupFace }
+      const t = smooth(clamp((line - a.key) / (b.key - a.key), 0, 1))
+      const w = lerp(a.w, b.w, t)
+      const y = clamp(lerp(a.y, b.y, t), vh * 0.1, vh * 0.86 - w * (200 / 240)) // keep it in view
+      return { x: lerp(a.x, b.x, t), y, w, visible: true, face: (t < 0.5 ? a : b).face, between: t > 0.02 && t < 0.98 }
     }
 
     const step = () => {
@@ -82,6 +91,14 @@ export default function Mascot() {
       dog.style.width = `${pos.w}px`
       dog.dataset.walking = active
       dog.dataset.hidden = !target.visible
+      root.toggleAttribute('data-pup-up', target.visible) // hides the hero pup once the walking dog has taken its place
+
+      // Stopped partway between two stops: after a second, the dog asks "coming?". The frame loop stops once the
+      // dog settles, so a timer wakes it when the second is up.
+      clearTimeout(askTimer)
+      const idle = now - lastStep
+      dog.dataset.asking = Boolean(target.between) && idle > 1000
+      if (target.between && idle <= 1000) askTimer = setTimeout(request, 1020 - idle)
       // The dog faces where it walks, unless the stop it is nearest fixes a side (data-pup-face). Meet the Pups
       // needs that: the row slides left past a dog that stands still on screen, so it should look right.
       if (target.face) dog.dataset.left = target.face === 'left'
@@ -121,9 +138,11 @@ export default function Mascot() {
     window.addEventListener('resize', request)
     return () => {
       cancelAnimationFrame(frame)
+      clearTimeout(askTimer)
       window.removeEventListener('scroll', request)
       window.removeEventListener('resize', request)
       root.classList.remove('mascot-on')
+      root.removeAttribute('data-pup-up')
     }
   }, [enabled])
 
@@ -137,6 +156,7 @@ export default function Mascot() {
         ))}
       </div>
       <div ref={dogRef} aria-hidden="true" className="mascot">
+        <span className="pup-bubble font-hand">{hero.follow}</span>
         <Pup />
       </div>
     </>

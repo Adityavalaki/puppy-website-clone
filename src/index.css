@@ -1672,6 +1672,19 @@
 /* Only one dog at a time: the still section dogs step aside while the walking one is on. */
 .mascot-on [data-pup-stop] { visibility: hidden; }
 
+/* ...except the hero pup at the very top. Once you scroll (data-pup-up), the walking dog stands up in its place. */
+.mascot-on:not([data-pup-up]) [data-pup-peek] { visibility: visible; }
+[data-pup-up] .mascot > svg { animation: stand-up 0.5s var(--ease-pounce); }
+
+@keyframes stand-up {
+  from { translate: 0 14%; }
+}
+
+/* "coming?" over the dog's head when you stop partway; it follows the head when the dog faces left. */
+.mascot .pup-bubble { top: -6%; left: 60%; }
+.mascot[data-left="true"] .pup-bubble { left: 8%; }
+.mascot[data-asking="true"] .pup-bubble { opacity: 1; scale: 1; translate: 0 0; }
+
 /* Parts of the dog pivot around points given in the SVG's own coordinates. */
 .pup-leg,
 .pup-head,
@@ -1723,7 +1736,7 @@
 }
 
 /* Fade the walking dog in and out instead of popping (hidden only above its first stop). */
-.mascot { transition: opacity 0.4s ease; }
+.mascot { transition: opacity 0.15s ease; } /* quick, so the hand-off from the hero pup doesn't blink */
 .mascot[data-hidden="true"] { opacity: 0; }
 
 /* ---------- Paw cursor (all pages) and its fading paw-print trail (PawCursor.jsx) ---------- */

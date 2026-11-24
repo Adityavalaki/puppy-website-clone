@@ -55,7 +55,7 @@ export default function Navbar() {
 
       <div className="gutter relative mx-auto flex h-16 max-w-[110rem] items-center gap-6 md:h-[4.75rem]">
         <Link to="/" aria-label={`${site.name} home`} className="group flex shrink-0 items-center gap-3 rounded-full">
-          <img src="/images/icons/logo.svg" alt="" className="size-[2.6rem] transition-[rotate] duration-600 ease-pounce group-hover:-rotate-8 md:size-12" />
+          <img src="/images/icons/logo.png" alt="" className="size-[2.6rem] transition-[rotate] duration-600 ease-pounce group-hover:-rotate-8 md:size-12" />
           <span className="font-display text-[clamp(1.15rem,4.6vw,1.4rem)] leading-none font-extrabold lg:hidden xl:inline">{site.name}</span>
         </Link>
 

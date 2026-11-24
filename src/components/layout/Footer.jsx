@@ -96,7 +96,7 @@ export default function Footer() {
 
       <div className="gutter relative mx-auto mt-16 flex max-w-[110rem] flex-col items-start justify-between gap-4 border-t border-milk/15 pt-6 text-sm text-milk/60 md:flex-row md:items-center">
         <span className="flex items-center gap-3">
-          <img src="/images/icons/logo.svg" alt="" className="size-9" />© {year} {site.name}
+          <img src="/images/icons/logo.png" alt="" className="size-9" />© {year} {site.name}
         </span>
         <span className="font-hand text-base font-medium text-honey/80">{site.tagline}</span>
       </div>

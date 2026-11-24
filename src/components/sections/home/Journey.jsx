@@ -74,7 +74,7 @@ export default function Journey() {
         <div className="journey-side">
           <div role="group" aria-label={journey.phoneLabel} className="phone">
             <div className="phone-bar">
-              <img src="/images/icons/logo.svg" alt="" className="size-10 rounded-full" />
+              <img src="/images/icons/logo.png" alt="" className="size-10 rounded-full" />
               <span>
                 <span className="block text-[0.98rem] leading-tight font-bold">{site.name}</span>
                 <span className="block text-[0.78rem] text-cocoa-soft">{showTyping ? journey.typing : journey.online}</span>

@@ -7,7 +7,7 @@ Read first: CLAUDE.md, docs/DECISIONS.md, docs/blutec-assignment-plan.md
 - Done: Aditya asked for a same-text clone: content.js now holds the reference site's exact wording (all 15 puppies imported, Korean Teacup collection filter, unnamed pups read "this puppy"), How it works step cards, tab titles (2ba79fb, 358d598). Loader on every page change (1s) (358d598). Detail card swings from its pin (8631943). Way-home paw trail (826982e). Polaroids pop in with a paw patting them on; Happy families wall plain in columns on the reference's striped bg with Teddy ending (2ed84c1). FAQ: sniff-out side panel, cork board, paper notes with glossy pins and folded corners (02ed251). Contact: Teddy under the letter saying "hm?"/"coming?" (this commit).
 - In progress: nothing.
 - Broken or risky: reference text includes the reference's email (info@instabizweb.com, on Aditya's same-text instruction) and "▶ video" badges though we have no videos. A positioned <li> breaks CSS columns in Chrome (paw anchors on .polaroid-button instead). Not tested on Safari/Firefox/real phones; no Lighthouse run.
-- Next: Lighthouse, README, ai-prompts log (Aditya's own prompts), Loom. Ask: delete unused logo.svg/pup-stand/pup-peek/pup-basket.svg? favicon still the paw.
+- Next: Lighthouse, README, ai-prompts log (Aditya's own prompts), Loom. Unused SVGs deleted and favicon is now logo.png (see next commit).
 - Do not touch: reference/, docs/blutec-assignment-plan.md, docs/ai-prompts.md.
 
 ## 2026-11-24 (5) — model: Claude Opus 5.5 (after a Haiku 4.5 turn)

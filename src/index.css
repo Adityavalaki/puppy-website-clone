@@ -1783,11 +1783,20 @@
 .mascot-on [data-pup-stop] { visibility: hidden; }
 
 /* ...except the hero pup at the very top. Once you scroll (data-pup-up), the walking dog stands up in its place. */
-.mascot-on:not([data-pup-up]) [data-pup-peek] { visibility: visible; }
+.mascot-on:not([data-pup-up]) .hero-peek { visibility: visible; }
 [data-pup-up] .mascot > svg { animation: stand-up 0.5s var(--ease-pounce); }
 
 @keyframes stand-up {
   from { translate: 0 14%; }
+}
+
+/* The end: once the walking dog settles on the footer basket (data-pup-home), it fades and the pup resting in
+   the basket appears in its place, with a little sink into the basket. */
+[data-pup-home] .mascot { opacity: 0; }
+.mascot-on[data-pup-home] .basket-peek { visibility: visible; animation: sink-in 0.45s var(--ease-pounce); }
+
+@keyframes sink-in {
+  from { translate: -50% -12%; }
 }
 
 /* Standing and sitting drawings share one box; only the current pose shows, with a little settle on sitting. */
@@ -2021,4 +2030,31 @@ textarea { cursor: text; }
   0% { left: 0; opacity: 0; }
   12%, 88% { opacity: 1; }
   100% { left: calc(100% - var(--pup-w)); opacity: 0; }
+}
+
+/* ---------- Footer basket (Footer.jsx): back rim, the resting pup, then the woven front over its paws ---------- */
+.basket {
+  position: relative;
+  width: clamp(14rem, 24vw, 19rem);
+  margin-inline: auto;
+}
+
+.basket-back,
+.basket-front {
+  display: block;
+  width: 100%;
+}
+
+.basket-front {
+  position: absolute;
+  inset: 0;
+}
+
+/* Head ~0.39 of the basket width, like the old drawing; paws rest on the rim (y 156 of 240). */
+.basket-peek {
+  position: absolute;
+  bottom: 34%;
+  left: 50%;
+  width: 56%;
+  translate: -50% 0;
 }

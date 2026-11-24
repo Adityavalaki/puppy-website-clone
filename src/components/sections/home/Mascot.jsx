@@ -48,14 +48,18 @@ export default function Mascot() {
       const pose = el.dataset.pupPose
       if (!el.dataset.pupPeek) return { x: box.left, y: box.top, w: box.width, key: box.top, face, pose }
       const scale = box.width / 108
-      return { x: box.left - 120 * scale, y: box.top - 6 * scale, w: 240 * scale, key: box.bottom, face, pose }
+      return { x: box.left - 120 * scale, y: box.top - 6 * scale, w: 240 * scale, key: box.bottom, face, pose, peek: true }
     }
 
     // Where the dog should be for the current scroll position.
     const findTarget = () => {
       const vh = window.innerHeight
-      const line = vh * 0.55 // the dog walks to whichever stops sit around this line across the screen
-      const stops = [...document.querySelectorAll('main [data-pup-stop]')]
+      // The dog walks to whichever stops sit around this line across the screen. In the last half screen of
+      // scrolling the line sweeps down to 95%, so a stop low on the final screen (the footer basket) is reached.
+      const maxScroll = document.documentElement.scrollHeight - vh
+      const end = clamp(1 - (maxScroll - window.scrollY) / (vh * 0.5), 0, 1)
+      const line = vh * (0.55 + 0.4 * end)
+      const stops = [...document.querySelectorAll('[data-pup-stop]')]
         .filter((el) => el.getBoundingClientRect().width > 0) // offsetWidth doesn't exist on SVG stops
         .map(toStop)
       if (stops.length === 0) return null
@@ -63,7 +67,7 @@ export default function Mascot() {
       // On the first stop (the hero pup): hidden at the very top, standing up in its place once you scroll.
       if (below === 0) return { ...stops[0], visible: window.scrollY > 4 }
       // Past the last stop: stay on it and scroll away with it.
-      if (below === -1) return { ...stops[stops.length - 1], visible: true }
+      if (below === -1) return { ...stops[stops.length - 1], visible: true, last: true }
       // Between two stops: blend their positions by how far the line has moved from one to the other.
       const a = stops[below - 1]
       const b = stops[below]
@@ -94,6 +98,9 @@ export default function Mascot() {
       dog.dataset.pose = !active && target.pose ? target.pose : 'stand' // sits only once it has stopped, close to a sitting stop
       dog.dataset.hidden = !target.visible
       root.toggleAttribute('data-pup-up', target.visible) // hides the hero pup once the walking dog has taken its place
+      // Settled on the last stop (the footer basket): the walking dog hands over to the pup resting in the basket.
+      const settled = !active && Math.hypot(target.x - pos.x, target.y - pos.y) < 2
+      root.toggleAttribute('data-pup-home', Boolean(target.last && target.peek) && settled)
 
       // Stopped partway between two stops: after a second, the dog asks "coming?". The frame loop stops once the
       // dog settles, so a timer wakes it when the second is up.
@@ -145,6 +152,7 @@ export default function Mascot() {
       window.removeEventListener('resize', request)
       root.classList.remove('mascot-on')
       root.removeAttribute('data-pup-up')
+      root.removeAttribute('data-pup-home')
     }
   }, [enabled])
 

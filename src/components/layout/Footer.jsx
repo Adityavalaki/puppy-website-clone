@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { footer, site } from '../../data/content.js'
+import { PupPeek } from '../ui/Pup.jsx'
 import Sparkle from '../ui/Sparkle.jsx'
 
 // Star positions in the night sky (left %, top %, size px). Each one twinkles 0.4s after the previous.
@@ -36,9 +37,21 @@ export default function Footer() {
           <p className="mt-5 max-w-md text-milk/80">{footer.blurb}</p>
         </div>
 
-        {/* On phones the basket drops to the end; from 768px it sits under the intro on the left. */}
-        <div className="order-last md:order-none md:col-span-5 md:col-start-1 md:row-start-2">
-          <img src="/images/icons/pup-basket.svg" alt="" className="-ml-[calc(clamp(14rem,24vw,19rem)*0.36)] w-[clamp(14rem,24vw,19rem)]" />
+        {/* On phones the basket drops to the end; from 768px it sits under the intro on the left.
+            The pup in it is the walking dog's last stop on Home: empty until the dog gets there (Mascot.jsx). */}
+        <div aria-hidden="true" className="order-last md:order-none md:col-span-5 md:col-start-1 md:row-start-2">
+          <div className="basket">
+            <svg viewBox="0 0 300 240" className="basket-back">
+              <ellipse cx="150" cy="152" rx="118" ry="16" fill="#8e5a2b" stroke="#2a170e" strokeWidth="5" />
+            </svg>
+            <PupPeek data-pup-stop data-pup-peek className="basket-peek" />
+            <svg viewBox="0 0 300 240" className="basket-front" fill="none" stroke="#2a170e" strokeWidth="5" strokeLinejoin="round" strokeLinecap="round">
+              <path d="M38 158H262L232 236H68Z" fill="#d9a05b" />
+              <path d="M52 184H248M60 210H240" stroke="#a8692f" strokeWidth="4" />
+              <path d="M95 162L102 234M150 162V234M205 162L198 234" stroke="#a8692f" strokeWidth="4" />
+              <rect x="30" y="148" width="240" height="18" rx="9" fill="#e8b56f" />
+            </svg>
+          </div>
         </div>
 
         <nav aria-label="Footer" className="md:col-span-3 md:col-start-7 md:row-span-2 md:row-start-1">

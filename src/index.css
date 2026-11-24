@@ -1605,13 +1605,31 @@
 }
 
 /* Puppy detail: the info card pinned to a board, with a pup peeking over its top edge. */
+/* It hangs from its pin: the pivot is the pin's centre (top-left), and hovering sets it swinging, a few
+   smaller and smaller swings that settle back to its resting tilt (--rest). */
 .pinned-card {
+  --rest: 0deg;
   outline: 2px dashed rgba(42, 23, 14, 0.22);
   outline-offset: -11px;
+  rotate: var(--rest);
+  transform-origin: 2.45rem 0.05rem;
 }
 
 @media (min-width: 1024px) {
-  .pinned-card { rotate: -1.2deg; }
+  .pinned-card { --rest: -1.2deg; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pinned-card:hover { animation: pin-swing 1.6s ease-out; }
+}
+
+@keyframes pin-swing {
+  0% { rotate: var(--rest); }
+  15% { rotate: calc(var(--rest) + 3.5deg); }
+  35% { rotate: calc(var(--rest) - 2.6deg); }
+  55% { rotate: calc(var(--rest) + 1.6deg); }
+  75% { rotate: calc(var(--rest) - 0.7deg); }
+  100% { rotate: var(--rest); }
 }
 
 .pin {

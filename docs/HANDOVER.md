@@ -3,6 +3,13 @@ Lane: A (graded demo, no real users or data) — agreed with Aditya 2026-11-23. 
 Read first: CLAUDE.md, docs/DECISIONS.md, docs/blutec-assignment-plan.md
 
 <!-- Newest entry on top. Five lines, every session. -->
+## 2026-11-24 (4) — model: Claude Opus 5.5
+- Done: Animation work pushed (1d6ae82). Responsive sweep of all 8 inner pages at 375/768/1024/1440 (overflow + broken images): fixed Contact at 375 (letter form select forced the grid column wide; min-w-0 on both columns), Gone home at 375 (smaller photo, wrapping route line, no tilt on phones), How it works playground (definite width in the auto column from 768, fluid below). All pages now 0px horizontal overflow, 0 broken images at every width.
+- In progress: nothing.
+- Broken or risky: Forms still need VITE_FORMSPREE_ENDPOINT in Vercel. Not tested on real devices or Safari/Firefox.
+- Next: Lighthouse run, README, ai-prompts log tidy (Aditya's own prompts), Loom.
+- Do not touch: reference/, docs/blutec-assignment-plan.md, docs/ai-prompts.md.
+
 ## 2026-11-24 (3) — model: Claude Opus 5.5
 - Done: Polish 2 (Aditya's feedback): Mascot rewritten so it stays with the reader: target is always between the stops around a line at 55% of the screen, eased 14%/frame (no jumps), kept on screen between stops, fades only above the first stop. New shared ui/FlightPath.jsx: redesigned airliner flies Korea to Dubai along the route as you scroll, flown part turns solid (Home "Two paths" + How it works Imported scene). Site-wide paw cursor + fading paw-print trail (layout/PawCursor.jsx, mouse only, off for reduced motion). How it works closing card: puppy playing with a ball (trotting legs, hops, turns round).
 - In progress: polish round. Not committed (mascot v1 + these changes).

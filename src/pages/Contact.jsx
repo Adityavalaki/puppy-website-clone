@@ -43,7 +43,7 @@ export default function Contact() {
       </section>
 
       <div className="gutter mx-auto mt-12 grid max-w-[110rem] gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-start">
-        <div className="grid gap-8">
+        <div className="grid min-w-0 gap-8">
           <a href={site.whatsappHref} target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp justify-self-start">WhatsApp {site.phoneDisplay}</a>
           <dl className="grid gap-5">
             <div>
@@ -71,7 +71,7 @@ export default function Contact() {
         </div>
 
         {/* The contact form, written as a letter with blanks to fill in. */}
-        <form noValidate onSubmit={submit} aria-labelledby="letter-title" className="letter">
+        <form noValidate onSubmit={submit} aria-labelledby="letter-title" className="letter min-w-0">
           <p id="letter-title" className="font-hand text-2xl text-toffee-ink">Dear TeddyPups,</p>
           <p className="mt-5 leading-[2.6]">
             my name is {blank('name', 'Your name (required)', { autoComplete: 'name' })}, and you can reach me on{' '}

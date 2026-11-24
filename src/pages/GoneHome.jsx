@@ -27,12 +27,12 @@ export default function GoneHome() {
       <ul className="mt-14 grid gap-7 md:grid-cols-2 xl:grid-cols-3">
         {goneHome.map((pup, index) => (
           <li key={pup.name} className="ticket" style={{ '--tilt': ['-1deg', '0.8deg', '-0.4deg'][index % 3] }}>
-            <img src={pup.image} alt={`${pup.name}, ${pup.breed}`} loading="lazy" className="size-24 shrink-0 rounded-full border-[3px] border-cocoa object-cover" />
+            <img src={pup.image} alt={`${pup.name}, ${pup.breed}`} loading="lazy" className="size-18 shrink-0 rounded-full border-[3px] border-cocoa object-cover sm:size-24" />
             <div className="min-w-0 flex-1">
               <p className="font-hand text-sm text-toffee-ink">one ticket home</p>
               <p className="font-display text-2xl leading-tight font-extrabold">{pup.name}</p>
               <p className="text-sm text-cocoa-soft">{pup.breed}, {pup.sex}</p>
-              <p className="mt-2 flex items-center gap-2 text-xs font-bold tracking-wider uppercase">
+              <p className="mt-2 flex flex-wrap items-center gap-x-2 text-xs font-bold tracking-wider uppercase">
                 {pup.from} <span aria-hidden="true" className="text-toffee">- - -›</span> Home <span aria-hidden="true">♥</span>
               </p>
             </div>

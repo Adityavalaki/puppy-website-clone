@@ -1696,7 +1696,8 @@ textarea { cursor: text; }
 /* ---------- How it works: a puppy playing with a ball inside the closing card ---------- */
 .playground {
   position: relative;
-  width: min(100%, 22rem);
+  width: 100%;
+  max-width: 22rem;
   height: 11rem;
   margin-inline: auto;
 }
@@ -1763,4 +1764,14 @@ textarea { cursor: text; }
 
 @keyframes hop {
   to { translate: 0 -6px; }
+}
+
+/* Phones: keep tickets straight so their tilted corners never poke past the screen edge. */
+@media (max-width: 639px) {
+  .ticket { rotate: none; }
+}
+
+/* From tablets the card puts the playground in an auto-sized column, which needs a definite width. */
+@media (min-width: 768px) {
+  .playground { width: 22rem; }
 }

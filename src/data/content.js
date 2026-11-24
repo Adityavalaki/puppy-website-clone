@@ -81,6 +81,8 @@ export const paths = {
 export const journey = {
   title: 'Your road to a puppy',
   lede: 'A friendly, step-by-step service that keeps bringing your puppy home simple, safe and fun.',
+  online: 'online',
+  typing: 'typing…', // shown with the ••• bubble while you scroll
   steps: [
     { title: 'Pick your breed', text: 'Tell us the breed you love or what you need in a dog. We will suggest puppies that suit your home and routine.' },
     { title: 'See photos & details', text: 'We send real photos, health records and every detail you need, straight to your WhatsApp.' },

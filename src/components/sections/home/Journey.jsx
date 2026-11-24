@@ -11,8 +11,10 @@ export default function Journey() {
   const stepRefs = useRef([])
   const [live, setLive] = useState(() => window.matchMedia(liveQuery).matches)
   const [scrollStep, setScrollStep] = useState(-1)
-  // Without the scroll reveal every step counts as reached.
+  const [typing, setTyping] = useState(false)
+  // Without the scroll reveal every step counts as reached, and nobody is typing.
   const active = live ? scrollStep : lastStep
+  const showTyping = live && typing
 
   useEffect(() => {
     const query = window.matchMedia(liveQuery)
@@ -22,15 +24,23 @@ export default function Journey() {
   }, [])
 
   // The active step is the last one whose top has scrolled past 55% of the screen height.
+  // While you scroll the shop "types" (status + ••• bubble); it stops 0.7s after you do.
   useEffect(() => {
     if (!live) return
+    let idle = 0
     const onScroll = () => {
       const line = window.innerHeight * 0.55
       setScrollStep(stepRefs.current.filter((step) => step.getBoundingClientRect().top < line).length - 1)
+      setTyping(true)
+      clearTimeout(idle)
+      idle = setTimeout(() => setTyping(false), 700)
     }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      clearTimeout(idle)
+    }
   }, [live])
 
   return (
@@ -67,7 +77,7 @@ export default function Journey() {
               <img src="/images/icons/logo.svg" alt="" className="size-10 rounded-full" />
               <span>
                 <span className="block text-[0.98rem] leading-tight font-bold">{site.name}</span>
-                <span className="block text-[0.78rem] text-cocoa-soft">online</span>
+                <span className="block text-[0.78rem] text-cocoa-soft">{showTyping ? journey.typing : journey.online}</span>
               </span>
             </div>
 
@@ -112,6 +122,13 @@ export default function Journey() {
                     </svg>
                   </div>
                 </div>
+              )}
+              {showTyping && (
+                <p aria-hidden="true" className="msg msg--them msg-typing">
+                  <span />
+                  <span />
+                  <span />
+                </p>
               )}
             </div>
 

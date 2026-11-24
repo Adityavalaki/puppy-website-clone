@@ -3,6 +3,13 @@ Lane: A (graded demo, no real users or data) — agreed with Aditya 2026-11-23. 
 Read first: CLAUDE.md, docs/DECISIONS.md, docs/blutec-assignment-plan.md
 
 <!-- Newest entry on top. Five lines, every session. -->
+## 2026-11-24 — model: Claude Opus 5.5
+- Done: All pages built and routed: /puppies (URL-query filters origin/breed/sex, round cards, gone-home strip), /puppies/:slug (gallery full + close-up of the same photo, info card, checklist, way-home steps per origin, enquiry form, prev/next; unknown slug shows 404), /gone-home (tickets), /happy-families (full polaroid wall + lightbox via shared PolaroidWall), /how-it-works (chapter chips, Dubai/Imported toggle, promise stamps via shared Stamp, #delivery, why us, CTA), /faq (search + one-open-at-a-time cork-board accordion), /contact (letter form), 404 poster. Forms validate in src/lib/enquiry.js (name + phone required, email format, honeypot).
+- In progress: polish pass (Aditya: "first make the whole website and then we will polish it"). Pages are NOT committed yet.
+- Broken or risky: Forms only send once VITE_FORMSPREE_ENDPOINT is set (in .env.local locally and in Vercel project settings); until then they say "Sending is not connected yet" instead of pretending. .env.example could not be created (env files are blocked by permission settings). New pages not yet visually checked at 375px (test browser froze after a script-driven navigation test; real click navigation was fine).
+- Next: commit + push when Aditya asks; visual check of every new page at 375/768/1024/1440 against reference/, then polish.
+- Do not touch: reference/, docs/blutec-assignment-plan.md, docs/ai-prompts.md.
+
 ## 2026-11-23 (6) — model: Claude Opus 5.5
 - Done: Home page complete, morning to night: Journey (sticky phone chat revealing per step, pushed 09bc4ca), Trust (passport book, 4 ink stamps, sunset skyline), Happy homes (testimonial bubble, polaroid wall 6/8 photos, reusable Lightbox: native dialog, arrows, Esc), Questions (3 FAQs, twinkling stars, floating ?), closing CTA (house with door opening on scroll, WhatsApp + contact). 8 Unsplash family photos in public/images/gallery (credited). Meet doors now show open in browsers without scroll-linked CSS.
 - In progress: nothing.

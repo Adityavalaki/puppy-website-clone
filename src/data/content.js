@@ -127,11 +127,160 @@ export const families = {
   ],
 }
 
+// The home page shows the first three; the FAQ page shows them all.
 export const faqs = [
   { q: 'Are your puppies vaccinated and vet checked?', a: 'Yes. Every puppy comes with a health certificate from a licensed vet, plus up-to-date vaccines and deworming, before going home.' },
   { q: 'Can I meet a puppy before choosing?', a: 'Of course. Visit our Downtown Dubai showroom and spend time with the local puppies before you make up your mind.' },
   { q: 'Can my puppy come home the same day?', a: 'Yes. Local puppies are ready right away, so you can take yours home on the day you visit.' },
+  { q: 'Do you bring puppies in from abroad?', a: 'Yes. We work with trusted breeders in Korea and reserve rare teacup breeds for you, then handle the whole trip to Dubai.' },
+  { q: 'How does an imported puppy travel?', a: 'With all health papers ready, in an airline-approved carrier and with a caring handler, on the shortest route we can book.' },
+  { q: 'Will I see photos and health records first?', a: 'Always. We send real photos, videos and the health records on WhatsApp before you commit to anything.' },
+  { q: 'Do you deliver?', a: 'Yes. We deliver across Dubai and the UAE, and we can arrange worldwide delivery for imported puppies.' },
+  { q: 'Which breeds do you usually have?', a: 'Mostly Maltipoo, Pomeranian, Toy and Teacup Poodle, Cavapoo and Shih Tzu. Ask us if you are looking for something else.' },
+  { q: 'Is there help after my puppy comes home?', a: 'Yes. We stay a message away for advice on food, training, grooming and settling in, for as long as you need us.' },
 ]
+
+// Filter chips on the Puppies page. Each sets one URL query value (?origin=, ?breed=, ?sex=).
+export const puppyFilters = [
+  { key: 'origin', label: 'where', options: [{ value: 'local', label: 'In Dubai' }, { value: 'imported', label: 'Imported' }] },
+  { key: 'breed', label: 'breed', options: [{ value: 'maltipoo', label: 'Maltipoo' }, { value: 'pomeranian', label: 'Pomeranian' }, { value: 'poodle', label: 'Poodle' }, { value: 'cavapoo', label: 'Cavapoo' }, { value: 'shih-tzu', label: 'Shih Tzu' }] },
+  { key: 'sex', label: 'boy or girl', options: [{ value: 'boy', label: 'Boys' }, { value: 'girl', label: 'Girls' }] },
+]
+
+export const puppiesPage = {
+  kicker: "from Teddy's sketchbook",
+  title: 'Available puppies',
+  lede: 'Every listing shows real photos of the actual puppy. Open a profile to see more, then ask us about them on WhatsApp.',
+  goneTitle: 'Already gone home',
+  goneCta: 'See them all',
+}
+
+export const puppyDetail = {
+  checklist: ['Vaccinated', 'Dewormed', 'Health certificate from a licensed vet', 'Fully checked before joining your family'],
+  steps: {
+    local: { title: 'Coming home from Dubai', steps: [
+      { title: 'Say hello', text: 'Visit the showroom or ask for a video call to meet your puppy.' },
+      { title: 'Ask anything', text: 'We go through health records, food and routine with you.' },
+      { title: 'Get ready', text: 'We help you prepare a bed, food and toys for day one.' },
+      { title: 'Welcome home', text: 'Take your puppy home the same day or have them delivered.' },
+    ] },
+    imported: { title: 'Coming home from abroad', steps: [
+      { title: 'Reserve your puppy', text: 'Tell us which puppy has stolen your heart.' },
+      { title: 'Personal updates', text: 'We confirm the details and send news of your puppy as the trip gets closer.' },
+      { title: 'Travel and arrival', text: 'We handle health checks, flights and every document.' },
+      { title: 'Welcome home', text: 'We help your new puppy settle in calmly at home.' },
+    ] },
+  },
+}
+
+// Puppies that already found families (photos reused from the free Unsplash set).
+export const goneHome = [
+  { name: 'Ace', breed: 'Pomeranian', sex: 'boy', from: 'TeddyPups', image: '/images/puppies/pomeranian.jpg' },
+  { name: 'Leo', breed: 'Poodle', sex: 'boy', from: 'TeddyPups', image: '/images/puppies/poodle.jpg' },
+  { name: 'Mia', breed: 'Maltipoo', sex: 'girl', from: 'Dubai showroom', image: '/images/puppies/maltipoo-2.jpg' },
+  { name: 'Sadie', breed: 'Maltipoo', sex: 'girl', from: 'TeddyPups', image: '/images/puppies/maltipoo.jpg' },
+  { name: 'Ollie', breed: 'Pomeranian', sex: 'boy', from: 'TeddyPups', image: '/images/puppies/pomeranian-4.jpg' },
+  { name: 'Bruno', breed: 'Cavapoo', sex: 'boy', from: 'Dubai showroom', image: '/images/puppies/cavapoo.jpg' },
+  { name: 'Luna', breed: 'Shih Tzu', sex: 'girl', from: 'TeddyPups', image: '/images/puppies/shih-tzu-2.jpg' },
+  { name: 'Teddy', breed: 'Toy Poodle', sex: 'boy', from: 'Dubai showroom', image: '/images/puppies/toy-poodle.jpg' },
+  { name: 'Daisy', breed: 'Cavapoo', sex: 'girl', from: 'TeddyPups', image: '/images/puppies/cavapoo-2.jpg' },
+]
+
+export const goneHomePage = {
+  title: 'Gone home',
+  lede: 'Every puppy here already lives with a loving family. Looking for one just like them? Tell us and we will help you find your match.',
+  cta: 'See available puppies',
+  booth: 'tickets home',
+}
+
+export const familiesPage = {
+  kicker: 'our wall of happy endings',
+  title: 'Happy families',
+  lede: 'Nothing makes us happier than seeing our puppies in loving homes. Here are some sweet moments our families shared after welcoming their new friend.',
+}
+
+export const howItWorks = {
+  title: 'How it works',
+  lede: 'Whether you visit us here in Dubai or reserve a rare breed from abroad, we make bringing your puppy home simple and memorable.',
+  chapters: [
+    { id: 'two-ways', label: 'Two ways home' },
+    { id: 'promise', label: 'Our puppy promise' },
+    { id: 'delivery', label: 'Delivery & collection' },
+    { id: 'why-us', label: 'Why choose us' },
+  ],
+  ways: {
+    kicker: 'choose your way',
+    title: 'Two ways home',
+    local: { tab: 'In Dubai', sub: 'meet in person', title: 'Meet your puppy in person', text: 'Visit our Downtown Dubai showroom and choose your puppy face to face. Our local puppies come from trusted breeders, raised with care, good food and regular vet checks.', scene: 'Downtown Dubai' },
+    imported: { tab: 'Imported', sub: 'reserved for you', title: 'Reserve a rare breed', text: 'Pick a Korean teacup breed from breeders we know well. We share photos and health records, then handle the flight, the papers and a gentle arrival.', scene: 'Korea to Dubai' },
+  },
+  promise: {
+    title: 'Our puppy promise',
+    stamps: [
+      { title: 'Caring breeders', text: 'We only work with breeders who keep high standards of health and kindness.', shape: 'round', icon: 'heart', ink: '#a24a1a', tilt: '-6deg' },
+      { title: 'Nothing hidden', text: 'Photos, videos and health papers are shared before your puppy travels.', shape: 'ticket', icon: 'plane', ink: '#1f6b45', tilt: '4deg' },
+      { title: 'Calm delivery', text: 'We take care of every step so your puppy arrives happy and healthy.', shape: 'oval', icon: 'chat', ink: '#5a3a28', tilt: '-3deg' },
+    ],
+  },
+  delivery: {
+    title: 'Delivery & collection',
+    lede: 'From a same-day visit in Downtown Dubai to a flight from Korea, every puppy travels in comfort and arrives safely.',
+    items: [
+      { title: 'Same-day collection', text: 'Choose a local puppy at the showroom and take them home today.' },
+      { title: 'Delivery in Dubai', text: 'We bring your puppy to your door anywhere in Dubai.' },
+      { title: 'Safe air travel', text: 'Imported puppies fly with approved carriers and full paperwork.' },
+      { title: 'Worldwide delivery', text: 'Living outside the UAE? Ask us about delivery to your country.' },
+    ],
+  },
+  why: {
+    title: 'Why choose us',
+    text: 'We are here to help you find a new family member. From your first message to the day your puppy arrives, we are with you at every step, and we keep things clear, honest and full of love.',
+    items: [
+      { title: 'International travel', text: 'Years of experience bringing puppies safely from Korea to Dubai.', icon: 'plane' },
+      { title: 'Help 24/7', text: 'Questions at midnight? We are only a message away, before and after delivery.', icon: 'chat' },
+      { title: 'Health guarantee', text: 'Every puppy is vaccinated, dewormed and checked by a licensed vet before going home.', icon: 'heart' },
+    ],
+  },
+  cta: {
+    title: 'Healthy, happy, one of a kind',
+    text: 'When you choose TeddyPups you get a healthy, well-raised puppy and friendly advice on training, food and care, so you and your new friend get off to the best start.',
+    whatsapp: 'Ask us on WhatsApp',
+    puppies: 'See available puppies',
+  },
+}
+
+export const faqPage = {
+  title: 'Questions & answers',
+  lede: "Can't find your answer? Message us on WhatsApp, our team is around day and night.",
+  searchLabel: 'sniff out a question',
+  searchPlaceholder: 'delivery, Korea, vaccines…',
+  ask: 'Ask your own question',
+  empty: 'No notes match that yet. Try another word, or ask us directly.',
+}
+
+export const contactPage = {
+  title: 'Get in touch with us',
+  lede: 'Questions about our puppies or how adoption works? Send us a letter below and our team will reply soon. Ready to adopt or just curious, we would love to hear from you.',
+  visitTitle: 'Visit us in Downtown Dubai',
+  visitText: 'Come to our Downtown Dubai showroom and meet the puppies face to face.',
+  mapsHref: 'https://www.google.com/maps/search/?api=1&query=Downtown+Dubai',
+  mapsCta: 'Open in Google Maps',
+  visitImage: '/images/puppies/pomeranian-3.jpg',
+}
+
+export const notFoundPage = {
+  kicker: 'have you seen this page?',
+  title: 'Lost',
+  text: 'One page, last seen wandering off. It answers to the address you typed, but it is not here any more. Teddy is on the case.',
+  tabsLabel: 'if found, take a tab:',
+  tabs: [
+    { label: 'Home', to: '/' },
+    { label: 'Puppies', to: '/puppies' },
+    { label: 'How it works', to: '/how-it-works' },
+    { label: 'Questions', to: '/faq' },
+    { label: 'Contact', to: '/contact' },
+  ],
+}
 
 export const questions = {
   title: 'Your questions, answered',

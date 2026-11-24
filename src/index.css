@@ -685,8 +685,8 @@
   gap: 2rem 1.1rem;
 }
 
-/* Phones and tablets show the first six photos. */
-.photo-wall-prints > li:nth-child(n + 7) { display: none; }
+/* Phones and tablets show the first six photos (unless the wall asks for all of them). */
+.photo-wall-prints:not(.photo-wall-prints--all) > li:nth-child(n + 7) { display: none; }
 
 @media (min-width: 640px) {
   .photo-wall-prints {
@@ -1341,3 +1341,259 @@
 @keyframes menu-link {
   from { opacity: 0; transform: translateY(1.2rem) rotate(-2deg); }
 }
+
+/* ---------- Shared by the inner pages ---------- */
+
+/* Big rounded display heading (Fraunces with the soft/wonky axes from --font-display). */
+@utility display-title {
+  font-family: var(--font-display);
+  font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 144;
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.filter-board {
+  position: relative;
+  display: grid;
+  gap: 1.1rem;
+  margin-top: 3rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 3px solid var(--color-cocoa);
+  border-radius: 1.4rem;
+  background: var(--color-milk);
+  box-shadow: 6px 8px 0 rgba(42, 23, 14, 0.12);
+}
+
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.6rem;
+  padding: 0 1rem;
+  border: 2px solid var(--color-cocoa);
+  border-radius: 999px;
+  background: var(--color-milk);
+  box-shadow: 0 4px 0 -1px rgba(42, 23, 14, 0.25);
+  font-size: 0.95rem;
+  font-weight: 650;
+  transition: background-color 0.2s, color 0.2s, translate 0.2s var(--ease-pounce);
+}
+
+.filter-chip:hover { translate: 0 -2px; }
+
+.filter-chip[aria-pressed="true"] {
+  background: var(--color-cocoa);
+  color: var(--color-milk);
+}
+
+/* Doodled ring behind each round puppy photo on the Puppies page. */
+.pup-card-ring {
+  position: absolute;
+  inset: -7% -5% -3% -7%;
+  border: 2px solid var(--color-cocoa);
+  border-radius: 46% 54% 50% 50% / 52% 46% 54% 48%;
+  background: color-mix(in oklab, var(--color-honey-soft) 70%, transparent);
+  rotate: var(--tilt);
+}
+
+.form-input {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.6rem 0.9rem;
+  border: 2px solid var(--color-cocoa-soft);
+  border-radius: 0.9rem;
+  background: var(--color-milk);
+}
+
+.form-input[aria-invalid="true"] {
+  border-color: #b3261e;
+  background: #fdeceb;
+}
+
+/* Puppy detail gallery: photo on a little stack of paper. */
+.paper-stack {
+  position: relative;
+  isolation: isolate;
+}
+
+.paper-stack::before,
+.paper-stack::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border: 3px solid var(--color-cocoa);
+  border-radius: 1rem;
+  background: var(--color-milk);
+}
+
+.paper-stack::before { translate: 8px 8px; }
+.paper-stack::after { translate: 15px 15px; z-index: -2; }
+
+.gallery-arrow {
+  position: absolute;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  translate: 0 -50%;
+  border: 2px solid var(--color-cocoa);
+  border-radius: 50%;
+  background: rgba(255, 253, 248, 0.92);
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+/* Paw-print dots joining the "way home" steps. */
+.step-dots {
+  position: absolute;
+  top: 1.75rem;
+  left: 4.5rem;
+  right: 0.5rem;
+  height: 4px;
+  background: radial-gradient(circle, var(--color-toffee) 1.6px, transparent 2px) 0 50% / 12px 4px repeat-x;
+  opacity: 0.6;
+}
+
+@media (max-width: 639px) {
+  .step-dots { display: none; }
+}
+
+/* Gone home: each puppy as a ticket with notches and a tear-off stub. */
+.ticket {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  padding: 1.1rem 0 1.1rem 1.1rem;
+  border: 3px solid var(--color-cocoa);
+  border-radius: 1rem;
+  background: var(--color-milk);
+  box-shadow: 6px 8px 0 rgba(42, 23, 14, 0.12);
+  rotate: var(--tilt);
+}
+
+.ticket-stub {
+  align-self: stretch;
+  display: grid;
+  place-items: center;
+  width: 2.8rem;
+  border-left: 2.5px dashed var(--color-cocoa);
+  border-radius: 0 0.8rem 0.8rem 0;
+  background: var(--color-honey);
+  font-family: var(--font-display);
+  font-weight: 800;
+  writing-mode: vertical-rl;
+  rotate: 180deg;
+}
+
+/* FAQ cork board with pinned notes. */
+.cork-board {
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+  border: 3px solid var(--color-cocoa);
+  border-radius: 1.4rem;
+  box-shadow: 0 0 0 10px #6b3a1f, 0 0 0 13px var(--color-cocoa);
+  background:
+    radial-gradient(circle at 20% 30%, rgba(42, 23, 14, 0.12) 1px, transparent 1.5px) 0 0 / 9px 9px,
+    radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.12) 1px, transparent 1.5px) 0 0 / 13px 13px,
+    #c99a62;
+  color: var(--color-cocoa);
+}
+
+.faq-note {
+  position: relative;
+  padding: 1.25rem 1.4rem;
+  border: 2.5px solid var(--color-cocoa);
+  border-radius: 0.5rem;
+  background: #fffdf5;
+  box-shadow: 4px 6px 0 rgba(42, 23, 14, 0.18);
+  rotate: var(--tilt);
+}
+
+/* The pin holding each note. */
+.faq-note::before {
+  content: "";
+  position: absolute;
+  top: -0.7rem;
+  left: 50%;
+  width: 1.2rem;
+  height: 1.2rem;
+  translate: -50%;
+  border: 2.5px solid var(--color-cocoa);
+  border-radius: 50%;
+  background: var(--pin);
+}
+
+/* Contact letter with fill-in blanks. */
+.letter {
+  position: relative;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border: 3px solid var(--color-cocoa);
+  border-radius: 1.5rem;
+  background:
+    linear-gradient(90deg, transparent 2.2rem, rgba(194, 98, 43, 0.35) 2.2rem 2.35rem, transparent 2.35rem),
+    var(--color-milk);
+  box-shadow: 8px 10px 0 rgba(42, 23, 14, 0.14);
+}
+
+.letter-blank {
+  min-width: 10rem;
+  max-width: 100%;
+  padding: 0 0.3rem;
+  border-bottom: 2px dashed var(--color-cocoa-soft);
+  background: transparent;
+  color: var(--color-toffee-ink);
+  font-family: var(--font-hand);
+}
+
+.letter-blank:focus { border-bottom-style: solid; outline: none; background: var(--color-honey-soft); }
+.letter-blank--error { border-bottom: 2px solid #b3261e; background: #fdeceb; }
+
+.letter-lines {
+  width: 100%;
+  border: 0;
+  background: repeating-linear-gradient(transparent 0 2.3rem, rgba(42, 23, 14, 0.18) 2.3rem calc(2.3rem + 1.5px));
+  font-family: var(--font-hand);
+  line-height: 2.4rem;
+  resize: vertical;
+}
+
+/* 404 "lost" poster with tear-off tabs. */
+.lost-poster {
+  position: relative;
+  width: min(100%, 34rem);
+  padding: clamp(1.5rem, 4.5vw, 2.4rem) clamp(1.2rem, 4.5vw, 2.4rem) 0;
+  border: 3px solid var(--color-cocoa);
+  border-radius: 0.6rem;
+  background: radial-gradient(ellipse at 20% 10%, rgba(255, 255, 255, 0.6), transparent 60%), #fff6df;
+  box-shadow: 8px 10px 0 rgba(42, 23, 14, 0.14);
+  text-align: center;
+  rotate: -1deg;
+}
+
+.lost-tabs {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin: 0.8rem calc(-1 * clamp(1.2rem, 4.5vw, 2.4rem)) 0;
+  border-top: 2.5px dashed rgba(42, 23, 14, 0.5);
+}
+
+.lost-tabs li + li { border-left: 2.5px dashed rgba(42, 23, 14, 0.5); }
+
+.lost-tab {
+  display: grid;
+  place-items: center;
+  height: 8.5rem;
+  padding: 0.6rem 0.2rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  writing-mode: vertical-rl;
+  transform-origin: 50% 0;
+  transition: rotate 0.3s var(--ease-pounce);
+}
+
+.lost-tab:is(:hover, :focus-visible) { rotate: 8deg; }
+.lost-tabs li:nth-child(even) .lost-tab:is(:hover, :focus-visible) { rotate: -8deg; }

@@ -1775,3 +1775,52 @@ textarea { cursor: text; }
 @media (min-width: 768px) {
   .playground { width: 22rem; }
 }
+
+/* ---------- First-load screen (PageLoader.jsx) ----------
+   A cream glow over a thin diamond lattice; the pup trots left to right on a loop until the page has loaded.
+   Sits under the paw-cursor trail (z 70) but over the header, mascot and everything else. */
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 65;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background:
+    repeating-linear-gradient(45deg, transparent 0 3.4rem, rgba(162, 74, 26, 0.12) 3.4rem calc(3.4rem + 1px)),
+    repeating-linear-gradient(-45deg, transparent 0 3.4rem, rgba(162, 74, 26, 0.12) 3.4rem calc(3.4rem + 1px)),
+    radial-gradient(circle at 50% 50%, var(--color-milk) 0%, #fcefd6 40%, #f8dfae 100%);
+  transition: opacity 0.5s ease;
+}
+
+.page-loader[data-leaving] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader-track {
+  --pup-w: clamp(6rem, 11vw, 8.5rem);
+  position: relative;
+  width: min(30rem, 80vw);
+  height: calc(var(--pup-w) * 200 / 240); /* Pup's viewBox is 240 x 200 */
+}
+
+.loader-walker {
+  position: absolute;
+  bottom: 0;
+  left: calc(50% - var(--pup-w) / 2);
+  width: var(--pup-w);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Walks in from the left, out on the right, and fades at both ends so the loop restart isn't a jump. */
+  .loader-walker { animation: loader-walk 1.8s linear infinite; }
+}
+
+@keyframes loader-walk {
+  0% { left: 0; opacity: 0; }
+  12%, 88% { opacity: 1; }
+  100% { left: calc(100% - var(--pup-w)); opacity: 0; }
+}

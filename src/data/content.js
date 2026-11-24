@@ -12,6 +12,7 @@ export const site = {
   // shortcut: .example is a reserved domain so no real inbox gets demo mail; use the real address before launch.
   email: 'hello@teddypups.example',
   address: 'Downtown Dubai, United Arab Emirates',
+  loaderText: 'every puppy is family',
 }
 
 export const navLinks = [

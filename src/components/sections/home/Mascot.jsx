@@ -39,20 +39,19 @@ export default function Mascot() {
     const findTarget = () => {
       const vh = window.innerHeight
       const line = vh * 0.55 // the dog walks to whichever stops sit around this line across the screen
-      const stops = [...document.querySelectorAll('main [data-pup-stop]')]
-        .filter((el) => el.offsetWidth > 0)
-        .map((el) => el.getBoundingClientRect())
+      const els = [...document.querySelectorAll('main [data-pup-stop]')].filter((el) => el.offsetWidth > 0)
+      const stops = els.map((el) => el.getBoundingClientRect())
       if (stops.length === 0) return null
       const below = stops.findIndex((box) => box.top > line)
       if (below === 0) {
         // Above the first stop (hero): wait on it, and stay hidden until it scrolls into view.
         const first = stops[0]
-        return { x: first.left, y: first.top, w: first.width, visible: first.top < vh }
+        return { x: first.left, y: first.top, w: first.width, visible: first.top < vh, face: els[0].dataset.pupFace }
       }
       if (below === -1) {
         // Past the last stop: stay on it and scroll away with it.
         const last = stops[stops.length - 1]
-        return { x: last.left, y: last.top, w: last.width, visible: true }
+        return { x: last.left, y: last.top, w: last.width, visible: true, face: els[els.length - 1].dataset.pupFace }
       }
       // Between two stops: blend their positions by how far the line has moved from one to the other.
       const a = stops[below - 1]
@@ -60,7 +59,7 @@ export default function Mascot() {
       const t = smooth(clamp((line - a.top) / (b.top - a.top), 0, 1))
       const w = lerp(a.width, b.width, t)
       const y = clamp(lerp(a.top, b.top, t), vh * 0.1, vh * 0.86 - w * (200 / 240)) // keep it in view
-      return { x: lerp(a.left, b.left, t), y, w, visible: true }
+      return { x: lerp(a.left, b.left, t), y, w, visible: true, face: els[t < 0.5 ? below - 1 : below].dataset.pupFace }
     }
 
     const step = () => {
@@ -79,7 +78,10 @@ export default function Mascot() {
       dog.style.width = `${pos.w}px`
       dog.dataset.walking = walking
       dog.dataset.hidden = !target.visible
-      if (Math.abs(dx) > 0.3) dog.dataset.left = dx > 0
+      // The dog faces where it walks, unless the stop it is nearest fixes a side (data-pup-face). Meet the Pups
+      // needs that: the row slides left past a dog that stands still on screen, so it should look right.
+      if (target.face) dog.dataset.left = target.face === 'left'
+      else if (Math.abs(dx) > 0.3) dog.dataset.left = dx < 0
 
       // Legs swing in a sine wave of the distance walked (one stride every ~70px): they move only while
       // the dog moves, and faster when it moves faster. Diagonal pairs swing together like a trot.

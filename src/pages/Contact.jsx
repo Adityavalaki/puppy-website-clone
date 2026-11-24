@@ -71,7 +71,7 @@ export default function Contact() {
         </div>
 
         {/* The contact form, written as a letter with blanks to fill in. */}
-        <form noValidate onSubmit={submit} aria-labelledby="letter-title" className="letter min-w-0">
+        <form noValidate onSubmit={submit} aria-labelledby="letter-title" className="letter min-w-0 font-hand">
           <p id="letter-title" className="font-hand text-2xl text-toffee-ink">Dear TeddyPups,</p>
           <p className="mt-5 leading-[2.6]">
             my name is {blank('name', 'Your name (required)', { autoComplete: 'name' })}, and you can reach me on{' '}

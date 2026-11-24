@@ -38,22 +38,36 @@ function WatchingPup() {
   return <PupPeek ref={ref} className="watching-pup" />
 }
 
-// Bookmark ribbon down the page's left edge that grows as you read: its end stays ~60% down the screen.
+// Bookmark ribbon down the page's left edge that grows as you read: its end heads for ~60% down the screen.
+// It glides there (15% of the remaining distance each frame) instead of jumping with every wheel step.
 function ReadingRibbon() {
   const ref = useRef(null)
 
   useEffect(() => {
     const ribbon = ref.current
-    const grow = () => {
+    let length = null
+    let frame = 0
+    const target = () => {
       const page = ribbon.parentElement.getBoundingClientRect()
-      ribbon.style.height = `${Math.min(page.height, Math.max(0, window.innerHeight * 0.6 - page.top))}px`
+      return Math.min(page.height, Math.max(0, window.innerHeight * 0.6 - page.top))
     }
-    grow()
-    window.addEventListener('scroll', grow, { passive: true })
-    window.addEventListener('resize', grow)
+    const step = () => {
+      const goal = target()
+      length = length === null ? goal : length + (goal - length) * 0.15
+      if (Math.abs(goal - length) < 0.5) length = goal
+      ribbon.style.height = `${length}px`
+      frame = length === goal ? 0 : requestAnimationFrame(step)
+    }
+    const request = () => {
+      if (!frame) frame = requestAnimationFrame(step)
+    }
+    step()
+    window.addEventListener('scroll', request, { passive: true })
+    window.addEventListener('resize', request)
     return () => {
-      window.removeEventListener('scroll', grow)
-      window.removeEventListener('resize', grow)
+      cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', request)
+      window.removeEventListener('resize', request)
     }
   }, [])
 

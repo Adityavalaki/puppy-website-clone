@@ -2556,3 +2556,40 @@ textarea { cursor: text; }
 
 /* Once a photo is in place, hovering lifts it straight away (no stagger delay). */
 .photo-wall [data-revealed] .polaroid-button:is(:hover, :focus-visible) .polaroid { transition-delay: 0s; }
+
+/* ---------- Contact: Teddy under the letter, wagging, with "hm?" and "coming?" popping up in turn ---------- */
+.contact-buddy {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(2rem, 5vh, 3rem);
+}
+
+@media (min-width: 1024px) {
+  /* Lined up under the letter (the right-hand column). */
+  .contact-buddy { justify-content: flex-end; padding-right: clamp(4rem, 14vw, 16rem); }
+}
+
+.contact-buddy-pup {
+  position: relative;
+  width: clamp(8rem, 13vw, 10rem);
+  padding-top: 2.6rem;
+}
+
+.contact-buddy-pup .pup-bubble { top: 0; left: 58%; }
+
+/* Two bubbles on one 6s loop, the second half a loop behind, so they take turns. */
+@media (prefers-reduced-motion: no-preference) {
+  .contact-buddy-pup .pup-tail { animation: wag 0.55s ease-in-out infinite alternate; }
+  .contact-buddy-pup .pup-bubble { animation: bubble-say 6s var(--ease-silk) infinite; }
+  .contact-buddy-pup .pup-bubble:nth-child(2) { animation-delay: 3s; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-buddy-pup .pup-bubble:first-child { opacity: 1; scale: 1; translate: 0 0; }
+}
+
+@keyframes bubble-say {
+  0%, 4% { opacity: 0; scale: 0.6; translate: 0 8px; }
+  10%, 40% { opacity: 1; scale: 1; translate: 0 0; }
+  48%, 100% { opacity: 0; scale: 0.6; translate: 0 8px; }
+}

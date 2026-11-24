@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { contactPage, puppies, site } from '../data/content.js'
 import { sendEnquiry, validateEnquiry } from '../lib/enquiry.js'
+import { PupSit } from '../components/ui/Pup.jsx'
 
 const empty = { name: '', phone: '', email: '', area: '', puppy: '', message: '', website: '' }
 
@@ -106,6 +107,16 @@ export default function Contact() {
             {status.state === 'error' && status.message}
           </p>
         </form>
+      </div>
+
+      {/* Teddy waits by the letter, tail wagging, saying "hm?" then "coming?" in turn (pure CSS, index.css). */}
+      <div aria-hidden="true" className="contact-buddy gutter mx-auto max-w-[110rem]">
+        <div className="contact-buddy-pup">
+          {contactPage.buddySays.map((line) => (
+            <span key={line} className="pup-bubble font-hand">{line}</span>
+          ))}
+          <PupSit />
+        </div>
       </div>
     </div>
   )

@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Lightbox from './Lightbox.jsx'
+import Paw from './Paw.jsx'
 
 // Each polaroid gets a slight tilt and a strip of tape, cycling through these looks.
 const looks = [
@@ -9,25 +10,47 @@ const looks = [
   { tilt: '2deg', tape: 'corners', color: '#f6d79a' },
 ]
 
-// Wooden wall of taped polaroids; clicking one opens it in the lightbox.
-// `all` shows every photo on phones too (the home page shows six there). `children` turns on the street below.
-export default function PolaroidWall({ photos, all = false, children }) {
+// Wall of taped polaroids; clicking one opens it in the lightbox. Wooden board by default (Home); `plain` puts
+// them straight on the page in columns (Happy families). `all` shows every photo on phones too (Home shows six),
+// and `children` turns on the street along the bottom.
+// Each photo pops in as it scrolls into view and a paw pats it onto the page (index.css, .photo-wall [data-armed]).
+export default function PolaroidWall({ photos, all = false, plain = false, children }) {
   const [openIndex, setOpenIndex] = useState(null)
+  const listRef = useRef(null)
+
+  // Armed from here, and only when motion is allowed, so without it every photo simply shows.
+  useEffect(() => {
+    if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return
+    const items = [...listRef.current.children]
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue
+        entry.target.dataset.revealed = ''
+        observer.unobserve(entry.target)
+      }
+    }, { threshold: 0.2 })
+    for (const item of items) {
+      item.dataset.armed = ''
+      observer.observe(item)
+    }
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <>
-      <div className="photo-wall">
-        <ul aria-label="Photos from TeddyPups families" className={`photo-wall-prints ${all ? 'photo-wall-prints--all' : ''}`}>
+      <div className={`photo-wall ${plain ? 'photo-wall--plain' : ''}`}>
+        <ul ref={listRef} aria-label="Photos from TeddyPups families" className={`photo-wall-prints ${all ? 'photo-wall-prints--all' : ''}`}>
           {photos.map((photo, index) => {
             const look = looks[index % looks.length]
             return (
-              <li key={photo.src}>
+              <li key={photo.src} style={{ '--d': `${(index % 4) * 90}ms` }}>
                 <button
                   type="button"
                   aria-label={`Open photo ${index + 1} of ${photos.length}: ${photo.caption}`}
                   onClick={() => setOpenIndex(index)}
                   className="polaroid-button"
                 >
+                  <Paw className="wall-paw" />
                   <span className="polaroid" style={{ '--tilt': look.tilt, '--tape': look.color }}>
                     {look.tape === 'corners' ? (
                       <>

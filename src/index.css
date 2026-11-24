@@ -2237,3 +2237,94 @@ textarea { cursor: text; }
   background: var(--tint);
   color: var(--color-toffee-deep);
 }
+
+/* ---------- Polaroid walls: pop in on scroll, a paw pats each one onto the page (PolaroidWall.jsx) ----------
+   The photo drops in tilted and settles, the paw comes down on top and lifts away, then the tape squashes on.
+   --d staggers the photos in a row. Only armed (hidden first) from JS when motion is allowed. */
+/* The paw is anchored to the photo's button: a positioned <li> breaks the Happy families columns in Chrome. */
+.polaroid-button { position: relative; }
+
+.photo-wall [data-armed] .polaroid { transition: opacity 0.45s ease var(--d), translate 0.75s var(--ease-pounce) var(--d), rotate 0.75s var(--ease-pounce) var(--d); }
+.photo-wall [data-armed] .tape { transition: scale 0.35s var(--ease-pounce) calc(var(--d) + 0.6s), opacity 0.25s calc(var(--d) + 0.6s); }
+.photo-wall [data-armed]:not([data-revealed]) .polaroid { opacity: 0; translate: 0 -2.6rem; rotate: calc(var(--tilt) + 9deg); }
+.photo-wall [data-armed]:not([data-revealed]) .tape { opacity: 0; scale: 1.3 0.5; }
+
+.wall-paw {
+  position: absolute;
+  top: -1.4rem;
+  left: 50%;
+  z-index: 3;
+  width: clamp(1.8rem, 24%, 2.6rem);
+  color: var(--color-toffee);
+  opacity: 0;
+  translate: -50% 0;
+  pointer-events: none;
+}
+
+.photo-wall [data-revealed] .wall-paw { animation: paw-pat 0.8s calc(var(--d) + 0.3s) both; }
+
+@keyframes paw-pat {
+  0% { opacity: 0; translate: -50% -1.2rem; scale: 0.8; }
+  30% { opacity: 1; translate: -50% 0; scale: 1.05; }
+  45% { scale: 0.92; }
+  70% { opacity: 1; translate: -50% 0; scale: 1; }
+  100% { opacity: 0; translate: -50% -0.8rem; scale: 0.9; }
+}
+
+/* Happy families page: no board, the photos sit straight on the page in columns. */
+.photo-wall--plain {
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.photo-wall--plain::before { display: none; }
+
+.photo-wall--plain .photo-wall-prints {
+  display: block;
+  columns: 2;
+  column-gap: clamp(1rem, 3vw, 2.6rem);
+}
+
+.photo-wall--plain .photo-wall-prints > li {
+  margin: 0;
+  padding: 1.1rem 0.35rem clamp(1.4rem, 3vw, 2.4rem);
+  break-inside: avoid;
+}
+
+@media (min-width: 768px) {
+  .photo-wall--plain .photo-wall-prints { columns: 3; }
+}
+
+@media (min-width: 1024px) {
+  .photo-wall--plain .photo-wall-prints { columns: 4; }
+}
+
+/* Happy families page background (stripes, a warm glow at the top) and the ending with Teddy. */
+.memories {
+  background:
+    repeating-linear-gradient(90deg, transparent 0 46px, rgba(194, 98, 43, 0.045) 46px 48px),
+    radial-gradient(70% 40% at 50% 0, rgba(255, 214, 140, 0.45), transparent 70%),
+    linear-gradient(#fff3df, #fbe9cc 60%, #f7e0bd);
+}
+
+.memories-end {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 6vw, 5rem);
+  padding-block: clamp(2.5rem, 6vh, 4rem) clamp(5rem, 10vh, 7rem);
+}
+
+.memories-pup {
+  width: clamp(8rem, 14vw, 10.5rem);
+  scale: -1 1; /* looking back at the wall */
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .memories-pup .pup-tail { animation: wag 0.55s ease-in-out infinite alternate; }
+}
+
+/* Once a photo is in place, hovering lifts it straight away (no stagger delay). */
+.photo-wall [data-revealed] .polaroid-button:is(:hover, :focus-visible) .polaroid { transition-delay: 0s; }

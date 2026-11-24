@@ -1974,19 +1974,19 @@
 .mascot { transition: opacity 0.15s ease; } /* quick, so the hand-off from the hero pup doesn't blink */
 .mascot[data-hidden="true"] { opacity: 0; }
 
-/* ---------- Paw cursor (all pages) and its fading paw-print trail (PawCursor.jsx) ---------- */
+/* ---------- Badge cursor (all pages, a mini TeddyPups logo) and its fading paw-print trail (PawCursor.jsx) ---------- */
 html {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 64 64'%3E%3Cg fill='%23c2622b' stroke='%23fffdf8' stroke-width='3'%3E%3Cellipse cx='32' cy='44' rx='13' ry='11'/%3E%3Cellipse cx='13' cy='30' rx='5.5' ry='7'/%3E%3Cellipse cx='24' cy='17' rx='5.5' ry='7.5'/%3E%3Cellipse cx='40' cy='17' rx='5.5' ry='7.5'/%3E%3Cellipse cx='51' cy='30' rx='5.5' ry='7'/%3E%3C/g%3E%3C/svg%3E") 13 4, auto;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='14 14 92 92'%3E%3Ccircle cx='60' cy='60' r='44' fill='%23c2622b' stroke='%23fffdf8' stroke-width='4'/%3E%3Ccircle cx='60' cy='60' r='32' fill='%23fffdf8'/%3E%3Cg stroke='%232a170e' stroke-width='2.4'%3E%3Ccircle cx='38' cy='47' r='5' fill='%23f2be6b'/%3E%3Ccircle cx='55' cy='47' r='5' fill='%23f2be6b'/%3E%3Ccircle cx='46.5' cy='58' r='12' fill='%23f2be6b'/%3E%3Ccircle cx='63' cy='42' r='5.5' fill='%23b8642e'/%3E%3Ccircle cx='83' cy='42' r='5.5' fill='%23b8642e'/%3E%3Ccircle cx='73' cy='55' r='13.5' fill='%23b8642e'/%3E%3C/g%3E%3Cg fill='%232a170e'%3E%3Ccircle cx='43' cy='56' r='2'/%3E%3Ccircle cx='50' cy='56' r='2'/%3E%3Ccircle cx='69' cy='53' r='2'/%3E%3Ccircle cx='77' cy='53' r='2'/%3E%3Cellipse cx='46.5' cy='61' rx='2.2' ry='1.7'/%3E%3Cellipse cx='73' cy='59' rx='2.4' ry='1.8'/%3E%3C/g%3E%3C/svg%3E") 15 15, auto;
 }
 
-/* Over anything clickable: a darker, slightly bigger paw. */
+/* Over anything clickable: a darker, slightly bigger badge. */
 a,
 button,
 select,
 summary,
 label[for],
 [role="button"] {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 64 64'%3E%3Cg fill='%232a170e' stroke='%23fffdf8' stroke-width='3'%3E%3Cellipse cx='32' cy='44' rx='13' ry='11'/%3E%3Cellipse cx='13' cy='30' rx='5.5' ry='7'/%3E%3Cellipse cx='24' cy='17' rx='5.5' ry='7.5'/%3E%3Cellipse cx='40' cy='17' rx='5.5' ry='7.5'/%3E%3Cellipse cx='51' cy='30' rx='5.5' ry='7'/%3E%3C/g%3E%3C/svg%3E") 15 4, pointer;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='14 14 92 92'%3E%3Ccircle cx='60' cy='60' r='44' fill='%238e3f15' stroke='%23fffdf8' stroke-width='4'/%3E%3Ccircle cx='60' cy='60' r='32' fill='%23fffdf8'/%3E%3Cg stroke='%232a170e' stroke-width='2.4'%3E%3Ccircle cx='38' cy='47' r='5' fill='%23f2be6b'/%3E%3Ccircle cx='55' cy='47' r='5' fill='%23f2be6b'/%3E%3Ccircle cx='46.5' cy='58' r='12' fill='%23f2be6b'/%3E%3Ccircle cx='63' cy='42' r='5.5' fill='%23b8642e'/%3E%3Ccircle cx='83' cy='42' r='5.5' fill='%23b8642e'/%3E%3Ccircle cx='73' cy='55' r='13.5' fill='%23b8642e'/%3E%3C/g%3E%3Cg fill='%232a170e'%3E%3Ccircle cx='43' cy='56' r='2'/%3E%3Ccircle cx='50' cy='56' r='2'/%3E%3Ccircle cx='69' cy='53' r='2'/%3E%3Ccircle cx='77' cy='53' r='2'/%3E%3Cellipse cx='46.5' cy='61' rx='2.2' ry='1.7'/%3E%3Cellipse cx='73' cy='59' rx='2.4' ry='1.8'/%3E%3C/g%3E%3C/svg%3E") 18 18, pointer;
 }
 
 input,

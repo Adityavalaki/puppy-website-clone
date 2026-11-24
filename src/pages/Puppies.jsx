@@ -1,6 +1,30 @@
 import { Link, useSearchParams } from 'react-router-dom'
 import { goneHome, puppies, puppiesPage, puppyFilters } from '../data/content.js'
-import Pup from '../components/ui/Pup.jsx'
+import Paw from '../components/ui/Paw.jsx'
+import { PupSit } from '../components/ui/Pup.jsx'
+import Sparkle from '../components/ui/Sparkle.jsx'
+
+// Scrapbook touches around each round photo, cycling card by card: the blob colour behind it, how far the
+// hand-drawn arc is turned, and two small doodles (one top-left, one on the right).
+const blobs = ['var(--color-sky)', 'var(--color-blush)', 'var(--color-honey-soft)']
+const doodleLines = {
+  swoosh: 'M6 12l11 6M4 22l13 1M8 32l10-5',
+  heart: 'M20 34C8 26 4 19 4 13a8 8 0 0 1 16-2 8 8 0 0 1 16 2c0 6-4 13-16 21Z',
+  dots: 'M8 24h.5M18 16h.5M28 22h.5',
+}
+
+function Doodle({ kind, className }) {
+  if (kind === 'sparkle') return <Sparkle className={`text-cocoa ${className}`} />
+  if (kind === 'paw') return <Paw className={`text-toffee ${className}`} />
+  return (
+    <svg viewBox="0 0 40 40" aria-hidden="true" className={`text-toffee-deep ${className}`} fill="none" stroke="currentColor" strokeWidth={kind === 'dots' ? 7 : 3.5} strokeLinecap="round" strokeLinejoin="round">
+      <path d={doodleLines[kind]} />
+    </svg>
+  )
+}
+
+const topLeft = ['swoosh', 'dots', 'sparkle', 'paw', 'heart']
+const right = ['paw', 'heart', 'sparkle', 'swoosh', 'sparkle']
 
 // Does this puppy pass the filter chosen for one key? (breed matches by name, so "Poodle" also finds Toy Poodles.)
 function matches(pup, key, value) {
@@ -25,7 +49,7 @@ export default function Puppies() {
   }
 
   return (
-    <div className="bg-[radial-gradient(circle_at_1px_1px,rgba(42,23,14,0.09)_1px,transparent_0)] bg-[length:22px_22px]">
+    <div className="overflow-x-clip bg-[radial-gradient(circle_at_1px_1px,rgba(42,23,14,0.09)_1px,transparent_0)] bg-[length:22px_22px]">
       <section aria-labelledby="puppies-title" className="gutter mx-auto max-w-[110rem] pt-[clamp(2.5rem,6vh,4rem)] pb-16">
         <div className="flex flex-wrap items-end justify-between gap-8">
           <div>
@@ -38,16 +62,19 @@ export default function Puppies() {
             </h1>
             <p className="mt-8 max-w-[46ch] text-[clamp(1.05rem,1.3vw,1.25rem)] text-cocoa-soft">{puppiesPage.lede}</p>
           </div>
-          <figure className="hidden text-center sm:block">
+          {/* The tail wags on its own; hovering makes "hm?" pop up (.portrait in index.css). */}
+          <figure className="portrait hidden text-center sm:block">
             <span className="relative block size-44 rounded-full border-[3px] border-cocoa bg-honey-soft">
-              <Pup className="absolute bottom-6 left-3 w-[calc(100%-1.5rem)]" />
-              <span className="absolute top-3 left-6 rounded-full border-2 border-cocoa bg-milk px-2 font-hand text-sm">hm?</span>
+              <PupSit className="absolute bottom-6 left-3 w-[calc(100%-1.5rem)]" />
+              <span aria-hidden="true" className="pup-bubble font-hand">{puppiesPage.portraitSays}</span>
             </span>
             <figcaption className="mt-1 font-hand text-cocoa-soft">self-portrait</figcaption>
           </figure>
         </div>
 
         <div className="filter-board">
+          <span aria-hidden="true" className="tape filter-tape" style={{ '--tape': '#f6d79a' }} />
+          <Paw className="absolute top-4 left-[4.6rem] w-3.5 text-toffee/50" />
           {puppyFilters.map((filter) => (
             <div key={filter.key} className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
               <p className="w-28 shrink-0 font-hand text-cocoa-soft">{filter.label}</p>
@@ -83,7 +110,12 @@ export default function Puppies() {
               <li key={pup.slug}>
                 <Link to={`/puppies/${pup.slug}`} className="pup-card group block text-center" style={{ '--tilt': index % 2 ? '3deg' : '-3deg' }}>
                   <span className="relative mx-auto block aspect-square w-[88%]">
-                    <span aria-hidden="true" className="pup-card-ring" />
+                    <span aria-hidden="true" className="pup-card-ring" style={{ '--blob': blobs[index % blobs.length] }} />
+                    <svg aria-hidden="true" viewBox="0 0 100 100" className="pup-card-arc" style={{ rotate: `${(index * 73) % 360}deg` }}>
+                      <path d="M14 80A44 44 0 1 1 86 74" />
+                    </svg>
+                    <Doodle kind={topLeft[index % topLeft.length]} className="absolute -top-[6%] -left-[8%] w-[16%]" />
+                    <Doodle kind={right[index % right.length]} className="absolute top-[44%] -right-[12%] w-[13%]" />
                     <img src={pup.image} alt="" loading="lazy" className="relative size-full rounded-full border-[3px] border-cocoa object-cover transition-transform duration-500 ease-pounce group-hover:scale-105" />
                     <span className="door-tag top-[6%] right-0">Available</span>
                   </span>

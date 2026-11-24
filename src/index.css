@@ -1555,8 +1555,39 @@
   inset: -7% -5% -3% -7%;
   border: 2px solid var(--color-cocoa);
   border-radius: 46% 54% 50% 50% / 52% 46% 54% 48%;
-  background: color-mix(in oklab, var(--color-honey-soft) 70%, transparent);
+  background: color-mix(in oklab, var(--blob, var(--color-honey-soft)) 70%, transparent);
   rotate: var(--tilt);
+}
+
+/* Thin hand-drawn arc around the photo, left open at the bottom; each card turns it differently. */
+.pup-card-arc {
+  position: absolute;
+  inset: -10%;
+  width: 120%;
+  height: 120%;
+  fill: none;
+  stroke: var(--color-cocoa);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+.pup-card-arc path { vector-effect: non-scaling-stroke; }
+
+/* Strip of tape holding the filter card to the page. */
+.filter-tape {
+  top: -0.75rem;
+  left: 2rem;
+  width: 5.5rem;
+  rotate: -7deg;
+}
+
+/* Puppies page self-portrait: the tail wags on its own, "hm?" pops up on hover. */
+.portrait .pup-bubble { top: 0.4rem; left: 0.8rem; }
+.portrait:hover .pup-bubble { opacity: 1; scale: 1; translate: 0 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .portrait .pup-tail { animation: wag 0.55s ease-in-out infinite alternate; }
 }
 
 .form-input {

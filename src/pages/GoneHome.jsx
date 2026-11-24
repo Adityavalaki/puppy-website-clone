@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { PupPeek } from '../components/ui/Pup.jsx'
 import { goneHome, goneHomePage } from '../data/content.js'
 
 export default function GoneHome() {
@@ -16,7 +17,7 @@ export default function GoneHome() {
           <Link to="/puppies" className="btn btn-primary mt-7">{goneHomePage.cta}</Link>
         </div>
         <div aria-hidden="true" className="relative hidden w-60 sm:block">
-          <img src="/images/icons/pup-peek.svg" alt="" className="mx-auto -mb-3 w-36" />
+          <PupPeek className="mx-auto -mb-3 w-24" />
           <div className="relative overflow-hidden rounded-xl border-[3px] border-cocoa bg-honey-soft pt-7 pb-4 text-center font-display text-xl font-extrabold text-toffee-ink">
             <span className="absolute inset-x-0 top-0 h-6 border-b-[3px] border-cocoa bg-[repeating-linear-gradient(90deg,var(--color-toffee)_0_1.05rem,var(--color-milk)_1.05rem_2.1rem)]" />
             {goneHomePage.booth}

@@ -190,11 +190,53 @@
   translate: var(--tag-x, -50%) -12%;
 }
 
+/* The peeking pup (PupPeek) is mostly head; 0.46 of the seat width keeps its topknot clear of the buttons.
+   One layer above the quilt (z 25) so its paws rest on the scalloped edge; name tags (z 31) still go over it. */
 .hero-teddy {
+  --peek-w: calc(var(--teddy-w) * 0.46);
   position: absolute;
-  left: calc(50% - var(--teddy-w) / 2);
-  bottom: calc(var(--quilt-h) + 0.75rem);
-  width: var(--teddy-w);
+  z-index: 26;
+  left: calc(50% - var(--peek-w) / 2);
+  bottom: calc(var(--quilt-h) + 0.5rem);
+  width: var(--peek-w);
+}
+
+/* Hover: the head tilts on its neck, eyes close, tongue pokes out (mood rules below) and "hm?" pops up. */
+.hero-peek .pup-head { transition: rotate 0.45s var(--ease-pounce); }
+.hero-peek:hover .pup-head { rotate: -9deg; }
+.hero-peek .pup-bubble { top: 4%; left: 66%; transform-origin: bottom left; }
+.hero-peek:hover .pup-bubble { opacity: 1; scale: 1; translate: 0 0; }
+
+/* A small white speech bubble with a tail, hidden until something shows it (hover, idle "coming?"). */
+.pup-bubble {
+  position: absolute;
+  z-index: 2;
+  padding: 0.1rem 0.85rem 0.2rem;
+  border: 2.5px solid var(--color-cocoa);
+  border-radius: 999px;
+  background: var(--color-milk);
+  color: var(--color-cocoa);
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  white-space: nowrap;
+  box-shadow: 3px 4px 0 rgba(42, 23, 14, 0.16);
+  pointer-events: none;
+  opacity: 0;
+  scale: 0.6;
+  translate: 0 8px;
+  transition: opacity 0.2s ease, scale 0.45s var(--ease-pounce), translate 0.45s var(--ease-pounce);
+}
+
+.pup-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -7px;
+  left: 14px;
+  width: 11px;
+  height: 11px;
+  border-right: 2.5px solid var(--color-cocoa);
+  border-bottom: 2.5px solid var(--color-cocoa);
+  background: var(--color-milk);
+  rotate: 45deg;
 }
 
 .hero-quilt {
@@ -1650,9 +1692,9 @@
 .pup-eyes-closed { opacity: 0; transition: opacity 0.2s ease; }
 .pup-eyes { transition: opacity 0.2s ease; }
 
-:is(.mascot[data-walking="true"], .pup-play, .pup-happy) .pup-tongue { opacity: 1; }
-.pup-happy .pup-eyes { opacity: 0; }
-.pup-happy .pup-eyes-closed { opacity: 1; }
+:is(.mascot[data-walking="true"], .pup-play, .pup-happy, .hero-peek:hover) .pup-tongue { opacity: 1; }
+:is(.pup-happy, .hero-peek:hover) .pup-eyes { opacity: 0; }
+:is(.pup-happy, .hero-peek:hover) .pup-eyes-closed { opacity: 1; }
 
 .mascot[data-walking="true"] .pup-tail { animation: wag 0.3s ease-in-out infinite alternate; }
 

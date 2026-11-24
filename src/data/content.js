@@ -56,6 +56,7 @@ export const hero = {
   primaryCta: 'See available puppies',
   whatsappCta: 'Ask us on WhatsApp',
   lineupLabel: 'A few of the puppies in our showroom',
+  peek: 'hm?', // the hero pup's speech bubble on hover
 }
 
 export const paths = {

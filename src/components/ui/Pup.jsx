@@ -29,9 +29,43 @@ function Leg({ x, top, height, color, pair }) {
   )
 }
 
+// The head, shared by the whole dog and the peeking one so every pup has the same face. It pivots on the neck.
+function PupHead() {
+  return (
+    <g className="pup-head" style={{ transformOrigin: '172px 108px' }}>
+      <path d={fluff(143, 90, 14, 27, 11, 0.2)} fill={shade} />
+      <path d={fluff(205, 90, 14, 27, 11, 0.2)} fill={shade} />
+      <path d={fluff(174, 30, 15, 13, 9, 0.3)} fill={coat} />
+      <path d={fluff(174, 72, 37, 35, 18, 0.11)} fill={coat} />
+      <ellipse cx="174" cy="88" rx="18" ry="13" fill="#fbe3b4" stroke="none" />
+      <circle cx="149" cy="85" r="7" fill="#f9cdbf" stroke="none" />
+      <circle cx="199" cy="85" r="7" fill="#f9cdbf" stroke="none" />
+
+      <g className="pup-eyes" stroke="none">
+        <circle cx="161" cy="72" r="7" fill={ink} />
+        <circle cx="187" cy="72" r="7" fill={ink} />
+        <circle cx="163.5" cy="69.5" r="2.4" fill="#fffdf8" />
+        <circle cx="189.5" cy="69.5" r="2.4" fill="#fffdf8" />
+      </g>
+      <path className="pup-eyes-closed" d="M154 74q7-7 14 0M180 74q7-7 14 0" strokeWidth="4" />
+
+      <ellipse cx="174" cy="82" rx="6" ry="4.5" fill={ink} stroke="none" />
+      <path className="pup-tongue" d="M169.5 90h9v4a4.5 4.5 0 0 1-9 0z" fill="#ef8c8c" strokeWidth="2.5" />
+      <path d="M166 89q4 4 8 0q4 4 8 0" strokeWidth="3" />
+
+      {/* Collar: a dark outline under a brown band, with a heart-shaped tag. */}
+      <path d="M146 106q28 13 56 0" strokeWidth="11" />
+      <path d="M146 106q28 13 56 0" stroke="#8e3f15" strokeWidth="6" />
+      <path d="M174 127c-5-3-8-6-8-9a4 4 0 0 1 8-1a4 4 0 0 1 8 1c0 3-3 6-8 9z" fill="#fffdf8" strokeWidth="2.5" />
+    </g>
+  )
+}
+
+const svgProps = { fill: 'none', stroke: ink, strokeWidth: '4.5', strokeLinejoin: 'round', strokeLinecap: 'round', 'aria-hidden': 'true' }
+
 export default function Pup({ className = '', ...rest }) {
   return (
-    <svg viewBox="0 0 240 200" aria-hidden="true" className={`pup ${className}`} fill="none" stroke={ink} strokeWidth="4.5" strokeLinejoin="round" strokeLinecap="round" {...rest}>
+    <svg viewBox="0 0 240 200" className={`pup ${className}`} {...svgProps} {...rest}>
       <ellipse cx="120" cy="190" rx="86" ry="7" fill={ink} opacity="0.12" stroke="none" />
 
       {/* Far-side legs, behind the body (darker). */}
@@ -52,33 +86,20 @@ export default function Pup({ className = '', ...rest }) {
       <Leg x={164} top={126} height={60} color={coat} pair="b" />
 
       <g className="pup-upper">
-        <g className="pup-head" style={{ transformOrigin: '172px 108px' }}>
-          <path d={fluff(143, 90, 14, 27, 11, 0.2)} fill={shade} />
-          <path d={fluff(205, 90, 14, 27, 11, 0.2)} fill={shade} />
-          <path d={fluff(174, 30, 15, 13, 9, 0.3)} fill={coat} />
-          <path d={fluff(174, 72, 37, 35, 18, 0.11)} fill={coat} />
-          <ellipse cx="174" cy="88" rx="18" ry="13" fill="#fbe3b4" stroke="none" />
-          <circle cx="149" cy="85" r="7" fill="#f9cdbf" stroke="none" />
-          <circle cx="199" cy="85" r="7" fill="#f9cdbf" stroke="none" />
-
-          <g className="pup-eyes" stroke="none">
-            <circle cx="161" cy="72" r="7" fill={ink} />
-            <circle cx="187" cy="72" r="7" fill={ink} />
-            <circle cx="163.5" cy="69.5" r="2.4" fill="#fffdf8" />
-            <circle cx="189.5" cy="69.5" r="2.4" fill="#fffdf8" />
-          </g>
-          <path className="pup-eyes-closed" d="M154 74q7-7 14 0M180 74q7-7 14 0" strokeWidth="4" />
-
-          <ellipse cx="174" cy="82" rx="6" ry="4.5" fill={ink} stroke="none" />
-          <path className="pup-tongue" d="M169.5 90h9v4a4.5 4.5 0 0 1-9 0z" fill="#ef8c8c" strokeWidth="2.5" />
-          <path d="M166 89q4 4 8 0q4 4 8 0" strokeWidth="3" />
-
-          {/* Collar: a dark outline under a brown band, with a heart-shaped tag. */}
-          <path d="M146 106q28 13 56 0" strokeWidth="11" />
-          <path d="M146 106q28 13 56 0" stroke="#8e3f15" strokeWidth="6" />
-          <path d="M174 127c-5-3-8-6-8-9a4 4 0 0 1 8-1a4 4 0 0 1 8 1c0 3-3 6-8 9z" fill="#fffdf8" strokeWidth="2.5" />
-        </g>
+        <PupHead />
       </g>
+    </svg>
+  )
+}
+
+// Just the head and two front paws, for a pup peeking over something (hero cushion, Gone Home sign).
+// The viewBox crops the same 240x200 drawing space around the head, so the face matches the walking dog exactly.
+export function PupPeek({ className = '', ...rest }) {
+  return (
+    <svg viewBox="120 6 108 136" className={`pup ${className}`} {...svgProps} {...rest}>
+      <PupHead />
+      <path d={fluff(155, 131, 15, 9, 9, 0.22)} fill={coat} />
+      <path d={fluff(193, 131, 15, 9, 9, 0.22)} fill={coat} />
     </svg>
   )
 }

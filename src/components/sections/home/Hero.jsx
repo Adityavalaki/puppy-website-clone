@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { hero, puppies, site } from '../../../data/content.js'
+import { PupPeek } from '../../ui/Pup.jsx'
 
 const lineup = puppies.slice(0, 6)
 
@@ -66,7 +67,11 @@ export default function Hero() {
           ))}
         </ul>
 
-        <img src="/images/icons/pup-peek.svg" alt="" className="hero-teddy" />
+        {/* Hover: head tilts, eyes close, tongue out, "hm?" pops up (all CSS, .hero-peek in index.css). */}
+        <div aria-hidden="true" className="hero-teddy hero-peek">
+          <span className="pup-bubble font-hand">{hero.peek}</span>
+          <PupPeek />
+        </div>
 
         <div aria-hidden="true" className="hero-quilt">
           <svg width="100%" height="40" preserveAspectRatio="none" className="absolute -top-[39px] left-0 block">

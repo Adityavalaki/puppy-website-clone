@@ -1,6 +1,6 @@
 import { trust } from '../../../data/content.js'
 import Stamp from '../../ui/Stamp.jsx'
-import Pup from '../../ui/Pup.jsx'
+import { PupSit } from '../../ui/Pup.jsx'
 
 export default function Trust() {
   return (
@@ -12,7 +12,7 @@ export default function Trust() {
             <h2 id="trust-title" className="mt-1.5 max-w-[12ch] font-display text-[clamp(2.2rem,4.2vw,3.9rem)] leading-[0.92] font-extrabold tracking-[-0.025em] text-balance">
               {trust.title}
             </h2>
-            <Pup data-pup-stop className="book-pup" />
+            <PupSit data-pup-stop data-pup-pose="sit" className="book-pup" />
           </div>
           <ul className="book-page book-page--right">
             {trust.stamps.map((stamp) => (

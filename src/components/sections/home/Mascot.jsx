@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Paw from '../../ui/Paw.jsx'
 import { hero } from '../../../data/content.js'
-import Pup from '../../ui/Pup.jsx'
+import Pup, { PupSit } from '../../ui/Pup.jsx'
 
 // Home page only: one dog that walks with you from section to section as you scroll, leaving paw prints.
 // The still dogs in each section (marked data-pup-stop) are its stops; they hide while this dog is on.
@@ -45,9 +45,10 @@ export default function Mascot() {
     const toStop = (el) => {
       const box = el.getBoundingClientRect()
       const face = el.dataset.pupFace
-      if (!el.dataset.pupPeek) return { x: box.left, y: box.top, w: box.width, key: box.top, face }
+      const pose = el.dataset.pupPose
+      if (!el.dataset.pupPeek) return { x: box.left, y: box.top, w: box.width, key: box.top, face, pose }
       const scale = box.width / 108
-      return { x: box.left - 120 * scale, y: box.top - 6 * scale, w: 240 * scale, key: box.bottom, face }
+      return { x: box.left - 120 * scale, y: box.top - 6 * scale, w: 240 * scale, key: box.bottom, face, pose }
     }
 
     // Where the dog should be for the current scroll position.
@@ -69,7 +70,7 @@ export default function Mascot() {
       const t = smooth(clamp((line - a.key) / (b.key - a.key), 0, 1))
       const w = lerp(a.w, b.w, t)
       const y = clamp(lerp(a.y, b.y, t), vh * 0.1, vh * 0.86 - w * (200 / 240)) // keep it in view
-      return { x: lerp(a.x, b.x, t), y, w, visible: true, face: (t < 0.5 ? a : b).face, between: t > 0.02 && t < 0.98 }
+      return { x: lerp(a.x, b.x, t), y, w, visible: true, face: (t < 0.5 ? a : b).face, between: t > 0.02 && t < 0.98, pose: t < 0.12 ? a.pose : t > 0.88 ? b.pose : undefined }
     }
 
     const step = () => {
@@ -90,6 +91,7 @@ export default function Mascot() {
       dog.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0)`
       dog.style.width = `${pos.w}px`
       dog.dataset.walking = active
+      dog.dataset.pose = !active && target.pose ? target.pose : 'stand' // sits only once it has stopped, close to a sitting stop
       dog.dataset.hidden = !target.visible
       root.toggleAttribute('data-pup-up', target.visible) // hides the hero pup once the walking dog has taken its place
 
@@ -158,6 +160,7 @@ export default function Mascot() {
       <div ref={dogRef} aria-hidden="true" className="mascot">
         <span className="pup-bubble font-hand">{hero.follow}</span>
         <Pup />
+        <PupSit />
       </div>
     </>
   )

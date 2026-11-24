@@ -641,6 +641,21 @@
 .stamp--oval { aspect-ratio: 1.35; border-radius: 50%; }
 .stamp--scallop { border: 5px dotted; }
 
+/* Stamped in as it scrolls into view (Stamp.jsx sets data-stamped): drops big and tilted, squashes, settles.
+   Every second stamp lands a beat later. Hidden beforehand only when motion is allowed. */
+@media (prefers-reduced-motion: no-preference) {
+  .stamp:not([data-stamped]) { opacity: 0; }
+  .stamp[data-stamped] { animation: stamp-in 0.6s var(--ease-snap) backwards; }
+  li:nth-child(even) .stamp[data-stamped] { animation-delay: 0.18s; }
+}
+
+@keyframes stamp-in {
+  0% { opacity: 0; scale: 1.8; rotate: calc(var(--tilt) + 14deg); }
+  55% { opacity: 0.95; scale: 0.92; rotate: var(--tilt); }
+  75% { scale: 1.03; }
+  100% { opacity: 0.9; scale: 1; rotate: var(--tilt); }
+}
+
 @media (min-width: 900px) {
   .book {
     grid-template-columns: 1fr 1.3fr;
@@ -1701,6 +1716,16 @@
 
 @keyframes stand-up {
   from { translate: 0 14%; }
+}
+
+/* Standing and sitting drawings share one box; only the current pose shows, with a little settle on sitting. */
+.mascot > .pup-sit { position: absolute; inset: 0; }
+.mascot:not([data-pose="sit"]) > .pup-sit,
+.mascot[data-pose="sit"] > svg:not(.pup-sit) { visibility: hidden; }
+.mascot[data-pose="sit"] > .pup-sit { animation: sit-down 0.35s var(--ease-pounce); }
+
+@keyframes sit-down {
+  from { translate: 0 -5%; }
 }
 
 /* "coming?" over the dog's head when you stop partway; it follows the head when the dog faces left. */

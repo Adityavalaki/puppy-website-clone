@@ -1,3 +1,5 @@
+import { useEffect, useRef, useState } from 'react'
+
 // Simple line icons drawn for this project (currentColor takes the surrounding text colour).
 const icons = {
   heart: 'M32 54C14 41 8 31 8 22a12 12 0 0 1 24-4 12 12 0 0 1 24 4c0 9-6 19-24 32ZM14 30h10l4-7 6 14 4-7h12',
@@ -15,10 +17,24 @@ export function Icon({ name, className }) {
 }
 
 // An ink stamp (as in a passport) with its caption underneath. shape: round | ticket | oval | scallop.
+// It gets "stamped" (data-stamped, animated in index.css) the first time most of it scrolls into view.
 export default function Stamp({ stamp }) {
+  const ref = useRef(null)
+  const [stamped, setStamped] = useState(false)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return
+      setStamped(true)
+      observer.disconnect()
+    }, { threshold: 0.6 })
+    observer.observe(ref.current)
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <div className="flex flex-col items-center text-center">
-      <span className={`stamp stamp--${stamp.shape}`} style={{ '--ink': stamp.ink, '--tilt': stamp.tilt }}>
+      <span ref={ref} data-stamped={stamped || undefined} className={`stamp stamp--${stamp.shape}`} style={{ '--ink': stamp.ink, '--tilt': stamp.tilt }}>
         <Icon name={stamp.icon} className="size-10" />
         <span className="max-w-[10ch] font-display text-[1.08rem] leading-[1.05] font-extrabold">{stamp.title}</span>
       </span>

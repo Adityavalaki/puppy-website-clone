@@ -92,6 +92,30 @@ export default function Pup({ className = '', ...rest }) {
   )
 }
 
+// Sitting, in the same 240x200 space and with the same head as the standing dog, so the walking dog can switch
+// between the two without jumping (Mascot.jsx shows this one when it rests at a stop with data-pup-pose="sit").
+export function PupSit({ className = '', ...rest }) {
+  return (
+    <svg viewBox="0 0 240 200" className={`pup pup-sit ${className}`} {...svgProps} {...rest}>
+      <ellipse cx="130" cy="190" rx="76" ry="7" fill={ink} opacity="0.12" stroke="none" />
+      <g className="pup-tail" style={{ transformOrigin: '80px 156px' }}>
+        <path d="M82 158C66 152 58 142 56 128" strokeWidth="5" />
+        <path d={fluff(50, 118, 15, 15, 9, 0.28)} fill={coat} />
+      </g>
+      <rect x="178" y="118" width="20" height="68" rx="10" fill={shade} />
+      {/* Body tilted up towards the head: haunches on the ground, chest up. */}
+      <path d={fluff(132, 146, 52, 36, 16)} fill={coat} transform="rotate(-30 132 146)" />
+      <path d={fluff(106, 160, 32, 28, 12, 0.12)} fill={coat} />
+      <path d="M94 150c6-5 14-5 20 0" stroke={shade} strokeWidth="3.5" />
+      <ellipse cx="122" cy="182" rx="22" ry="8" fill={coat} />
+      <path d="M128 178v6M134 178v6" strokeWidth="2.5" />
+      <rect x="154" y="118" width="22" height="68" rx="11" fill={coat} />
+      <path d="M162 177v6M168 177v6" strokeWidth="2.5" />
+      <PupHead />
+    </svg>
+  )
+}
+
 // Just the head and two front paws, for a pup peeking over something (hero cushion, Gone Home sign).
 // The viewBox crops the same 240x200 drawing space around the head, so the face matches the walking dog exactly.
 export function PupPeek({ className = '', ...rest }) {

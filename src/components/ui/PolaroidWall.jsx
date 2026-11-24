@@ -10,8 +10,8 @@ const looks = [
 ]
 
 // Wooden wall of taped polaroids; clicking one opens it in the lightbox.
-// `all` shows every photo on phones too (the home page shows six there).
-export default function PolaroidWall({ photos, all = false }) {
+// `all` shows every photo on phones too (the home page shows six there). `children` turns on the street below.
+export default function PolaroidWall({ photos, all = false, children }) {
   const [openIndex, setOpenIndex] = useState(null)
 
   return (
@@ -45,6 +45,14 @@ export default function PolaroidWall({ photos, all = false }) {
             )
           })}
         </ul>
+        {/* Optional street along the bottom of the wall: lamp, front door, and whatever is passed in (a link). */}
+        {children && (
+          <div className="wall-street">
+            <span aria-hidden="true" className="wall-lamp" />
+            <span aria-hidden="true" className="wall-door" />
+            <div className="wall-street-end">{children}</div>
+          </div>
+        )}
       </div>
       <Lightbox photos={photos} index={openIndex} onChange={setOpenIndex} onClose={() => setOpenIndex(null)} />
     </>

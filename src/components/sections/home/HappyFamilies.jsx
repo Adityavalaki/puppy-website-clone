@@ -18,11 +18,9 @@ export default function HappyFamilies() {
         </figure>
       </div>
 
-      <PolaroidWall photos={families.photos} />
-
-      <div className="mt-12 text-center">
-        <Link to="/happy-families" className="btn btn-ghost-light">{families.cta}</Link>
-      </div>
+      <PolaroidWall photos={families.photos}>
+        <Link to="/happy-families" className="btn btn-primary">{families.cta}</Link>
+      </PolaroidWall>
     </section>
   )
 }

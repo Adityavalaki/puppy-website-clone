@@ -713,10 +713,12 @@
 }
 
 .photo-wall {
+  --wall-pad-x: clamp(1rem, 3vw, 2.7rem);
+  --wall-pad-y: clamp(2.2rem, 4vw, 3.2rem);
   position: relative;
   max-width: 104rem;
   margin: clamp(3rem, 7vh, 4.5rem) clamp(1rem, 3vw, 2.7rem) 0;
-  padding: clamp(2.2rem, 4vw, 3.2rem) clamp(1rem, 3vw, 2.7rem) clamp(2.2rem, 4vw, 3.2rem);
+  padding: var(--wall-pad-y) var(--wall-pad-x);
   border: 3px solid var(--color-cocoa);
   border-radius: 1rem;
   background:
@@ -742,6 +744,76 @@
 
 @media (min-width: 1680px) {
   .photo-wall { margin-inline: auto; }
+}
+
+/* Street along the bottom of the Home wall: lamp left, front door centre, button right, all on a dark floor.
+   Negative margins cancel the wall's padding so the floor runs edge to edge along the wall's bottom. */
+.wall-street {
+  --floor-h: 2.6rem;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: end;
+  margin: clamp(2.5rem, 5vw, 4rem) calc(-1 * var(--wall-pad-x)) calc(-1 * var(--wall-pad-y));
+  padding: 0 var(--wall-pad-x) var(--floor-h);
+}
+
+.wall-street::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: var(--floor-h);
+  border-top: 3px solid var(--color-cocoa);
+  border-radius: 0 0 0.8rem 0.8rem;
+  background: repeating-linear-gradient(90deg, transparent 0 7.5rem, rgba(255, 255, 255, 0.08) 7.5rem calc(7.5rem + 2px)), #3a2114;
+}
+
+/* Pole with a glowing lamp on top. */
+.wall-lamp {
+  position: relative;
+  justify-self: start;
+  width: 0.75rem;
+  height: clamp(8rem, 15vw, 11rem);
+  margin-left: clamp(1rem, 9vw, 9rem);
+  border: 3px solid var(--color-cocoa);
+  border-bottom: 0;
+  background: #4a2a19;
+}
+
+.wall-lamp::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  width: 2.6rem;
+  height: 2.3rem;
+  border: 3px solid var(--color-cocoa);
+  border-radius: 1rem 1rem 0.6rem 0.6rem;
+  background: #ffd27f;
+  box-shadow: 0 0 3rem 1.2rem rgba(255, 210, 127, 0.3);
+  translate: -50% 0;
+}
+
+/* Arched double door in a light frame. */
+.wall-door {
+  width: clamp(6rem, 10vw, 9rem);
+  aspect-ratio: 0.72;
+  border: 3px solid var(--color-cocoa);
+  border-bottom: 0;
+  border-radius: 999px 999px 0 0;
+  background: linear-gradient(90deg, #a24a1a calc(50% - 1.5px), var(--color-cocoa) 0 calc(50% + 1.5px), #a24a1a 0);
+  box-shadow: 0 0 0 0.45rem #d4893f, 0 0 0 calc(0.45rem + 3px) var(--color-cocoa);
+}
+
+.wall-street-end {
+  justify-self: end;
+  align-self: center;
+}
+
+/* Phones: no lamp; door on the left, button on the right. */
+@media (max-width: 639px) {
+  .wall-lamp { display: none; }
+  .wall-street { grid-template-columns: auto 1fr; gap: 1rem; }
 }
 
 .photo-wall-prints {

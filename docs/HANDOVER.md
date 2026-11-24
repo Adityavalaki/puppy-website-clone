@@ -3,6 +3,20 @@ Lane: A (graded demo, no real users or data) — agreed with Aditya 2026-11-23. 
 Read first: CLAUDE.md, docs/DECISIONS.md, docs/blutec-assignment-plan.md
 
 <!-- Newest entry on top. Five lines, every session. -->
+## 2026-11-24 (3) — model: Claude Opus 5.5
+- Done: Polish 2 (Aditya's feedback): Mascot rewritten so it stays with the reader: target is always between the stops around a line at 55% of the screen, eased 14%/frame (no jumps), kept on screen between stops, fades only above the first stop. New shared ui/FlightPath.jsx: redesigned airliner flies Korea to Dubai along the route as you scroll, flown part turns solid (Home "Two paths" + How it works Imported scene). Site-wide paw cursor + fading paw-print trail (layout/PawCursor.jsx, mouse only, off for reduced motion). How it works closing card: puppy playing with a ball (trotting legs, hops, turns round).
+- In progress: polish round. Not committed (mascot v1 + these changes).
+- Broken or risky: In very fast scrolling the dog can be off screen for a moment while catching up (4/90 samples), then glides back. Cursor trail only tested with simulated pointer events.
+- Next: commit + push when asked; visual check of inner pages at 375/768/1024/1440.
+- Do not touch: reference/, docs/blutec-assignment-plan.md, docs/ai-prompts.md.
+
+## 2026-11-24 (2) — model: Claude Opus 5.5
+- Done: Polish 1, walking mascot on the home page (D-004): ui/Pup.jsx is the dog in parts (4 legs, tail, head); sections/home/Mascot.jsx moves it between the six section dogs (data-pup-stop) as you scroll, legs swing from distance travelled (diagonal trot), body bobs, head nods, tail wags, turns to face direction, fading paw prints; pulled into view mid-walk; off for reduced motion. Verified at 1440 and 375: fully on screen in 109/110 sampled walk frames, 17-20 leg angles per walk, no console errors.
+- In progress: polish round (next: visual check of inner pages at 375/768/1024/1440).
+- Broken or risky: Mascot changes are not committed yet. Dog walks over text in places (as the reference does).
+- Next: commit + push when Aditya asks; continue polish.
+- Do not touch: reference/, docs/blutec-assignment-plan.md, docs/ai-prompts.md.
+
 ## 2026-11-24 — model: Claude Opus 5.5
 - Done: All pages built and routed: /puppies (URL-query filters origin/breed/sex, round cards, gone-home strip), /puppies/:slug (gallery full + close-up of the same photo, info card, checklist, way-home steps per origin, enquiry form, prev/next; unknown slug shows 404), /gone-home (tickets), /happy-families (full polaroid wall + lightbox via shared PolaroidWall), /how-it-works (chapter chips, Dubai/Imported toggle, promise stamps via shared Stamp, #delivery, why us, CTA), /faq (search + one-open-at-a-time cork-board accordion), /contact (letter form), 404 poster. Forms validate in src/lib/enquiry.js (name + phone required, email format, honeypot).
 - In progress: polish pass (Aditya: "first make the whole website and then we will polish it"). Pages are NOT committed yet.

@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { howItWorks, site } from '../data/content.js'
+import FlightPath from '../components/ui/FlightPath.jsx'
+import Pup from '../components/ui/Pup.jsx'
 import Stamp, { Icon } from '../components/ui/Stamp.jsx'
 
 const { ways, promise, delivery, why, cta } = howItWorks
@@ -61,16 +63,7 @@ export default function HowItWorks() {
                 </svg>
               </>
             ) : (
-              <svg aria-hidden="true" viewBox="0 0 660 300" className="absolute inset-0 size-full">
-                <path d="M60 240C180 60 460 40 600 170" fill="none" stroke="var(--color-toffee-deep)" strokeWidth="3" strokeDasharray="3 11" strokeLinecap="round" />
-                <circle cx="60" cy="240" r="8" fill="var(--color-toffee-deep)" />
-                <circle cx="600" cy="170" r="8" fill="var(--color-toffee-deep)" />
-                <g transform="translate(320 92) rotate(-12)" stroke="var(--color-cocoa)" strokeWidth="4" strokeLinejoin="round">
-                  <path d="M-10 30L22 68H48L36 30Z" fill="var(--color-toffee-deep)" />
-                  <path d="M-100 0C-100 -24 -70 -30 -46 -30H50C78 -30 98 -16 104 0C98 16 78 30 50 30H-46C-70 30 -100 24 -100 0Z" fill="var(--color-milk)" />
-                  <path d="M-10 -30L20 -66H44L34 -30Z" fill="var(--color-toffee)" />
-                </g>
-              </svg>
+              <FlightPath image="/images/puppies/maltipoo-3.jpg" label="A plane flying a puppy from Korea to Dubai" className="absolute top-[15%] left-[4%] h-[72%] w-[92%]" />
             )}
           </div>
         </div>
@@ -128,7 +121,15 @@ export default function HowItWorks() {
               <Link to="/puppies" className="btn btn-ghost">{cta.puppies}</Link>
             </div>
           </div>
-          <img src="/images/icons/pup-stand.svg" alt="" className="mx-auto w-48" />
+          {/* A puppy playing in the card: runs back and forth after a ball, legs trotting, hopping, turning round. */}
+          <div aria-hidden="true" className="playground">
+            <span className="play-ball" />
+            <div className="play-runner">
+              <div className="play-flip">
+                <Pup className="pup-play block w-full" />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </div>

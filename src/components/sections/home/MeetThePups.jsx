@@ -103,7 +103,7 @@ export default function MeetThePups() {
               </li>
             </ul>
             <div aria-hidden="true" className="meet-floor" style={pinned ? { backgroundPositionX: `${x}px` } : undefined} />
-            <img src="/images/icons/pup-stand.svg" alt="" className="meet-pup" />
+            <img src="/images/icons/pup-stand.svg" alt="" data-pup-stop className="meet-pup" />
           </div>
         </div>
       </div>

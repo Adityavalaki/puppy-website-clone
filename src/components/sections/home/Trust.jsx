@@ -11,7 +11,7 @@ export default function Trust() {
             <h2 id="trust-title" className="mt-1.5 max-w-[12ch] font-display text-[clamp(2.2rem,4.2vw,3.9rem)] leading-[0.92] font-extrabold tracking-[-0.025em] text-balance">
               {trust.title}
             </h2>
-            <img src="/images/icons/pup-stand.svg" alt="" className="book-pup" />
+            <img src="/images/icons/pup-stand.svg" alt="" data-pup-stop className="book-pup" />
           </div>
           <ul className="book-page book-page--right">
             {trust.stamps.map((stamp) => (

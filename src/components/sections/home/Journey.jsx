@@ -121,7 +121,7 @@ export default function Journey() {
               </svg>
             </a>
           </div>
-          <img src="/images/icons/pup-stand.svg" alt="" className="journey-pup" />
+          <img src="/images/icons/pup-stand.svg" alt="" data-pup-stop className="journey-pup" />
         </div>
       </div>
     </section>

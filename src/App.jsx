@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom'
 import Footer from './components/layout/Footer.jsx'
 import MobileBar from './components/layout/MobileBar.jsx'
 import Navbar from './components/layout/Navbar.jsx'
+import PawCursor from './components/layout/PawCursor.jsx'
 import Contact from './pages/Contact.jsx'
 import Faq from './pages/Faq.jsx'
 import GoneHome from './pages/GoneHome.jsx'
@@ -44,6 +45,7 @@ export default function App() {
       </main>
       <Footer />
       <MobileBar />
+      <PawCursor />
     </>
   )
 }

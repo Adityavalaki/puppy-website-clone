@@ -27,3 +27,12 @@ Chosen: 2. Cartoon dog, stamps and icons are simple SVGs drawn for this project.
 Why: Reusing a client's photos without permission is not ours to decide; CLAUDE.md defaults to free images.
 Trade-off: Side-by-side the photos won't match; layout, sizes and crops will.
 Revisit if: Blutec confirms their assets may be used.
+
+## D-004: Scroll-following puppy on the home page (D-001 stretch goal)
+Date: 2026-11-24   Model: Claude Opus 5.5
+Context: All pages are built; Aditya started the polish round with "puppy animation around the website's home page" and asked that the dog be made carefully, with legs that visibly move while scrolling, like the reference's mascot that walks between sections leaving paw prints.
+Options:   1) Rebuild the reference engine as-is (poses, speech bubbles, curtain integration, scripted acts).  2) One fixed-position dog drawn as an inline multi-part SVG (separate legs, tail, head) that walks between the section dogs ("stops"), scrubbed by scroll; the leg swing is driven by the distance actually travelled, so legs move only, and in step, while you scroll.  3) Option 2 but with the single pup-stand.svg image (rejected: legs cannot move, which Aditya specifically asked for).
+Chosen: 2.
+Why: It gives the visible behaviour (a dog that trots with your scroll, turns to face its direction, leaves prints) in code that can be explained: find the two stops around the current scroll, blend between their on-screen positions, turn distance travelled into a sine-wave leg swing. Reading live positions makes it work with the pinned door row and the sticky phone without special cases.
+Trade-off: No extra poses or speech bubbles; the hero's peeking head and the footer basket stay static. Runs a requestAnimationFrame-throttled scroll handler on the home page only. Turned off for reduced motion.
+Revisit if: Performance drops on low-end phones, or more poses (sit, peek) are wanted for the stops.

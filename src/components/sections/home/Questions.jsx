@@ -29,7 +29,7 @@ export default function Questions() {
           <Link to="/faq" className="btn btn-ghost-light mt-8">{questions.cta}</Link>
           <div className="relative mt-9 hidden w-[clamp(9.5rem,30vw,13rem)] md:block">
             <span aria-hidden="true" className="float absolute -top-10 left-[58%] font-display text-[clamp(2.4rem,4vw,3.4rem)] leading-none font-extrabold text-honey">?</span>
-            <img src="/images/icons/pup-stand.svg" alt="" />
+            <img src="/images/icons/pup-stand.svg" alt="" data-pup-stop />
           </div>
         </div>
 

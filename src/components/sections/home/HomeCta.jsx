@@ -26,7 +26,7 @@ export default function HomeCta() {
         </div>
         <span aria-hidden="true" className="house-plant house-plant--right" />
         <span aria-hidden="true" className="house-mat font-hand">{homeCta.mat}</span>
-        <img src="/images/icons/pup-stand.svg" alt="" className="house-pup" />
+        <img src="/images/icons/pup-stand.svg" alt="" data-pup-stop className="house-pup" />
       </div>
 
       <div className="gutter flex flex-wrap justify-center gap-3 pt-[clamp(2rem,4vh,2.75rem)] pb-[clamp(5rem,11vh,8rem)]">

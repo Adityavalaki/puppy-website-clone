@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { paths } from '../../../data/content.js'
+import FlightPath from '../../ui/FlightPath.jsx'
 
 export default function TwoWays() {
   return (
@@ -40,35 +41,13 @@ export default function TwoWays() {
           <article aria-labelledby="way-imported" className="way way--right">
             <h3 id="way-imported" className="way-sign way-sign--right font-display font-extrabold">{paths.imported.sign}</h3>
             <div className="way-scene">
-              <svg role="img" aria-label={paths.planeLabel} viewBox="0 0 660 300" className="way-flight absolute inset-0 size-full overflow-visible">
-                <defs>
-                  <clipPath id="plane-window">
-                    <circle cx="10" r="22" />
-                  </clipPath>
-                </defs>
-                <path d="M40 250C160 60 460 30 620 170" fill="none" stroke="var(--color-toffee-deep)" strokeWidth="3" strokeDasharray="3 11" strokeLinecap="round" />
-                <circle cx="40" cy="250" r="7" fill="var(--color-toffee-deep)" />
-                <circle cx="620" cy="170" r="7" fill="var(--color-toffee-deep)" />
-                <text x="40" y="284" textAnchor="middle" className="fill-cocoa-soft font-hand text-[19px]">Korea</text>
-                <text x="620" y="204" textAnchor="middle" className="fill-cocoa-soft font-hand text-[19px]">Dubai</text>
-                <g transform="translate(300 94) rotate(-14)">
-                  <g className="plane" stroke="var(--color-cocoa)" strokeWidth="4" strokeLinejoin="round">
-                    <path d="M-10 30L22 68H48L36 30Z" fill="var(--color-toffee-deep)" />
-                    <path d="M-92 -12L-112 -44H-90L-66 -22Z" fill="var(--color-toffee)" />
-                    <path d="M-100 0C-100 -24 -70 -30 -46 -30H50C78 -30 98 -16 104 0C98 16 78 30 50 30H-46C-70 30 -100 24 -100 0Z" fill="var(--color-milk)" />
-                    <path d="M-10 -30L20 -66H44L34 -30Z" fill="var(--color-toffee)" />
-                    <path d="M80 -16C88 -13 94 -8 97 0" fill="none" strokeWidth="3.5" strokeLinecap="round" />
-                    <image href={paths.imported.image} x="-12" y="-22" width="44" height="44" preserveAspectRatio="xMidYMid slice" clipPath="url(#plane-window)" />
-                    <circle cx="10" r="22" fill="none" />
-                  </g>
-                </g>
-              </svg>
+              <FlightPath image={paths.imported.image} label={paths.planeLabel} className="way-flight absolute inset-0 size-full" />
             </div>
             <p className="mt-6 max-w-[40ch] text-cocoa-soft">{paths.imported.text}</p>
             <Link to="/puppies?origin=imported" className="btn btn-primary mt-5">{paths.imported.cta}</Link>
           </article>
 
-          <img src="/images/icons/pup-stand.svg" alt="" className="ways-pup" />
+          <img src="/images/icons/pup-stand.svg" alt="" data-pup-stop className="ways-pup" />
         </div>
       </div>
     </section>

@@ -133,19 +133,30 @@ export default function Puppies() {
         )}
       </section>
 
-      <section aria-labelledby="gone-strip-title" className="border-t-[3px] border-dashed border-cocoa/20 py-14">
-        <div className="gutter mx-auto flex max-w-[110rem] flex-wrap items-center justify-between gap-8">
-          <h2 id="gone-strip-title" className="display-title text-[clamp(2rem,4vw,3.4rem)]">{puppiesPage.goneTitle}</h2>
-          <div className="flex items-center gap-4">
-            <ul className="flex -space-x-4">
-              {goneHome.slice(0, 5).map((pup) => (
-                <li key={pup.name}>
-                  <img src={pup.image} alt={`${pup.name}, ${pup.breed}`} loading="lazy" className="size-16 rounded-full border-[3px] border-cocoa object-cover grayscale-[35%]" />
-                </li>
-              ))}
-            </ul>
-            <Link to="/gone-home" className="btn btn-ghost">{puppiesPage.goneCta}</Link>
+      {/* Warm band of puppies that found homes, running into the footer's dark wave. */}
+      <section aria-labelledby="gone-strip-title" className="gone-strip">
+        <div className="gutter mx-auto grid max-w-[110rem] items-center gap-12 pt-14 pb-20 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.6fr)]">
+          <div>
+            <h2 id="gone-strip-title" className="display-title text-[clamp(2.4rem,4.4vw,4rem)]">{puppiesPage.goneTitle}</h2>
+            <p className="mt-3 text-[clamp(1.05rem,1.3vw,1.2rem)] text-cocoa-soft">{puppiesPage.goneLede}</p>
+            <Link to="/gone-home" className="btn btn-primary mt-7">{puppiesPage.goneCta}</Link>
           </div>
+          <ul className="grid grid-cols-3 gap-x-5 gap-y-10 sm:grid-cols-5">
+            {goneHome.slice(0, 5).map((pup, index) => (
+              <li key={pup.name} className="text-center">
+                <span className="relative mx-auto block aspect-square w-[84%]">
+                  <span aria-hidden="true" className="pup-card-ring" style={{ '--blob': blobs[(index + 2) % blobs.length], '--tilt': index % 2 ? '4deg' : '-4deg' }} />
+                  <svg aria-hidden="true" viewBox="0 0 100 100" className="pup-card-arc" style={{ rotate: `${(index * 97 + 40) % 360}deg` }}>
+                    <path d="M14 80A44 44 0 1 1 86 74" />
+                  </svg>
+                  <img src={pup.image} alt={`${pup.name}, ${pup.breed}`} loading="lazy" className="relative size-full rounded-full border-[3px] border-cocoa object-cover" />
+                  <Doodle kind={right[index % right.length]} className="absolute top-[34%] -right-[22%] w-[15%]" />
+                  <span className="door-tag gone-tag font-hand">{puppiesPage.goneTag}</span>
+                </span>
+                <span className="mt-6 block font-display text-[clamp(1.05rem,1.4vw,1.3rem)] leading-tight font-extrabold">{pup.name}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
     </div>

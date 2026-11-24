@@ -2164,3 +2164,23 @@ textarea { cursor: text; }
   width: 56%;
   translate: -50% 0;
 }
+
+/* ---------- Puppies page "Already gone home" band ---------- */
+.gone-strip {
+  background:
+    radial-gradient(circle at 1px 1px, rgba(42, 23, 14, 0.09) 1px, transparent 0) 0 0 / 22px 22px,
+    linear-gradient(#fdeccb, var(--color-honey-soft));
+}
+
+/* The "gone home" sticker sits across the bottom of each photo instead of the top corner. */
+.gone-tag {
+  top: auto;
+  right: auto;
+  bottom: -0.5rem;
+  left: 50%;
+  translate: -50% 0;
+  rotate: -6deg;
+  color: var(--color-toffee-ink);
+  font-size: clamp(0.72rem, 0.9vw, 0.88rem);
+  white-space: nowrap;
+}

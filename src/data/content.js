@@ -158,7 +158,9 @@ export const puppiesPage = {
   portraitSays: 'hm?',
   lede: 'Every listing shows real photos of the actual puppy. Open a profile to see more, then ask us about them on WhatsApp.',
   goneTitle: 'Already gone home',
-  goneCta: 'See them all',
+  goneLede: 'These puppies have found their families.',
+  goneCta: "See the puppies who've gone home",
+  goneTag: 'gone home ♥',
 }
 
 export const puppyDetail = {

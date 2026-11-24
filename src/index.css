@@ -1604,6 +1604,80 @@
   background: #fdeceb;
 }
 
+/* Puppy detail: the info card pinned to a board, with a pup peeking over its top edge. */
+.pinned-card {
+  outline: 2px dashed rgba(42, 23, 14, 0.22);
+  outline-offset: -11px;
+}
+
+@media (min-width: 1024px) {
+  .pinned-card { rotate: -1.2deg; }
+}
+
+.pin {
+  position: absolute;
+  top: -1rem;
+  left: 1.4rem;
+  z-index: 1;
+  width: 2.1rem;
+  aspect-ratio: 1;
+  border: 3px solid var(--color-cocoa);
+  border-radius: 50%;
+  background: var(--color-honey);
+  box-shadow: 2px 3px 0 rgba(42, 23, 14, 0.2);
+}
+
+/* The slot across the pin's head. */
+.pin::after {
+  content: "";
+  position: absolute;
+  inset: 44% 20%;
+  border-radius: 2px;
+  background: var(--color-cocoa);
+}
+
+.watching-pup {
+  position: absolute;
+  right: 1.6rem;
+  bottom: calc(100% - 0.55rem);
+  width: 4.8rem;
+}
+
+/* Paw stamp on the enquiry form's corner. */
+.paw-stamp {
+  position: absolute;
+  top: -1.1rem;
+  right: clamp(1rem, 4vw, 2.5rem);
+  display: grid;
+  place-items: center;
+  width: 3.6rem;
+  aspect-ratio: 1;
+  border: 2.5px dashed var(--color-toffee-deep);
+  border-radius: 0.7rem;
+  background: var(--color-honey-soft);
+  color: var(--color-toffee-deep);
+  box-shadow: 3px 4px 0 rgba(42, 23, 14, 0.12);
+  rotate: 8deg;
+}
+
+/* Bookmark ribbon down the left edge (PuppyDetail.jsx sets its height as you scroll). Only where the side
+   margin is wide enough to hold it without touching the content. */
+.read-ribbon {
+  position: absolute;
+  top: 0;
+  left: clamp(0.3rem, 0.8vw, 1.1rem);
+  z-index: 1;
+  display: none;
+  width: 1.1rem;
+  border-radius: 0.6rem 0.6rem 0 0;
+  background: linear-gradient(90deg, var(--color-toffee), var(--color-toffee-deep) 70%, var(--color-toffee-ink));
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 0.75rem), 0 100%);
+}
+
+@media (min-width: 768px) {
+  .read-ribbon { display: block; }
+}
+
 /* Puppy detail gallery: photo on a little stack of paper. */
 .paper-stack {
   position: relative;
@@ -1863,7 +1937,8 @@
    Happy (hover, loader): eyes close into little arcs and the tongue comes out. */
 .pup-tongue,
 .pup-eyes-closed { opacity: 0; transition: opacity 0.2s ease; }
-.pup-eyes { transition: opacity 0.2s ease; }
+/* --look-x/y let a pup glance somewhere (the detail page's watching pup); 0 everywhere else. */
+.pup-eyes { translate: var(--look-x, 0) var(--look-y, 0); transition: opacity 0.2s ease, translate 0.12s ease-out; }
 
 :is(.mascot[data-walking="true"], .pup-play, .pup-happy, .hero-peek:hover) .pup-tongue { opacity: 1; }
 :is(.pup-happy, .hero-peek:hover) .pup-eyes { opacity: 0; }

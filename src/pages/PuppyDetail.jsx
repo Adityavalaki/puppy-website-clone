@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { puppies, puppyDetail, site } from '../data/content.js'
 import { sendEnquiry, validateEnquiry } from '../lib/enquiry.js'
 import Paw from '../components/ui/Paw.jsx'
+import { PupPeek } from '../components/ui/Pup.jsx'
 import NotFound from './NotFound.jsx'
 
 function Chapter({ number, children }) {
@@ -12,6 +13,51 @@ function Chapter({ number, children }) {
       {children}
     </p>
   )
+}
+
+// Peeks over the pinned card and follows the mouse with its eyes (mouse devices with motion allowed only).
+function WatchingPup() {
+  const ref = useRef(null)
+
+  useEffect(() => {
+    if (!window.matchMedia('(pointer: fine) and (prefers-reduced-motion: no-preference)').matches) return
+    const pup = ref.current
+    const look = (event) => {
+      const box = pup.getBoundingClientRect()
+      const dx = event.clientX - (box.left + box.width / 2)
+      const dy = event.clientY - (box.top + box.height / 2)
+      const distance = Math.hypot(dx, dy) || 1
+      const reach = Math.min(1, distance / 300) * 3.5 // eye travel in drawing units; less when the mouse is close
+      pup.style.setProperty('--look-x', `${(dx / distance) * reach}px`)
+      pup.style.setProperty('--look-y', `${(dy / distance) * reach}px`)
+    }
+    window.addEventListener('pointermove', look)
+    return () => window.removeEventListener('pointermove', look)
+  }, [])
+
+  return <PupPeek ref={ref} className="watching-pup" />
+}
+
+// Bookmark ribbon down the page's left edge that grows as you read: its end stays ~60% down the screen.
+function ReadingRibbon() {
+  const ref = useRef(null)
+
+  useEffect(() => {
+    const ribbon = ref.current
+    const grow = () => {
+      const page = ribbon.parentElement.getBoundingClientRect()
+      ribbon.style.height = `${Math.min(page.height, Math.max(0, window.innerHeight * 0.6 - page.top))}px`
+    }
+    grow()
+    window.addEventListener('scroll', grow, { passive: true })
+    window.addEventListener('resize', grow)
+    return () => {
+      window.removeEventListener('scroll', grow)
+      window.removeEventListener('resize', grow)
+    }
+  }, [])
+
+  return <span ref={ref} aria-hidden="true" className="read-ribbon" />
 }
 
 function EnquiryForm({ pup }) {
@@ -101,7 +147,8 @@ export default function PuppyDetail() {
   ]
 
   return (
-    <div className="bg-[#f4efe7]">
+    <div className="relative bg-[#f4efe7]">
+      <ReadingRibbon />
       <div className="gutter mx-auto max-w-[110rem] pt-8 pb-20">
         <nav aria-label="Breadcrumb" className="text-sm">
           <Link to="/puppies" className="text-toffee-deep underline underline-offset-4">Available puppies</Link> / {pup.name}
@@ -128,7 +175,10 @@ export default function PuppyDetail() {
           </div>
 
           <div className="grid gap-6 lg:pt-16">
-            <div className="rounded-3xl border-[3px] border-cocoa bg-milk p-7 shadow-[8px_10px_0_rgba(42,23,14,0.14)]">
+            {/* Pinned to the board, with a pup peeking over the top edge. */}
+            <div className="pinned-card relative rounded-3xl border-[3px] border-cocoa bg-milk p-7 shadow-[8px_10px_0_rgba(42,23,14,0.14)]">
+              <span aria-hidden="true" className="pin" />
+              <WatchingPup />
               <span className="inline-flex items-center gap-1.5 rounded-full bg-honey-soft px-3 py-1 text-sm font-semibold"><Paw className="size-3.5 text-toffee" /> Available</span>
               <h1 className="display-title mt-4 text-[clamp(3rem,6vw,4.5rem)]">{pup.name}</h1>
               <p className="mt-2 text-lg text-cocoa-soft">{pup.breed}</p>
@@ -171,7 +221,8 @@ export default function PuppyDetail() {
           </ol>
         </section>
 
-        <section id="enquiry" aria-labelledby="enquiry-title" className="mt-20 scroll-mt-28 rounded-3xl border-[3px] border-cocoa bg-milk p-[clamp(1.5rem,4vw,3rem)] shadow-[8px_10px_0_rgba(42,23,14,0.14)]">
+        <section id="enquiry" aria-labelledby="enquiry-title" className="relative mt-20 scroll-mt-28 rounded-3xl border-[3px] border-cocoa bg-milk p-[clamp(1.5rem,4vw,3rem)] shadow-[8px_10px_0_rgba(42,23,14,0.14)]">
+          <span aria-hidden="true" className="paw-stamp"><Paw className="w-7" /></span>
           <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.4fr)]">
             <div>
               <Chapter number="4">dear TeddyPups…</Chapter>
@@ -187,7 +238,7 @@ export default function PuppyDetail() {
         <nav aria-label="More puppies" className="mt-14 grid gap-5 sm:grid-cols-2">
           {[['Previous pup', prev], ['Next pup', next]].map(([label, other]) => (
             <Link key={label} to={`/puppies/${other.slug}`} className="flex items-center gap-4 rounded-3xl border-[3px] border-cocoa bg-milk p-4 hover:bg-honey-soft">
-              <img src={other.image} alt="" className="size-16 rounded-full border-2 border-cocoa object-cover" />
+              <img src={other.image} alt="" className="h-20 w-16 rounded-t-full border-[3px] border-cocoa object-cover" />
               <span>
                 <span className="block font-hand text-sm text-cocoa-soft">{label}</span>
                 <span className="font-display text-2xl font-extrabold">{other.name}</span>

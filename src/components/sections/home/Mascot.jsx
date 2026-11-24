@@ -79,7 +79,7 @@ export default function Mascot() {
       dog.style.width = `${pos.w}px`
       dog.dataset.walking = walking
       dog.dataset.hidden = !target.visible
-      if (Math.abs(dx) > 0.3) dog.dataset.left = dx < 0
+      if (Math.abs(dx) > 0.3) dog.dataset.left = dx > 0
 
       // Legs swing in a sine wave of the distance walked (one stride every ~70px): they move only while
       // the dog moves, and faster when it moves faster. Diagonal pairs swing together like a trot.

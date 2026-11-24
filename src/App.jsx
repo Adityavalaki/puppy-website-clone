@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
+import { pageTitles, puppies } from './data/content.js'
 import Footer from './components/layout/Footer.jsx'
 import MobileBar from './components/layout/MobileBar.jsx'
 import Navbar from './components/layout/Navbar.jsx'
@@ -17,6 +18,13 @@ import PuppyDetail from './pages/PuppyDetail.jsx'
 
 export default function App() {
   const { pathname, hash } = useLocation()
+
+  // Browser tab titles, as on the reference site.
+  useEffect(() => {
+    const pup = pathname.startsWith('/puppies/') && puppies.find((p) => `/puppies/${p.slug}` === pathname)
+    const page = pup ? `${pup.name !== pup.breed ? `${pup.name}, ` : ''}${pup.breed} puppy` : pageTitles.pages[pathname]
+    document.title = page ? `${page} | ${pageTitles.brand}` : pageTitles.home
+  }, [pathname])
 
   // A new page opens at the top, or at the section named in the URL (e.g. /how-it-works#delivery).
   useEffect(() => {
@@ -47,7 +55,7 @@ export default function App() {
       <Footer />
       <MobileBar />
       <PawCursor />
-      <PageLoader />
+      <PageLoader key={pathname} />
     </>
   )
 }

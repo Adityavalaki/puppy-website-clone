@@ -17,6 +17,19 @@ export const site = {
   loaderText: 'every puppy is family',
 }
 
+export const pageTitles = {
+  home: 'TeddyPups U.A.E. — Premium teacup puppies in Dubai',
+  brand: 'TeddyPups U.A.E.',
+  pages: {
+    '/puppies': 'Available puppies',
+    '/gone-home': 'Gone home',
+    '/happy-families': 'Happy families',
+    '/how-it-works': 'How it works',
+    '/faq': 'Questions & answers',
+    '/contact': 'Visit & contact',
+  },
+}
+
 export const navLinks = [
   { label: 'Home', to: '/' },
   { label: 'Puppies', to: '/puppies' },

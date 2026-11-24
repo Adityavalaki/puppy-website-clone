@@ -76,7 +76,7 @@ export default function Journey() {
             <div className="phone-bar">
               <img src="/images/icons/logo.png" alt="" className="size-10 rounded-full" />
               <span>
-                <span className="block text-[0.98rem] leading-tight font-bold">{site.name}</span>
+                <span className="block text-[0.98rem] leading-tight font-bold">{site.fullName}</span>
                 <span className="block text-[0.78rem] text-cocoa-soft">{showTyping ? journey.typing : journey.online}</span>
               </span>
             </div>

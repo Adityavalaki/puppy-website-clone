@@ -26,25 +26,33 @@ function Doodle({ kind, className }) {
 const topLeft = ['swoosh', 'dots', 'sparkle', 'paw', 'heart']
 const right = ['paw', 'heart', 'sparkle', 'swoosh', 'sparkle']
 
+const filterKeys = ['origin', 'collection', 'breed', 'sex']
+
 // Does this puppy pass the filter chosen for one key? (breed matches by name, so "Poodle" also finds Toy Poodles.)
 function matches(pup, key, value) {
   if (!value) return true
-  if (key === 'breed') {
-    const label = puppyFilters.find((f) => f.key === 'breed').options.find((o) => o.value === value)?.label ?? ''
-    return pup.breed.toLowerCase().includes(label.toLowerCase())
-  }
+  if (key === 'breed') return pup.breed.toLowerCase().includes(value.replace('-', ' '))
+  if (key === 'origin') return value === 'imported' // every listed puppy is imported, as on the reference site
   return pup[key] === value
 }
 
 export default function Puppies() {
-  // The chosen filters live in the URL (?origin=&breed=&sex=), so a filtered view can be shared or bookmarked.
+  // The chosen filters live in the URL (?origin=&collection=&breed=&sex=), so a filtered view can be shared.
   const [params, setParams] = useSearchParams()
-  const shown = puppies.filter((pup) => puppyFilters.every(({ key }) => matches(pup, key, params.get(key))))
+  const shown = puppies.filter((pup) => filterKeys.every((key) => matches(pup, key, params.get(key))))
+  const filtered = filterKeys.some((key) => params.get(key))
+  const where = params.get('origin') || params.get('collection')
 
+  // Clicking a chosen chip turns it off. The "where" options (origin, collection) replace each other.
   const toggle = (key, value) => {
     const next = new URLSearchParams(params)
-    if (!value || next.get(key) === value) next.delete(key)
-    else next.set(key, value)
+    const wasOn = next.get(key) === value
+    if (key === 'origin' || key === 'collection') {
+      next.delete('origin')
+      next.delete('collection')
+    }
+    if (value && !wasOn) next.set(key, value)
+    else next.delete(key)
     setParams(next, { replace: true })
   }
 
@@ -76,11 +84,11 @@ export default function Puppies() {
           <span aria-hidden="true" className="tape filter-tape" style={{ '--tape': '#f6d79a' }} />
           <Paw className="absolute top-4 left-[4.6rem] w-3.5 text-toffee/50" />
           {puppyFilters.map((filter) => (
-            <div key={filter.key} className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
+            <div key={filter.label} className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
               <p className="w-28 shrink-0 font-hand text-cocoa-soft">{filter.label}</p>
               <div className="flex flex-wrap gap-2.5">
-                {filter.key === 'origin' && (
-                  <button type="button" aria-pressed={!params.get('origin')} onClick={() => toggle('origin', null)} className="filter-chip">
+                {filter.label === 'where' && (
+                  <button type="button" aria-pressed={!where} onClick={() => toggle('origin', null)} className="filter-chip">
                     Everywhere
                   </button>
                 )}
@@ -88,8 +96,8 @@ export default function Puppies() {
                   <button
                     key={option.value}
                     type="button"
-                    aria-pressed={params.get(filter.key) === option.value}
-                    onClick={() => toggle(filter.key, option.value)}
+                    aria-pressed={params.get(option.key) === option.value}
+                    onClick={() => toggle(option.key, option.value)}
                     className="filter-chip"
                   >
                     {option.label}
@@ -101,7 +109,7 @@ export default function Puppies() {
         </div>
 
         <p aria-live="polite" className="mt-10 font-hand text-lg">
-          {shown.length} {shown.length === 1 ? 'puppy' : 'puppies'} looking for a home
+          {shown.length} {shown.length === 1 ? 'puppy' : 'puppies'} {filtered ? 'match' : 'looking for a home'}
         </p>
 
         {shown.length > 0 ? (
@@ -118,9 +126,10 @@ export default function Puppies() {
                     <Doodle kind={right[index % right.length]} className="absolute top-[44%] -right-[12%] w-[13%]" />
                     <img src={pup.image} alt="" loading="lazy" className="relative size-full rounded-full border-[3px] border-cocoa object-cover transition-transform duration-500 ease-pounce group-hover:scale-105" />
                     <span className="door-tag top-[6%] right-0">Available</span>
+                    {pup.video && <span className="video-tag">▶ video</span>}
                   </span>
                   <span className="mt-4 block font-display text-[clamp(1.35rem,2vw,1.9rem)] leading-none font-extrabold tracking-[-0.02em] group-hover:text-toffee-deep">{pup.name}</span>
-                  <span className="mt-1.5 block text-sm text-cocoa-soft">{pup.breed} · {pup.sex} · {pup.age}</span>
+                  <span className="mt-1.5 block text-sm text-cocoa-soft">{[pup.name !== pup.breed && pup.breed, pup.sex, pup.age].filter(Boolean).join(' · ')}</span>
                 </Link>
               </li>
             ))}

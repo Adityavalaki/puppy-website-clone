@@ -81,7 +81,7 @@ export default function Contact() {
             <select name="puppy" aria-label="Puppy you're interested in (optional)" value={values.puppy} onChange={update} className="letter-blank">
               <option value="">any puppy (not sure yet)</option>
               {puppies.map((pup) => (
-                <option key={pup.slug} value={pup.slug}>{pup.name} ({pup.breed}, {pup.sex})</option>
+                <option key={pup.slug} value={pup.slug}>{pup.name} ({pup.name !== pup.breed ? `${pup.breed}, ${pup.sex}` : pup.sex})</option>
               ))}
             </select>
             .

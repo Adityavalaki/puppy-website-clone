@@ -151,13 +151,16 @@ export default function PuppyDetail() {
   const next = puppies[(index + 1) % puppies.length]
   // Two views of the same photo: the full shot and a close-up crop.
   const shots = [{ label: 'full photo', zoom: false }, { label: 'close-up', zoom: true }]
-  const way = puppyDetail.steps[pup.origin]
+  const way = puppyDetail.wayHome
+  // Puppies listed by breed only are "this puppy" in sentences, like the reference site.
+  const named = pup.name !== pup.breed
+  const callName = named ? pup.name : 'this puppy'
   const whatsapp = `https://wa.me/971500000000?text=${encodeURIComponent(`Hi TeddyPups! I'd love to know more about ${pup.name} (${pup.breed}).`)}`
   const facts = [
     ['Breed', pup.breed],
-    ['Boy or girl', pup.sex === 'boy' ? 'Boy' : 'Girl'],
+    ['Boy or girl', pup.sex[0].toUpperCase() + pup.sex.slice(1)],
     ['Age', pup.age],
-    ['Where', pup.origin === 'local' ? 'In Dubai' : 'Imported for you'],
+    ['Where', puppyDetail.where],
   ]
 
   return (
@@ -195,7 +198,7 @@ export default function PuppyDetail() {
               <WatchingPup />
               <span className="inline-flex items-center gap-1.5 rounded-full bg-honey-soft px-3 py-1 text-sm font-semibold"><Paw className="size-3.5 text-toffee" /> Available</span>
               <h1 className="display-title mt-4 text-[clamp(3rem,6vw,4.5rem)]">{pup.name}</h1>
-              <p className="mt-2 text-lg text-cocoa-soft">{pup.breed}</p>
+              {named && <p className="mt-2 text-lg text-cocoa-soft">{pup.breed}</p>}
               <dl className="mt-6 grid grid-cols-2 gap-x-6 gap-y-4">
                 {facts.map(([term, value]) => (
                   <div key={term}>
@@ -204,13 +207,13 @@ export default function PuppyDetail() {
                   </div>
                 ))}
               </dl>
-              <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp mt-7 w-full">Ask about {pup.name} on WhatsApp</a>
+              <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp mt-7 w-full">Ask about {callName} on WhatsApp</a>
               <a href="#enquiry" className="btn btn-ghost mt-3 w-full">Send an enquiry</a>
             </div>
 
             <div className="rounded-3xl border-[3px] border-cocoa bg-[#fff8ec] p-7">
-              <Chapter number="2">what comes with {pup.name}</Chapter>
-              <h2 className="display-title mt-2 text-[clamp(1.6rem,2.4vw,2.1rem)]">Every TeddyPups puppy comes</h2>
+              <Chapter number="2">what comes with {callName}</Chapter>
+              <h2 className="display-title mt-2 text-[clamp(1.6rem,2.4vw,2.1rem)]">{puppyDetail.checklistTitle}</h2>
               <ul className="mt-4 grid gap-2.5">
                 {puppyDetail.checklist.map((item) => (
                   <li key={item} className="flex items-center gap-3"><span aria-hidden="true" className="font-bold text-toffee-deep">✓</span>{item}</li>
@@ -240,9 +243,9 @@ export default function PuppyDetail() {
           <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.4fr)]">
             <div>
               <Chapter number="4">dear TeddyPups…</Chapter>
-              <h2 id="enquiry-title" className="display-title mt-2 text-[clamp(2.2rem,4vw,3.6rem)]">Ask about {pup.name}</h2>
+              <h2 id="enquiry-title" className="display-title mt-2 text-[clamp(2.2rem,4vw,3.6rem)]">Ask about {callName}</h2>
               <p className="mt-4 max-w-[36ch] text-cocoa-soft">
-                Leave your details and we will get back to you soon, or <a href={site.whatsappHref} target="_blank" rel="noopener noreferrer" className="underline">message us on WhatsApp</a> for the quickest reply.
+                {puppyDetail.enquiryText} <a href={site.whatsappHref} target="_blank" rel="noopener noreferrer" className="underline">{puppyDetail.enquiryLink}</a> {puppyDetail.enquiryEnd}
               </p>
             </div>
             <EnquiryForm key={pup.slug} pup={pup} />

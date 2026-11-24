@@ -78,7 +78,8 @@ export default function MeetThePups() {
                   <Link to={`/puppies/${pup.slug}`} className="door-link" style={{ '--door': doorColors[index % doorColors.length] }}>
                     <span className="door-plate">
                       <span className="door-name font-display font-extrabold">{pup.name}</span>
-                      <span className="door-meta">{pup.breed}, {pup.sex}, {pup.age}</span>
+                      {/* Puppies listed by breed only skip the breed here, like the reference: "girl, 2 months, with video". */}
+                      <span className="door-meta">{[pup.name !== pup.breed && pup.breed, pup.sex, pup.age, pup.video && 'with video'].filter(Boolean).join(', ')}</span>
                     </span>
                     <span className="door-frame">
                       <span className="door-room">

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { hero, puppies, site } from '../../../data/content.js'
 import { PupPeek } from '../../ui/Pup.jsx'
 
-const lineup = puppies.slice(0, 6)
+const lineup = hero.lineup.map((slug) => puppies.find((pup) => pup.slug === slug))
 
 export default function Hero() {
   // Which puppy's name tag is showing. It moves along the row on its own, and jumps to whichever photo you hover.

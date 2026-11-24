@@ -2184,3 +2184,37 @@ textarea { cursor: text; }
   font-size: clamp(0.72rem, 0.9vw, 0.88rem);
   white-space: nowrap;
 }
+
+/* "▶ video" pill on puppy cards that have a video. */
+.video-tag {
+  position: absolute;
+  bottom: 9%;
+  left: 2%;
+  z-index: 2;
+  padding: 0.1rem 0.6rem;
+  border: 2px solid var(--color-milk);
+  border-radius: 999px;
+  background: var(--color-cocoa);
+  color: var(--color-milk);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+/* How it works step cards: a white card with an icon in a tinted circle. */
+.how-step {
+  padding: clamp(1.4rem, 2.5vw, 1.9rem);
+  border: 3px solid var(--color-cocoa);
+  border-radius: 1.6rem;
+  background: var(--color-milk);
+  box-shadow: 4px 6px 0 rgba(42, 23, 14, 0.12);
+}
+
+.how-step-icon {
+  display: grid;
+  place-items: center;
+  width: 4.4rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--tint);
+  color: var(--color-toffee-deep);
+}

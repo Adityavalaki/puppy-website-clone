@@ -5,7 +5,8 @@ import { useEffect, useId, useRef } from 'react'
 const route = 'M60 250C170 60 470 30 610 170'
 const clamp = (value) => Math.min(1, Math.max(0, value))
 
-export default function FlightPath({ image, label, className }) {
+// `from` names the start of the route (Home says Korea; How it works says Europe · Korea, like the reference).
+export default function FlightPath({ image, label, className, from = 'Korea' }) {
   const svgRef = useRef(null)
   const flownRef = useRef(null)
   const planeRef = useRef(null)
@@ -61,7 +62,7 @@ export default function FlightPath({ image, label, className }) {
       <path ref={flownRef} d={route} fill="none" stroke="var(--color-toffee-deep)" strokeWidth="3.5" strokeLinecap="round" />
       <circle cx="60" cy="250" r="8" fill="var(--color-toffee-deep)" />
       <circle cx="610" cy="170" r="8" fill="var(--color-toffee-deep)" />
-      <text x="60" y="284" textAnchor="middle" className="fill-cocoa-soft font-hand text-[19px]">Korea</text>
+      <text x="60" y="284" textAnchor="middle" className="fill-cocoa-soft font-hand text-[19px]">{from}</text>
       <text x="610" y="204" textAnchor="middle" className="fill-cocoa-soft font-hand text-[19px]">Dubai</text>
 
       {/* Cartoon airliner pointing right (nose at +x), centred on 0,0. */}

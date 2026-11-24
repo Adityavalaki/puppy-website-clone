@@ -6,6 +6,7 @@ import Pup from '../components/ui/Pup.jsx'
 import Stamp, { Icon } from '../components/ui/Stamp.jsx'
 
 const { ways, promise, delivery, why, cta } = howItWorks
+const stepTints = ['var(--color-honey-soft)', 'var(--color-blush)', 'var(--color-sky)', '#dcebd5']
 
 export default function HowItWorks() {
   const [way, setWay] = useState('local')
@@ -52,9 +53,10 @@ export default function HowItWorks() {
           <div>
             <h3 className="display-title text-[clamp(1.9rem,3.4vw,3rem)]">{current.title}</h3>
             <p className="mt-4 max-w-[48ch] text-lg text-cocoa-soft">{current.text}</p>
+            {current.note && <p className="mt-5 max-w-[52ch] font-hand text-lg text-toffee-ink">{current.note}</p>}
           </div>
           <div className="relative h-72 overflow-hidden rounded-3xl border-[3px] border-cocoa bg-linear-to-b from-[#fff3dc] to-[#f8d79e] shadow-[8px_10px_0_rgba(42,23,14,0.14)]">
-            <p className="absolute top-5 left-6 font-hand text-toffee-ink">{current.scene}</p>
+            {current.scene && <p className="absolute top-5 left-6 font-hand text-toffee-ink">{current.scene}</p>}
             {way === 'local' ? (
               <>
                 <span className="absolute top-12 right-16 size-20 rounded-full bg-honey shadow-[0_0_40px_10px_rgba(242,190,107,0.5)]" />
@@ -63,14 +65,28 @@ export default function HowItWorks() {
                 </svg>
               </>
             ) : (
-              <FlightPath image="/images/puppies/maltipoo-3.jpg" label="A plane flying a puppy from Korea to Dubai" className="absolute top-[15%] left-[4%] h-[72%] w-[92%]" />
+              <FlightPath image="/images/puppies/maltipoo-3.jpg" label="A plane flying a puppy from Korea to Dubai" from={current.from} className="absolute top-[15%] left-[4%] h-[72%] w-[92%]" />
             )}
           </div>
         </div>
+        {/* The four steps for the chosen way, one card each (icon, step number, title, text). */}
+        <ol className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {current.steps.map((step, index) => (
+            <li key={step.title} className="how-step">
+              <span className="how-step-icon" style={{ '--tint': stepTints[index] }}>
+                <Icon name={step.icon} className="size-8" />
+              </span>
+              <p className="mt-6 font-display text-base font-extrabold text-toffee-ink">Step {index + 1}</p>
+              <h4 className="font-display text-[1.45rem] leading-tight font-extrabold">{step.title}</h4>
+              <p className="mt-2 text-cocoa-soft">{step.text}</p>
+            </li>
+          ))}
+        </ol>
       </section>
 
       <section id="promise" aria-labelledby="promise-title" className="gutter mx-auto mt-24 max-w-[110rem] scroll-mt-28">
         <div className="book-page rounded-3xl">
+          <p className="font-hand text-lg text-toffee-ink">{promise.kicker}</p>
           <h2 id="promise-title" className="display-title max-w-[14ch] text-[clamp(2.4rem,5vw,4.5rem)]">{promise.title}</h2>
           <ul className="mt-10 grid gap-10 md:grid-cols-3">
             {promise.stamps.map((stamp) => (

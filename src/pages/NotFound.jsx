@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { notFoundPage } from '../data/content.js'
+import Pup from '../components/ui/Pup.jsx'
 
 // A "lost dog" poster with tear-off tabs that link back to the main pages.
 export default function NotFound() {
@@ -14,7 +15,7 @@ export default function NotFound() {
           <span className="sr-only">: this page has wandered off</span>
         </h1>
         <div className="mx-auto mt-4 grid aspect-[4/3] w-[min(100%,18rem)] place-items-center rounded-xl border-[3px] border-dashed border-cocoa/40">
-          <img src="/images/icons/pup-stand.svg" alt="" className="w-[70%]" />
+          <Pup className="w-[70%]" />
         </div>
         <p className="mx-auto mt-5 max-w-[34ch] text-cocoa-soft">{notFoundPage.text}</p>
         <p className="mt-5 font-hand text-lg text-toffee-ink">{notFoundPage.tabsLabel}</p>

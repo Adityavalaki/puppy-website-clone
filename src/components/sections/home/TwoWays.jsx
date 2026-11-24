@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { paths } from '../../../data/content.js'
 import FlightPath from '../../ui/FlightPath.jsx'
+import Pup from '../../ui/Pup.jsx'
 
 export default function TwoWays() {
   return (
@@ -47,7 +48,7 @@ export default function TwoWays() {
             <Link to="/puppies?origin=imported" className="btn btn-primary mt-5">{paths.imported.cta}</Link>
           </article>
 
-          <img src="/images/icons/pup-stand.svg" alt="" data-pup-stop className="ways-pup" />
+          <Pup data-pup-stop className="ways-pup" />
         </div>
       </div>
     </section>

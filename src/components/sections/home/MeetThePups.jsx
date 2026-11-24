@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { meet, puppies } from '../../../data/content.js'
 import Paw from '../../ui/Paw.jsx'
+import Pup from '../../ui/Pup.jsx'
 
 const doorColors = ['#a24a1a', '#5a3a28', '#d4893f', '#b8644a', '#7a4a2e']
 
@@ -103,7 +104,7 @@ export default function MeetThePups() {
               </li>
             </ul>
             <div aria-hidden="true" className="meet-floor" style={pinned ? { backgroundPositionX: `${x}px` } : undefined} />
-            <img src="/images/icons/pup-stand.svg" alt="" data-pup-stop data-pup-face="right" className="meet-pup" />
+            <Pup data-pup-stop data-pup-face="right" className="meet-pup" />
           </div>
         </div>
       </div>

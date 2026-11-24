@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { journey, site, whatsappMessage } from '../../../data/content.js'
+import Pup from '../../ui/Pup.jsx'
 
 // Wide screens with motion allowed reveal the chat one step at a time as you scroll; everywhere else it shows in full.
 const liveQuery = '(min-width: 1024px) and (prefers-reduced-motion: no-preference)'
@@ -121,7 +122,7 @@ export default function Journey() {
               </svg>
             </a>
           </div>
-          <img src="/images/icons/pup-stand.svg" alt="" data-pup-stop className="journey-pup" />
+          <Pup data-pup-stop className="journey-pup" />
         </div>
       </div>
     </section>

@@ -36,7 +36,7 @@ export default function PageLoader() {
     <div role="status" aria-label="Loading TeddyPups" className="page-loader" data-leaving={phase === 'leaving' || undefined}>
       <div className="loader-track">
         <div className="loader-walker">
-          <Pup className="pup-play block w-full" />
+          <Pup className="pup-play pup-happy" />
         </div>
       </div>
       <p className="font-hand text-[clamp(1.25rem,2vw,1.6rem)] text-toffee-ink">{site.loaderText}</p>

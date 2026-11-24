@@ -59,6 +59,15 @@
 
 /* Pill buttons with a hard "sticker" shadow. Utilities (e.g. min-h-11) can still override them. */
 @layer components {
+  /* Inline SVG has no natural size like an <img>; fill the box by default. Layered, so width utilities and the
+     per-spot rules (.meet-pup etc.) still win. */
+  .pup {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
   .btn {
     display: inline-flex;
     align-items: center;
@@ -1635,7 +1644,21 @@
 .mascot[data-walking="false"] :is(.pup-leg, .pup-head) { transition: rotate 0.35s var(--ease-silk); }
 .mascot[data-walking="false"] .pup-upper { transition: translate 0.35s var(--ease-silk); }
 
-.pup-tail { animation: wag 0.45s ease-in-out infinite alternate; }
+/* Moods. Resting: tongue in, tail still. Walking or playing: tongue peeks out and the tail wags.
+   Happy (hover, loader): eyes close into little arcs and the tongue comes out. */
+.pup-tongue,
+.pup-eyes-closed { opacity: 0; transition: opacity 0.2s ease; }
+.pup-eyes { transition: opacity 0.2s ease; }
+
+:is(.mascot[data-walking="true"], .pup-play, .pup-happy) .pup-tongue { opacity: 1; }
+.pup-happy .pup-eyes { opacity: 0; }
+.pup-happy .pup-eyes-closed { opacity: 1; }
+
+.mascot[data-walking="true"] .pup-tail { animation: wag 0.3s ease-in-out infinite alternate; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .pup-play .pup-tail { animation: wag 0.3s ease-in-out infinite alternate; }
+}
 
 @keyframes wag {
   from { rotate: -14deg; }

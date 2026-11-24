@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { faqPage, faqs, site } from '../data/content.js'
+import Pup from '../components/ui/Pup.jsx'
 
 // Pin colours and tilts so the notes look hand-pinned to the cork board.
 const pins = ['#c2622b', '#2f6e9e', '#d4893f', '#1f6b45']
@@ -38,7 +39,7 @@ export default function Faq() {
           <p aria-live="polite" className="mt-3 font-semibold">{shown.length} {shown.length === 1 ? 'note' : 'notes'} on the board</p>
           <div className="relative mt-10 hidden w-44 lg:block">
             <span aria-hidden="true" className="float absolute -top-8 left-24 grid size-12 place-items-center rounded-full border-[3px] border-cocoa bg-milk font-display text-2xl font-extrabold text-toffee-deep">!</span>
-            <img src="/images/icons/pup-stand.svg" alt="" />
+            <Pup />
           </div>
           <a href={site.whatsappHref} target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp mt-8">{faqPage.ask}</a>
         </div>

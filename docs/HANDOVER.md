@@ -3,6 +3,13 @@ Lane: A (graded demo, no real users or data) — agreed with Aditya 2026-11-23. 
 Read first: CLAUDE.md, docs/DECISIONS.md, docs/blutec-assignment-plan.md
 
 <!-- Newest entry on top. Five lines, every session. -->
+## 2026-11-24 (5) — model: Claude Opus 5.5 (after a Haiku 4.5 turn)
+- Done: 0866178 (Haiku) flipped the Home mascot on every section and swapped headings to a non-existent "Dear Teddypups" Google font (fell back to Georgia) + restyled the form. 7cde60a reverted both: mascot faces travel direction again, a stop can pin its facing via data-pup-face (only Meet the Pups = right, the row slides past a still dog); form restored and the whole letter set in font-hand (Shantell Sans). New layout/PageLoader.jsx: first-load screen (cream glow + diamond lattice, Pup trots left→right on a 1.8s loop, "every puppy is family"), stays until window load and at least 1.8s, fades 0.5s, once per visit.
+- In progress: 10-step polish plan from Aditya's reference screenshots (order agreed). Step 1 done, uncommitted: Pup.jsx redrawn fluffy (scalloped `fluff()` outline, shiny eyes, collar + heart tag, pom tail) with CSS moods (tongue/tail-wag while walking or playing, `pup-happy` closes eyes); every pup-stand.svg <img> replaced by <Pup/> so stops match the mover; Mascot stop filter uses getBoundingClientRect (SVG has no offsetWidth); walking mood lingers 250ms. Next: step 2, hero pup hover ("hm?"). Loader also still uncommitted.
+- Broken or risky: loader adds up to 1.8s before content on fast loads (may cost Lighthouse LCP/perceived speed); it is React-rendered, so the plain cream page shows before the JS bundle runs.
+- Next: Lighthouse run, README, ai-prompts log tidy (Aditya's own prompts), Loom.
+- Do not touch: reference/, docs/blutec-assignment-plan.md, docs/ai-prompts.md.
+
 ## 2026-11-24 (4) — model: Claude Opus 5.5
 - Done: Animation work pushed (1d6ae82). Responsive sweep of all 8 inner pages at 375/768/1024/1440 (overflow + broken images): fixed Contact at 375 (letter form select forced the grid column wide; min-w-0 on both columns), Gone home at 375 (smaller photo, wrapping route line, no tilt on phones), How it works playground (definite width in the auto column from 768, fluid below). All pages now 0px horizontal overflow, 0 broken images at every width.
 - In progress: nothing.

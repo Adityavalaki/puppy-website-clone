@@ -1,5 +1,6 @@
 import { Link, useSearchParams } from 'react-router-dom'
 import { goneHome, puppies, puppiesPage, puppyFilters } from '../data/content.js'
+import Pup from '../components/ui/Pup.jsx'
 
 // Does this puppy pass the filter chosen for one key? (breed matches by name, so "Poodle" also finds Toy Poodles.)
 function matches(pup, key, value) {
@@ -39,7 +40,7 @@ export default function Puppies() {
           </div>
           <figure className="hidden text-center sm:block">
             <span className="relative block size-44 rounded-full border-[3px] border-cocoa bg-honey-soft">
-              <img src="/images/icons/pup-stand.svg" alt="" className="absolute inset-x-3 bottom-6" />
+              <Pup className="absolute bottom-6 left-3 w-[calc(100%-1.5rem)]" />
               <span className="absolute top-3 left-6 rounded-full border-2 border-cocoa bg-milk px-2 font-hand text-sm">hm?</span>
             </span>
             <figcaption className="mt-1 font-hand text-cocoa-soft">self-portrait</figcaption>

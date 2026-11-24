@@ -33,13 +33,14 @@ export default function Mascot() {
     let pos = null // where the dog is drawn now {x, y, w}
     let travelled = 0 // total distance walked in px; drives the leg swing
     let lastPrint = null
+    let lastStep = 0 // time of the last real step: the "walking" mood lingers briefly so slow scrolls don't flicker it
     let nextId = 0
 
     // Where the dog should be for the current scroll position.
     const findTarget = () => {
       const vh = window.innerHeight
       const line = vh * 0.55 // the dog walks to whichever stops sit around this line across the screen
-      const els = [...document.querySelectorAll('main [data-pup-stop]')].filter((el) => el.offsetWidth > 0)
+      const els = [...document.querySelectorAll('main [data-pup-stop]')].filter((el) => el.getBoundingClientRect().width > 0) // offsetWidth doesn't exist on SVG stops
       const stops = els.map((el) => el.getBoundingClientRect())
       if (stops.length === 0) return null
       const below = stops.findIndex((box) => box.top > line)
@@ -72,11 +73,14 @@ export default function Mascot() {
       pos = { x: pos.x + dx, y: pos.y + dy, w: pos.w + (target.w - pos.w) * follow }
       const moved = Math.hypot(dx, dy)
       const walking = moved > 0.35
+      const now = performance.now()
+      if (walking) lastStep = now
+      const active = now - lastStep < 250
       travelled += moved
 
       dog.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0)`
       dog.style.width = `${pos.w}px`
-      dog.dataset.walking = walking
+      dog.dataset.walking = active
       dog.dataset.hidden = !target.visible
       // The dog faces where it walks, unless the stop it is nearest fixes a side (data-pup-face). Meet the Pups
       // needs that: the row slides left past a dog that stands still on screen, so it should look right.
@@ -106,7 +110,7 @@ export default function Mascot() {
       }
 
       // Keep animating until the dog has caught up with its target.
-      if (Math.abs(target.x - pos.x) > 0.3 || Math.abs(target.y - pos.y) > 0.3 || walking) request()
+      if (Math.abs(target.x - pos.x) > 0.3 || Math.abs(target.y - pos.y) > 0.3 || active) request()
     }
 
     const request = () => {

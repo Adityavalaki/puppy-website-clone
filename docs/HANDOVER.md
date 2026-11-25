@@ -3,6 +3,13 @@ Lane: A (graded demo, no real users or data) — agreed with Aditya 2026-11-23. 
 Read first: CLAUDE.md, docs/DECISIONS.md, docs/blutec-assignment-plan.md
 
 <!-- Newest entry on top. Five lines, every session. -->
+## 2026-11-25 — model: Claude Opus 5.5
+- Done: Lighthouse (production build, vite preview): all 9 pages 100 Accessibility / Best Practices / SEO on mobile (Home + a puppy page also on desktop). Fixes: public/robots.txt + llms.txt (were falling back to index.html), Gone home ticket arrow darker (4.06:1 -> toffee-deep), fonts self-hosted in public/fonts (Latin woff2 from Google Fonts, OFL) and preloaded, Google Fonts link removed.
+- In progress: nothing.
+- Broken or risky: Home LCP on a 4x-CPU/Slow-4G phone is ~2.1-2.8s measured in-page (trace says ~4s incl. trace overhead); not the loader (tested). Fonts are Latin-only now (fine for English). Remaining forced reflow ~55ms, left as is.
+- Next: README, ai-prompts log (Aditya's own prompts), Loom. Real-device / Safari / Firefox check.
+- Do not touch: reference/, docs/blutec-assignment-plan.md, docs/ai-prompts.md.
+
 ## 2026-11-24 (6) — model: Claude Opus 5.5
 - Done: Aditya asked for a same-text clone: content.js now holds the reference site's exact wording (all 15 puppies imported, Korean Teacup collection filter, unnamed pups read "this puppy"), How it works step cards, tab titles (2ba79fb, 358d598). Loader on every page change (1s) (358d598). Detail card swings from its pin (8631943). Way-home paw trail (826982e). Polaroids pop in with a paw patting them on; Happy families wall plain in columns on the reference's striped bg with Teddy ending (2ed84c1). FAQ: sniff-out side panel, cork board, paper notes with glossy pins and folded corners (02ed251). Contact: Teddy under the letter saying "hm?"/"coming?" (this commit).
 - In progress: nothing.

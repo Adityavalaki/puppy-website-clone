@@ -34,7 +34,7 @@ export default function GoneHome() {
               <p className="font-display text-2xl leading-tight font-extrabold">{pup.name}</p>
               <p className="text-sm text-cocoa-soft">{pup.name !== pup.breed ? `${pup.breed}, ${pup.sex}` : pup.sex[0].toUpperCase() + pup.sex.slice(1)}</p>
               <p className="mt-2 flex flex-wrap items-center gap-x-2 text-xs font-bold tracking-wider uppercase">
-                {pup.from} <span aria-hidden="true" className="text-toffee">- - -›</span> Home <span aria-hidden="true">♥</span>
+                {pup.from} <span aria-hidden="true" className="text-toffee-deep">- - -›</span> Home <span aria-hidden="true">♥</span>
               </p>
             </div>
             <span aria-hidden="true" className="ticket-stub">admit one</span>

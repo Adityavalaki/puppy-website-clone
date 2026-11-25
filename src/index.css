@@ -1,5 +1,31 @@
 @import "tailwindcss";
 
+/* Fonts, self-hosted (public/fonts, Latin subset from Google Fonts, SIL Open Font Licence) so there is no
+   render-blocking request to another site; index.html preloads them. Variable fonts: one file per family. */
+@font-face {
+  font-family: "Figtree";
+  font-style: normal;
+  font-weight: 300 900;
+  font-display: swap;
+  src: url("/fonts/figtree-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("/fonts/fraunces-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Shantell Sans";
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+  src: url("/fonts/shantell-sans-latin.woff2") format("woff2");
+}
+
 /* Design tokens measured from the reference site's CSS (see docs/DECISIONS.md).
    Each one becomes a Tailwind utility, e.g. bg-toffee-deep, text-cocoa, font-display. */
 @theme {

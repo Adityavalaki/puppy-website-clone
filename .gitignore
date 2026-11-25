@@ -12,6 +12,8 @@ dist
 reference
 # private notes: contact details and offer terms, must not reach the public repo
 docs/blutec-assignment-plan.md
+# AI session working log, kept locally (DECISIONS.md D-007)
+docs/HANDOVER.md
 dist-ssr
 *.local
 

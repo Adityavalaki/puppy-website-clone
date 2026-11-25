@@ -10,7 +10,7 @@ Why: Option 1 is the most time and the hardest code to explain; option 3 drops "
 Trade-off: The clone will feel calmer than the original; the mascot that walks with the scroll is the most visible thing missing.
 Revisit if: Core pages are done and tested with more than 10 hours left.
 
-## D-002: Stack and dependencies
+## D-002: Stack and dependencies (font loading superseded by D-006)
 Date: 2026-11-23   Model: Claude Opus 5.5
 Context: Multi-page site (8 routes plus 404), two forms, deploy on Vercel. CLAUDE.md fixes React + Vite (JS) + Tailwind v4 and says no extra libraries without asking.
 Options:   1) React + Vite + Tailwind v4 + react-router-dom, fonts via Google Fonts link, forms to Formspree.  2) Same plus Lenis (smooth scroll) and @fontsource packages.  3) Plain HTML/CSS/JS, one file per page.
@@ -19,7 +19,7 @@ Why: The site has real routes (/puppies/:slug for 15 puppies from one template),
 Trade-off: A client-side router needs a vercel.json rewrite so refreshing a sub-page doesn't 404. Fonts load from Google's CDN (one extra host).
 Revisit if: Smooth scrolling gets picked up as a stretch goal (then Lenis, asked first).
 
-## D-003: Images and text
+## D-003: Images and text (text part superseded by D-005)
 Date: 2026-11-23   Model: Claude Opus 5.5
 Context: The original uses the client's own puppy photos and copy. No permission from Blutec to reuse them.
 Options:   1) Reuse the original's assets.  2) Free Unsplash/Pexels photos and my own text of similar length.
@@ -36,3 +36,30 @@ Chosen: 2.
 Why: It gives the visible behaviour (a dog that trots with your scroll, turns to face its direction, leaves prints) in code that can be explained: find the two stops around the current scroll, blend between their on-screen positions, turn distance travelled into a sine-wave leg swing. Reading live positions makes it work with the pinned door row and the sticky phone without special cases.
 Trade-off: No extra poses or speech bubbles; the hero's peeking head and the footer basket stay static. Runs a requestAnimationFrame-throttled scroll handler on the home page only. Turned off for reduced motion.
 Revisit if: Performance drops on low-end phones, or more poses (sit, peek) are wanted for the stops.
+
+## D-005: Use the reference site's exact text and the TeddyPups logo
+Date: 2026-11-24   Model: Claude Opus 5.5
+Context: Side by side, my own placeholder text (D-003) made the clone read differently from the original. Aditya asked for a word-for-word clone and supplied the TeddyPups logo.
+Options:   1) Keep my own text of similar length.  2) The reference's exact wording and logo, with photos still from Unsplash.
+Chosen: 2.
+Why: The brief asks to match the original "as closely as possible"; the wording drives line breaks, card heights and layout, so matching it makes the side-by-side check honest.
+Trade-off: The text, the contact email and the logo belong to the reference client and are used only for this assignment demo. Blutec's permission was not asked. The "video" badges are copied but there are no videos.
+Revisit if: The site is used for anything beyond the assignment, or Blutec objects.
+
+## D-006: Self-host the fonts
+Date: 2026-11-25   Model: Claude Opus 5.5
+Context: Lighthouse flagged the render-blocking Google Fonts stylesheet on mobile.
+Options:   1) Keep the Google Fonts link.  2) Download the Latin woff2 files into public/fonts and preload them.  3) @fontsource npm packages.
+Chosen: 2.
+Why: One less host and no blocking stylesheet, with no new dependency (option 3 adds packages for the same files).
+Trade-off: Latin characters only, and font updates are manual.
+Revisit if: The site needs non-Latin text.
+
+## D-007: What the public repo contains
+Date: 2026-11-25   Model: Claude Opus 5.5
+Context: The repo is public and goes to the recruiter. It held one AI session log (docs/HANDOVER.md) next to the code; the brief's sample tree listed only code and docs/ai-prompts.md.
+Options:   1) Keep everything.  2) Keep the code, CLAUDE.md (the AI brief), DECISIONS.md, IMAGE-CREDITS.md and ai-prompts.md; stop tracking HANDOVER.md.  3) Remove every working doc so the tree matches the sample exactly.
+Chosen: 2. HANDOVER.md stays on disk and is gitignored, next to reference/ and the private assignment plan.
+Why: The brief asks me to explain my AI workflow and decisions; the brief, the decisions and the prompt log show that. HANDOVER.md is a long day-by-day AI working log that adds noise. The sample tree's Button/SectionTitle and tailwind.config.js were not added: buttons share CSS classes and Tailwind v4 is configured in index.css, so they would be empty files.
+Trade-off: HANDOVER.md is still visible in older commits.
+Revisit if: A reviewer asks for the full working log.

@@ -3,7 +3,7 @@
 A responsive clone of [puppy.instabizweb.com](https://puppy.instabizweb.com/) (TeddyPups U.A.E.), built as a technical assignment for Blutec AI.
 
 **Live:** https://puppy-website-clone-f8vo.vercel.app
-**Video walkthrough:** LOOM_LINK
+**Video walkthrough:** https://www.loom.com/share/9592f0995227493ebd626e33b5fe747d
 
 ## What's in it
 Nine routes, all from the reference site:

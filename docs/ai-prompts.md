@@ -393,34 +393,7 @@ Outcome: The AI kept the real structure instead of the sample tree (sections nam
 
 Outcome: The AI checked the live bundle: no Formspree endpoint yet. Vite bakes VITE_ variables in at build time, so the variable had to be set in Vercel and the site rebuilt.
 
-## 46. 25 Nov 11:03
-
-> what i need to do tell me in steps from this:
->
-> [pasted text]
-> What you need to do before sending
-> Formspree: create a form at formspree.io. In Vercel, go to the project's Settings → Environment Variables and add VITE_FORMSPREE_ENDPOINT = https://formspree.io/f/xxxx. Then redeploy and tell me, and I'll check that the live form sends.
-> .env.example: a hook stops me from writing env files, so run this yourself: "VITE_FORMSPREE_ENDPOINT=https://formspree.io/f/your-form-id" | Out-File -Encoding utf8 .env.example
-> Commit: suggested message: Add README, AI prompt log and decisions; stop tracking session handover. Then push.
-> Loom: record it, set it to "anyone with the link", and replace LOOM_LINK in the README and in the email.
-> Gmail: the connector needs you to sign in again, so I couldn't make a draft. Reconnect it in your claude.ai connector settings if you want me to create one. Otherwise, copy the email below.
-> [end of pasted text]
-
-Outcome: Got a numbered checklist for the remaining submission steps.
-
-## 47. 25 Nov 11:05
-
-> how can i get Key: VITE_FORMSPREE_ENDPOINT (exactly, including VITE_)
-
-Outcome: The key is just the variable name I type in; only the value comes from Formspree.
-
-## 48. 25 Nov 11:07 · 1 screenshot(s) attached
-
-> what to do
-
-Outcome: Added VITE_FORMSPREE_ENDPOINT in Vercel as a Config variable for Production.
-
-## 49. 25 Nov 11:12
+## 46. 25 Nov 11:12
 
 > done with first 3 step, now take comtrol from step 4
 
